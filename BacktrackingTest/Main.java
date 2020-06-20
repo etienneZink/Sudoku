@@ -13,12 +13,12 @@ public class Main {
         };
         Main main = new Main();
         boolean test = false;
-        test = main.gueltig(1,2,sudoku);
+        test = main.gueltig(1,3,sudoku);
         if(test == true){
-            system.out.println("gültig");
+            System.out.println("gültig");
         }
         else{
-            system.out.println("ungültig"); 
+            System.out.println("ungültig" ); 
         }
 
     }
@@ -41,7 +41,7 @@ public class Main {
 
     public int[][] sudokuLoesung(int[][] sudoku){
         boolean finish = false;
-        while(finsish == false){
+        while(finish == false){
 
         }        
         return sudoku;
@@ -54,27 +54,31 @@ public class Main {
         boolean box = true;
     
         for (int i = 0; i < 8; i++){
-            if(sudoku[x][y] == sudoku[i][y]){
+            if(sudoku[x][y] == sudoku[i][y] && x != i){
                 reihe = false;
             }
         }
         for (int i = 0; i < 8; i++){
-            if(sudoku[x][y] == sudoku[x][i]){
+            if(sudoku[x][y] == sudoku[x][i] && y != i){
                 spalte = false;
             }
         }
         
         int xstart = x - (x % 3);
         int ystart = y - (y % 3);
-        for (int i = xstart; i < xstart + 1; i++){
-            for (int j = ystart; i < ystart + 1; j++){
-                if(sudoku[x][y] == sudoku[i][j]){
+        for (int i = xstart; i <= (xstart + 2); i++){
+            for (int j = ystart; j <= (ystart + 2); j++){
+                if(sudoku[x][y] == sudoku[i][j] && x != i && y != j){
                     box = false;
                 }
             }
         }
-        if(reihe == true && spalte == true && box == true){
-            gueltig = true;
+        if(reihe){
+            if(spalte){
+                if(box){
+                    gueltig = true;
+                }
+            }
         }
 
         return gueltig;
