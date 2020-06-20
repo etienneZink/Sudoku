@@ -14,21 +14,21 @@ import model.sudoku_Framework.interfaces.Factory;
  * @author Etienne Zink
  * @version 1.0
  */
-public class CellFactory implements Factory {
+public class ClassicFactory implements Factory {
 
     private HashMap<Integer, Cell> cellTypes;
-    private static CellFactory factory = new CellFactory();
+    private static ClassicFactory factory = new ClassicFactory();
 
     // constructor
 
-    private CellFactory() {
+    private ClassicFactory() {
         cellTypes = new HashMap<Integer, Cell>();
         setCellTypes();
     }
 
     // static methods
 
-    public static CellFactory getFactory() {
+    public static ClassicFactory getFactory() {
         return factory;
     }
 
