@@ -1,4 +1,4 @@
-package model.sodukoFramework.exceptions;
+package model.sudoku_Framework.exceptions;
 
 public class ValueNotSetException extends Exception{
 

@@ -1,8 +1,8 @@
-package model.sodukoFramework.classes;
+package model.sudoku_Framework.classes;
 
 import java.io.Serializable;
 
-import model.sodukoFramework.exceptions.ValueNotSetException;
+import model.sudoku_Framework.exceptions.ValueNotSetException;
 
 /**
  * Immutable and serializable class for inner structure of <code>Sudoku</code>.
@@ -18,21 +18,21 @@ public class Cell implements Serializable {
     private static final long serialVersionUID = -2736891441965617088L;
 
     private int value;
-    final private boolean valueIsSet;
+    final private boolean isSet;
 
     // constructors
 
     /**
-     * Initialize a new <code>Cell</code> with <code>valueIsSet = false</code>.
+     * Initialize a new <code>Cell</code> with <code>isSet = false</code>.
      */
 
     protected Cell() {
-        valueIsSet = false;
+        isSet = false;
     }
 
     protected Cell(final int value) {
 
-        valueIsSet = true;
+        isSet = true;
         this.value = value;
     }
 
@@ -56,11 +56,11 @@ public class Cell implements Serializable {
     /**
      * 
      * @return <code>value</code>  
-     * @throws ValueNotSetException If <code>valueIsSet</code> is <code>false</code>
+     * @throws ValueNotSetException If <code>isSet</code> is <code>false</code>
      */
 
     public int getValue() throws ValueNotSetException {
-        if (!valueIsSet) {
+        if (!isSet) {
             throw new ValueNotSetException();
         }
         return value;
@@ -68,7 +68,7 @@ public class Cell implements Serializable {
     }
 
     public boolean getIsSet() {
-        return valueIsSet;
+        return isSet;
     }
 
 }
