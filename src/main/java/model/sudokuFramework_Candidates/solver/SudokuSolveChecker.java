@@ -1,7 +1,7 @@
-package model.sudokuWithCandidatesQuickAndDirty.solver;
+package model.sudokuFramework_Candidates.solver;
 
-import model.sudokuWithCandidatesQuickAndDirty.boards.ClassicSudokuBoard;
-import model.sudokuWithCandidatesQuickAndDirty.fields.SudokuField;
+import model.sudokuFramework_Candidates.boards.ClassicSudokuBoard;
+import model.sudokuFramework_Candidates.fields.SudokuField;
 
 public class SudokuSolveChecker {
 

@@ -1,7 +1,7 @@
-package model.sudokuWithCandidatesQuickAndDirty.fields;
+package model.sudokuFramework_Candidates.fields;
 
-import model.sudokuWithCandidatesQuickAndDirty.interfaces.FieldFactoryInterface;
-import model.sudokuWithCandidatesQuickAndDirty.interfaces.FieldTypes;
+import model.sudokuFramework_Candidates.interfaces.FieldFactoryInterface;
+import model.sudokuFramework_Candidates.interfaces.FieldTypes;
 
 // TODO Dokumentation Singlton 
 

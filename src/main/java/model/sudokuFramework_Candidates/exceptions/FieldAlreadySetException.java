@@ -1,4 +1,4 @@
-package model.sudokuWithCandidatesQuickAndDirty.exceptions;
+package model.sudokuFramework_Candidates.exceptions;
 
 public class FieldAlreadySetException extends Exception{
 

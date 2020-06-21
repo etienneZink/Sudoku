@@ -1,12 +1,12 @@
-package model.sudokuWithCandidatesQuickAndDirty.boards;
+package model.sudokuFramework_Candidates.boards;
 
 import java.io.Serializable;
 
-import model.sudokuWithCandidatesQuickAndDirty.exceptions.WrongValueException;
-import model.sudokuWithCandidatesQuickAndDirty.fields.Field;
-import model.sudokuWithCandidatesQuickAndDirty.fields.SudokuField;
-import model.sudokuWithCandidatesQuickAndDirty.interfaces.FieldTypes;
-import model.sudokuWithCandidatesQuickAndDirty.exceptions.FieldAlreadySetException;
+import model.sudokuFramework_Candidates.exceptions.FieldAlreadySetException;
+import model.sudokuFramework_Candidates.exceptions.WrongValueException;
+import model.sudokuFramework_Candidates.fields.Field;
+import model.sudokuFramework_Candidates.fields.SudokuField;
+import model.sudokuFramework_Candidates.interfaces.FieldTypes;
 
 //TODO Dokumentation
 
@@ -122,19 +122,30 @@ public final class ClassicSudokuBoard extends AbstractBoard implements Serializa
         return board;
     }
 
-    public void setFieldAt(int row, int column, int value) throws WrongValueException, FieldAlreadySetException {
+    /**
+     * Throws ArrayIndexOutOfBoundsException if row or column are inappropriate
+     * 
+     * @param row
+     * @param column
+     * @param value
+     * @throws WrongValueException
+     * @throws FieldAlreadySetException
+     */
+    public void setFieldAt(int row, int column, int value) throws WrongValueException, FieldAlreadySetException{
         SudokuField field;
         if (indexInBoard(row) && indexInBoard(column)) {
             field = board[row][column];
             if (!field.isSet()) {
                 if (isLegalValue(value)) {
                     board[row][value] = (SudokuField) factory.getInstance(FieldTypes.SudokuField, value);
+                } else {
+                    throw new WrongValueException();
                 }
             } else {
                 throw new FieldAlreadySetException();
             }
         } else {
-            throw new WrongValueException();
+            throw new ArrayIndexOutOfBoundsException();
         }
 
         // TODO Unterscheidung in exceptions

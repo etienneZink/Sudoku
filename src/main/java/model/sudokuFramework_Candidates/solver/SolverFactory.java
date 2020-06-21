@@ -1,9 +1,9 @@
-package model.sudokuWithCandidatesQuickAndDirty.solver;
+package model.sudokuFramework_Candidates.solver;
 
-import model.sudokuWithCandidatesQuickAndDirty.boards.AbstractBoard;
-import model.sudokuWithCandidatesQuickAndDirty.interfaces.FieldTypes;
-import model.sudokuWithCandidatesQuickAndDirty.interfaces.Solver;
-import model.sudokuWithCandidatesQuickAndDirty.interfaces.SolverFactoryInterface;
+import model.sudokuFramework_Candidates.boards.AbstractBoard;
+import model.sudokuFramework_Candidates.interfaces.FieldTypes;
+import model.sudokuFramework_Candidates.interfaces.Solver;
+import model.sudokuFramework_Candidates.interfaces.SolverFactoryInterface;
 
 //TODO Dokumentation Singelton
 

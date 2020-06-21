@@ -1,6 +1,6 @@
-package model.sudokuWithCandidatesQuickAndDirty.boards;
+package model.sudokuFramework_Candidates.boards;
 
-import model.sudokuWithCandidatesQuickAndDirty.fields.FieldFactory;
+import model.sudokuFramework_Candidates.fields.FieldFactory;
 
 //TODO Dokumentation
 

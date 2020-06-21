@@ -1,9 +1,9 @@
-package model.sudokuWithCandidatesQuickAndDirty.fields;
+package model.sudokuFramework_Candidates.fields;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import model.sudokuWithCandidatesQuickAndDirty.exceptions.WrongValueException;
+import model.sudokuFramework_Candidates.exceptions.WrongValueException;
 
 //TODO Dokumentation
 

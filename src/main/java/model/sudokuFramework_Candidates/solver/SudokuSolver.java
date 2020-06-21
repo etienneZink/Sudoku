@@ -1,8 +1,8 @@
-package model.sudokuWithCandidatesQuickAndDirty.solver;
+package model.sudokuFramework_Candidates.solver;
 
-import model.sudokuWithCandidatesQuickAndDirty.boards.AbstractBoard;
-import model.sudokuWithCandidatesQuickAndDirty.boards.ClassicSudokuBoard;
-import model.sudokuWithCandidatesQuickAndDirty.interfaces.Solver;
+import model.sudokuFramework_Candidates.boards.AbstractBoard;
+import model.sudokuFramework_Candidates.boards.ClassicSudokuBoard;
+import model.sudokuFramework_Candidates.interfaces.Solver;
 
 public class SudokuSolver implements Solver {
 

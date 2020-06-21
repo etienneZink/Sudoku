@@ -1,4 +1,4 @@
-package model.sudokuWithCandidatesQuickAndDirty.fields;
+package model.sudokuFramework_Candidates.fields;
 
 import java.io.Serializable;
 
