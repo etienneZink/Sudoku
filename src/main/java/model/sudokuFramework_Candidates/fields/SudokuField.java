@@ -3,11 +3,9 @@ package model.sudokuFramework_Candidates.fields;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.sudokuFramework_Candidates.exceptions.WrongValueException;
-
 //TODO Dokumentation
 
-public class SudokuField extends Field{
+public class SudokuField extends Field {
 
     /**
      *
@@ -21,32 +19,32 @@ public class SudokuField extends Field{
         initialize();
     }
 
-    protected SudokuField(int value){
+    protected SudokuField(int value) {
         super(value);
     }
 
-    private void initialize(){
+    private void initialize() {
         candidates = new ArrayList<Integer>();
-        for(int i = 0; i < 9; ++i){
+        for (int i = 0; i < 9; ++i) {
             candidates.add(i + 1);
         }
     }
 
-    public List<Integer> getCandidates(){
+    private void isToSet(){
+        if (candidates.size() == 1) {
+            value = candidates.get(0);
+            isSet = true;
+        }
+    }
+
+    public List<Integer> getCandidates() {
         return candidates;
     }
 
-    public void removeCandidate(int value) throws WrongValueException{
-        try {
-            candidates.remove(value);
-            if(candidates.size() == 1){
-                value = candidates.get(0);
-                isSet = true;
-            }
-        } catch (Exception e) {
-            throw new WrongValueException();
-        }
-        
+    public void removeCandidate(int value) {
+        int index = candidates.indexOf(value);
+        candidates.remove(index);
+        isToSet();
     }
-    
+
 }

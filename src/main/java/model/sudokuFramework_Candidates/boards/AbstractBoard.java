@@ -16,7 +16,7 @@ public abstract class AbstractBoard {
     protected FieldFactory factory = FieldFactory.get();
 
     protected boolean indexInBoard(int value) {
-        return (0 <= value && value < BOARD_SIZE) ? true : false;
+        return (-1 < value && value < BOARD_SIZE) ? true : false;
     }
 
     protected boolean isLegalValue(int value) {

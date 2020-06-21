@@ -17,7 +17,7 @@ public final class ClassicSudokuBoard extends AbstractBoard implements Serializa
      */
     private static final long serialVersionUID = 1801731341833282685L;
 
-    private SudokuField[][] board;
+    private SudokuField[][] board = new SudokuField[BOARD_SIZE][BOARD_SIZE];;
 
     public ClassicSudokuBoard(int[][] values) {
         initialize(values);
@@ -31,7 +31,10 @@ public final class ClassicSudokuBoard extends AbstractBoard implements Serializa
         if (fields instanceof SudokuField[][]){
         initialize((SudokuField[][]) fields);
         }
-        
+    }
+
+    public ClassicSudokuBoard(){
+        initialize();
     }
 
     public boolean inColumn(int fieldRow, int column, int value) {
@@ -58,7 +61,7 @@ public final class ClassicSudokuBoard extends AbstractBoard implements Serializa
 
         for (int tempRow = groupStartRow; tempRow < groupStartRow + 3; ++tempRow) {
             for (int tempColumn = groupStartColumn; tempColumn < groupStartColumn + 3; ++tempColumn) {
-                if (value == board[tempRow + groupStartRow][tempColumn + groupStartColumn].getValue() && row != tempRow && column != tempColumn) {
+                if (value == board[tempRow][tempColumn].getValue() && row != tempRow && column != tempColumn) {
                     return true;
                 }
             }
@@ -80,9 +83,15 @@ public final class ClassicSudokuBoard extends AbstractBoard implements Serializa
         }
     }
 
-    
+    private void initialize(){
+        for(int row = 0; row < BOARD_SIZE; ++row){
+            for(int column = 0; column < BOARD_SIZE; ++column){
+                board[row][column] = (SudokuField) factory.getInstance(FieldTypes.SudokuField, 0);
+            }
+        }
+    }
+
     private void initialize(int[][] values) {
-        board = new SudokuField[BOARD_SIZE][BOARD_SIZE];
         if (values.length == BOARD_SIZE) {
             for (int row = 0; row < BOARD_SIZE; ++row) {
                 if (values[row].length == BOARD_SIZE) {
@@ -125,33 +134,34 @@ public final class ClassicSudokuBoard extends AbstractBoard implements Serializa
         return board;
     }
 
-    /**
-     * Throws ArrayIndexOutOfBoundsException if row or column are inappropriate
-     * 
-     * @param row
-     * @param column
-     * @param value
-     * @throws WrongValueException
-     * @throws FieldAlreadySetException
-     */
-    public void setFieldAt(int row, int column, int value) throws WrongValueException, FieldAlreadySetException{
+    public SudokuField getFieldAt(int row, int column){
+        return board[row][column];
+    }
+
+
+    public void setFieldAt(int row, int column, int value){
         
         SudokuField field;
         if (indexInBoard(row) && indexInBoard(column)) {
             field = board[row][column];
             if (!field.isSet()) {
                 if (isLegalValue(value)) {
-                    board[row][value] = (SudokuField) factory.getInstance(FieldTypes.SudokuField, value);
-                } else {
-                    throw new WrongValueException();
+                    board[row][column] = (SudokuField) factory.getInstance(FieldTypes.SudokuField, value);
                 }
-            } else {
-                throw new FieldAlreadySetException();
             }
-        } else {
-            throw new ArrayIndexOutOfBoundsException();
         }
-
-        // TODO Unterscheidung in exceptions
     }
+
+    public void setFieldAt(int row, int column, SudokuField field){
+        if (indexInBoard(row) && indexInBoard(column)) {
+            field = board[row][column];
+            if (!field.isSet()) {
+                if (isLegalValue(field.getValue())) {
+                    board[row][column] = field;
+                }
+            }
+        }
+    }
+
+
 }
