@@ -1,13 +1,13 @@
-package model.sudokuWithCandidatesQuickAndDirty.solve;
+package model.sudokuWithCandidatesQuickAndDirty.solver;
 
-import model.sudokuWithCandidatesQuickAndDirty.board.ClassicSudokuBoard;
-import model.sudokuWithCandidatesQuickAndDirty.board.SudokuField;
+import model.sudokuWithCandidatesQuickAndDirty.boards.ClassicSudokuBoard;
+import model.sudokuWithCandidatesQuickAndDirty.fields.SudokuField;
 
-public class SolveChecker {
+public class SudokuSolveChecker {
 
     private ClassicSudokuBoard sudoku;
 
-    public SolveChecker(ClassicSudokuBoard sudoku){
+    public SudokuSolveChecker(ClassicSudokuBoard sudoku){
         this.sudoku = sudoku;
     }
 

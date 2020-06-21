@@ -1,24 +1,23 @@
-package model.sudokuWithCandidatesQuickAndDirty.board;
+package model.sudokuWithCandidatesQuickAndDirty.boards;
 
 import java.io.Serializable;
 
 import model.sudokuWithCandidatesQuickAndDirty.exceptions.WrongValueException;
+import model.sudokuWithCandidatesQuickAndDirty.fields.Field;
+import model.sudokuWithCandidatesQuickAndDirty.fields.SudokuField;
+import model.sudokuWithCandidatesQuickAndDirty.interfaces.FieldTypes;
 import model.sudokuWithCandidatesQuickAndDirty.exceptions.FieldAlreadySetException;
 
 //TODO Dokumentation
 
-public class ClassicSudokuBoard implements Serializable {
+public final class ClassicSudokuBoard extends AbstractBoard implements Serializable {
 
     /**
      *
      */
     private static final long serialVersionUID = 1801731341833282685L;
 
-    public static final int BOARD_SIZE = 9;
-
     private SudokuField[][] board;
-    private boolean successfullBuild = false;
-    private boolean solved = false;
 
     public ClassicSudokuBoard(int[][] values) {
         initialize(values);
@@ -26,6 +25,13 @@ public class ClassicSudokuBoard implements Serializable {
 
     public ClassicSudokuBoard(SudokuField[][] fields) {
         initialize(fields);
+    }
+
+    public ClassicSudokuBoard(Field[][] fields) {
+        if (fields instanceof SudokuField[][]){
+        initialize((SudokuField[][]) fields);
+        }
+        
     }
 
     public boolean inColumn(int fieldRow, int column, int value) {
@@ -76,17 +82,11 @@ public class ClassicSudokuBoard implements Serializable {
 
     private void initialize(int[][] values) {
         board = new SudokuField[BOARD_SIZE][BOARD_SIZE];
-        int value;
         if (values.length == BOARD_SIZE) {
             for (int row = 0; row < BOARD_SIZE; ++row) {
                 if (values[row].length == BOARD_SIZE) {
                     for (int column = 0; column < BOARD_SIZE; ++column) {
-                        value = values[row][column];
-                        if (value == 0) {
-                            board[row][column] = new SudokuField();
-                        } else {
-                            board[row][column] = new SudokuField(value);
-                        }
+                        board[row][column] = (SudokuField) factory.getInstance(FieldTypes.SudokuField, values[row][column]);
                     }
                     successfullBuild = true;
 
@@ -101,18 +101,11 @@ public class ClassicSudokuBoard implements Serializable {
     }
 
     private void initialize(SudokuField[][] fields) {
-        SudokuField field;
-
         if (fields.length == BOARD_SIZE) {
             for (int row = 0; row < BOARD_SIZE; ++row) {
                 if (fields[row].length == BOARD_SIZE) {
                     for (int column = 0; column < BOARD_SIZE; ++column) {
-                        field = fields[row][column];
-                        if (field == null) {
-                            board[row][column] = new SudokuField();
-                        } else {
-                            board[row][column] = field;
-                        }
+                        board[row][column] = (SudokuField) factory.getInstance(FieldTypes.SudokuField, fields[row][column].getValue());
                     }
                     successfullBuild = true;
 
@@ -125,37 +118,17 @@ public class ClassicSudokuBoard implements Serializable {
         }
     }
 
-    private boolean indexInBoard(int value) {
-        return (0 <= value && value < BOARD_SIZE) ? true : false;
-    }
-
-    private boolean isLegalValue(int value) {
-        return (0 < value && value < 10) ? true : false;
-    }
-
-    public boolean isBuild() {
-        return successfullBuild;
-    }
-
     public SudokuField[][] getBoard() {
         return board;
-    }
-
-    public boolean isSolved() {
-        return solved;
-    }
-
-    public void solved() {
-        solved = true;
     }
 
     public void setFieldAt(int row, int column, int value) throws WrongValueException, FieldAlreadySetException {
         SudokuField field;
         if (indexInBoard(row) && indexInBoard(column)) {
             field = board[row][column];
-            if (!field.isSet) {
+            if (!field.isSet()) {
                 if (isLegalValue(value)) {
-                    board[row][value] = new SudokuField(value);
+                    board[row][value] = (SudokuField) factory.getInstance(FieldTypes.SudokuField, value);
                 }
             } else {
                 throw new FieldAlreadySetException();
@@ -166,5 +139,4 @@ public class ClassicSudokuBoard implements Serializable {
 
         // TODO Unterscheidung in exceptions
     }
-
 }

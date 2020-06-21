@@ -1,10 +1,10 @@
-package model.sudokuWithCandidatesQuickAndDirty.board;
+package model.sudokuWithCandidatesQuickAndDirty.fields;
 
 import java.io.Serializable;
 
 //TODO Dokumetation
 
-public class Field implements Serializable{
+public abstract class Field implements Serializable{
 
     /**
      *
@@ -23,7 +23,7 @@ public class Field implements Serializable{
         isSet = true;
     }
 
-    public boolean getIsSet(){
+    public boolean isSet(){
         return isSet;
     }
 

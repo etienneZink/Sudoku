@@ -1,4 +1,4 @@
-package model.sudokuWithCandidatesQuickAndDirty.board;
+package model.sudokuWithCandidatesQuickAndDirty.fields;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,12 +16,12 @@ public class SudokuField extends Field{
 
     private List<Integer> candidates;
 
-    public SudokuField() {
+    protected SudokuField() {
         super();
         initialize();
     }
 
-    public SudokuField(int value){
+    protected SudokuField(int value){
         super(value);
     }
 
