@@ -8,6 +8,9 @@ public abstract class AbstractBoard {
 
     public final int BOARD_SIZE = 9;
 
+    /**
+     * Needs to be checked before working with a board.
+     */
     protected boolean successfullBuild = false;
     protected boolean solved = false;
     protected FieldFactory factory = FieldFactory.get();

@@ -80,6 +80,7 @@ public final class ClassicSudokuBoard extends AbstractBoard implements Serializa
         }
     }
 
+    
     private void initialize(int[][] values) {
         board = new SudokuField[BOARD_SIZE][BOARD_SIZE];
         if (values.length == BOARD_SIZE) {
@@ -88,18 +89,18 @@ public final class ClassicSudokuBoard extends AbstractBoard implements Serializa
                     for (int column = 0; column < BOARD_SIZE; ++column) {
                         board[row][column] = (SudokuField) factory.getInstance(FieldTypes.SudokuField, values[row][column]);
                     }
-                    successfullBuild = true;
-
                 } else {
                     successfullBuild = false;
-                    break;
                 }
             }
+            successfullBuild = true;
 
+        } else {
+            successfullBuild = false;
         }
 
     }
-
+    
     private void initialize(SudokuField[][] fields) {
         if (fields.length == BOARD_SIZE) {
             for (int row = 0; row < BOARD_SIZE; ++row) {
@@ -107,14 +108,16 @@ public final class ClassicSudokuBoard extends AbstractBoard implements Serializa
                     for (int column = 0; column < BOARD_SIZE; ++column) {
                         board[row][column] = (SudokuField) factory.getInstance(FieldTypes.SudokuField, fields[row][column].getValue());
                     }
-                    successfullBuild = true;
+                    
 
                 } else {
                     successfullBuild = false;
-                    break;
                 }
             }
+            successfullBuild = true;
 
+        } else {
+            successfullBuild = false;
         }
     }
 
@@ -132,6 +135,7 @@ public final class ClassicSudokuBoard extends AbstractBoard implements Serializa
      * @throws FieldAlreadySetException
      */
     public void setFieldAt(int row, int column, int value) throws WrongValueException, FieldAlreadySetException{
+        
         SudokuField field;
         if (indexInBoard(row) && indexInBoard(column)) {
             field = board[row][column];
