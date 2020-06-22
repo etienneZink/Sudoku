@@ -2,8 +2,6 @@ package model.sudokuFramework_Candidates.boards;
 
 import java.io.Serializable;
 
-import model.sudokuFramework_Candidates.exceptions.FieldAlreadySetException;
-import model.sudokuFramework_Candidates.exceptions.WrongValueException;
 import model.sudokuFramework_Candidates.fields.Field;
 import model.sudokuFramework_Candidates.fields.SudokuField;
 import model.sudokuFramework_Candidates.interfaces.FieldTypes;
