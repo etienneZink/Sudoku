@@ -1,12 +1,12 @@
 package model.sudokuFramework_Candidates.solver;
 
 import model.sudokuFramework_Candidates.boards.AbstractBoard;
-import model.sudokuFramework_Candidates.interfaces.FieldTypes;
-import model.sudokuFramework_Candidates.interfaces.SolverFactoryInterface;
+import model.sudokuFramework_Candidates.boards.ClassicSudokuBoard;
+import model.sudokuFramework_Candidates.interfaces.Factory;
 
 //TODO Dokumentation Singelton
 
-public class SolverFactory implements SolverFactoryInterface {
+public class SolverFactory implements Factory {
 
     private static SolverFactory factory = new SolverFactory();
 
@@ -15,12 +15,12 @@ public class SolverFactory implements SolverFactoryInterface {
     }
 
     @Override
-    public AbstractSolver getInstance(FieldTypes type, AbstractBoard board) {
-        switch (type) {
-            case SudokuField:
-                return new SudokuSolver(board);
-            default:
-                return null;
+    public AbstractSolver getInstance(AbstractBoard board) {
+
+        if(board instanceof ClassicSudokuBoard){
+            return new SudokuSolver(board);
+        } else {
+            return null;
         }
     }
 

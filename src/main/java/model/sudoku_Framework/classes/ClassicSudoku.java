@@ -1,6 +1,7 @@
 package model.sudoku_Framework.classes;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import model.sudoku_Framework.exceptions.NoSuitingArrayException;
 import model.sudoku_Framework.exceptions.ValueNotSetException;
@@ -177,7 +178,7 @@ public abstract class ClassicSudoku implements Serializable {
             for (int row = 0; row < originalArray.length; ++row) {
                 if (originalArray[row].length == SUDOKU_FIELD_SIZE) {
                     for (int column = 0; column < originalArray[row].length; ++column) {
-                        if(originalArray[row][column] == null){
+                        if(Objects.nonNull(originalArray[row][column])){
                             targetArray[row][column] = factory.getInstance();
                         } else {
                             targetArray[row][column] = originalArray[row][column];

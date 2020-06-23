@@ -1,7 +1,6 @@
 package sudoku;
 
 import model.sudokuFramework_Candidates.boards.ClassicSudokuBoard;
-import model.sudokuFramework_Candidates.interfaces.FieldTypes;
 import model.sudokuFramework_Candidates.solver.AbstractSolver;
 import model.sudokuFramework_Candidates.solver.SolverFactory;
 import model.sudokuFramework_Candidates.solver.SudokuSolveChecker;
@@ -62,7 +61,7 @@ public class SolveCheck {
         
         board = new ClassicSudokuBoard(sudokuToSolve);
 
-        solver = SolverFactory.get().getInstance(FieldTypes.SudokuField, board);
+        solver = SolverFactory.get().getInstance(board);
 
     }
     public static void main(String[] args) {

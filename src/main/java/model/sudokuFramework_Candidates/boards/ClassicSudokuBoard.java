@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import model.sudokuFramework_Candidates.fields.Field;
 import model.sudokuFramework_Candidates.fields.SudokuField;
-import model.sudokuFramework_Candidates.interfaces.FieldTypes;
 
 //TODO Dokumentation
 
@@ -84,7 +83,7 @@ public final class ClassicSudokuBoard extends AbstractBoard implements Serializa
     private void initialize(){
         for(int row = 0; row < BOARD_SIZE; ++row){
             for(int column = 0; column < BOARD_SIZE; ++column){
-                board[row][column] = (SudokuField) factory.getInstance(FieldTypes.SudokuField, 0);
+                board[row][column] = new SudokuField();
             }
         }
     }
@@ -94,7 +93,7 @@ public final class ClassicSudokuBoard extends AbstractBoard implements Serializa
             for (int row = 0; row < BOARD_SIZE; ++row) {
                 if (values[row].length == BOARD_SIZE) {
                     for (int column = 0; column < BOARD_SIZE; ++column) {
-                        board[row][column] = (SudokuField) factory.getInstance(FieldTypes.SudokuField, values[row][column]);
+                        board[row][column] = new SudokuField(values[row][column]);
                     }
                 } else {
                     successfullBuild = false;
@@ -113,7 +112,7 @@ public final class ClassicSudokuBoard extends AbstractBoard implements Serializa
             for (int row = 0; row < BOARD_SIZE; ++row) {
                 if (fields[row].length == BOARD_SIZE) {
                     for (int column = 0; column < BOARD_SIZE; ++column) {
-                        board[row][column] = (SudokuField) factory.getInstance(FieldTypes.SudokuField, fields[row][column].getValue());
+                        board[row][column] = new SudokuField(fields[row][column].getValue());
                     }
                     
 
@@ -144,7 +143,7 @@ public final class ClassicSudokuBoard extends AbstractBoard implements Serializa
             field = board[row][column];
             if (!field.isSet()) {
                 if (isLegalValue(value)) {
-                    board[row][column] = (SudokuField) factory.getInstance(FieldTypes.SudokuField, value);
+                    board[row][column] = new SudokuField(value);
                 }
             }
         }

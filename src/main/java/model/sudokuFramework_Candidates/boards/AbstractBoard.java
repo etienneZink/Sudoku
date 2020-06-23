@@ -1,6 +1,5 @@
 package model.sudokuFramework_Candidates.boards;
 
-import model.sudokuFramework_Candidates.fields.FieldFactory;
 
 //TODO Dokumentation
 
@@ -13,7 +12,6 @@ public abstract class AbstractBoard {
      */
     protected boolean successfullBuild = false;
     protected boolean solved = false;
-    protected FieldFactory factory = FieldFactory.get();
 
     protected boolean indexInBoard(int value) {
         return (-1 < value && value < BOARD_SIZE) ? true : false;

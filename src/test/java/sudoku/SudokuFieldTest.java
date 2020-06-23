@@ -6,20 +6,17 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import model.sudokuFramework_Candidates.fields.FieldFactory;
 import model.sudokuFramework_Candidates.fields.SudokuField;
-import model.sudokuFramework_Candidates.interfaces.FieldTypes;
 
 public class SudokuFieldTest {
 
     SudokuField fieldWithoutValue;
     SudokuField fieldValue;
-    FieldFactory factory = FieldFactory.get();
 
     @Before
     public void setUp() {
-        fieldWithoutValue = (SudokuField) factory.getInstance(FieldTypes.SudokuField, 0);
-        fieldValue = (SudokuField) factory.getInstance(FieldTypes.SudokuField, 1);
+        fieldWithoutValue = new SudokuField();
+        fieldValue = new SudokuField(1);
     }
 
     @Test

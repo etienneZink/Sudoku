@@ -1,6 +1,7 @@
 package model.sudoku_Framework.classes;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 import model.sudoku_Framework.exceptions.WrongValueException;
 import model.sudoku_Framework.interfaces.Factory;
@@ -39,11 +40,11 @@ public class ClassicFactory implements Factory {
      */
     @Override
     public Cell getInstance(int value) throws WrongValueException {
-        if ((Integer) value == null) {
+        if ((Objects.nonNull(value))) {
             return getInstance();
         } else {
             Cell tempReturn = cellTypes.get(value);
-            if (tempReturn == null) {
+            if (Objects.nonNull(tempReturn)) {
                 throw new WrongValueException();
             }
             return tempReturn;
