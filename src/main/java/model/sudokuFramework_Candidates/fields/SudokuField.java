@@ -20,7 +20,14 @@ public class SudokuField extends Field {
     }
 
     public SudokuField(int value) {
-        super(value);
+        //TODO more sexy -> anderer weg es auszudrücken
+        if(isLegalValue(value)){
+            setValue(value);
+            setIsSet(true);
+        } else {
+            setIsSet(false);
+            initialize();
+        }
     }
 
     private void initialize() {
@@ -32,9 +39,13 @@ public class SudokuField extends Field {
 
     private void isToSet(){
         if (candidates.size() == 1) {
-            value = candidates.get(0);
-            isSet = true;
+            setValue(candidates.get(0));
+            setIsSet(true);
         }
+    }
+
+    private boolean isLegalValue(int value) {
+        return (0 < value && value < 10) ? true : false;
     }
 
     public List<Integer> getCandidates() {

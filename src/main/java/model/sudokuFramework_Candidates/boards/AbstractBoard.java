@@ -20,10 +20,6 @@ public abstract class AbstractBoard {
         return (lenght == BOARD_SIZE)? true: false;
     }
 
-    protected boolean isLegalValue(int value) {
-        return (0 < value && value < 10) ? true : false;
-    }
-
     public boolean isSolved() {
         return solved;
     }
@@ -32,5 +28,6 @@ public abstract class AbstractBoard {
         solved = true;
     }
 
+    public abstract boolean solve();
     
 }

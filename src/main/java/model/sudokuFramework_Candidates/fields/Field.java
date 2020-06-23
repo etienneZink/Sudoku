@@ -11,8 +11,8 @@ public abstract class Field implements Serializable{
      */
     private static final long serialVersionUID = -3783448412446847604L;
 
-    protected int value;
-    protected boolean isSet = false;
+    private int value;
+    private boolean isSet = false;
 
     protected Field(){
         
@@ -33,5 +33,13 @@ public abstract class Field implements Serializable{
      */
     public int getValue(){
         return isSet? value: -1; 
+    }
+
+    protected void setIsSet(boolean isSet){
+        this.isSet = isSet;
+    }
+
+    protected void setValue(int value){
+        this.value = value;
     }
 }

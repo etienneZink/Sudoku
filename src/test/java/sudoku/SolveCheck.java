@@ -2,14 +2,11 @@ package sudoku;
 
 import model.sudokuFramework_Candidates.boards.ClassicSudokuBoard;
 import model.sudokuFramework_Candidates.checker.SudokuChecker;
-import model.sudokuFramework_Candidates.interfaces.Solver;
-import model.sudokuFramework_Candidates.solver.SolverFactory;
 
 public class SolveCheck {
 
     private int[][] sudokuToSolve = new int[9][9];
     private ClassicSudokuBoard board;
-    private Solver solver;
 
     private SolveCheck(){
 
@@ -64,22 +61,18 @@ public class SolveCheck {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
-
-        solver = SolverFactory.get().getInstance(board);
-
     }
     public static void main(String[] args) {
-       SolveCheck check = new SolveCheck();
+       SolveCheck sudokuGame = new SolveCheck();
        System.out.println("Sudoku to solve:");
-        check.board.print();
+        sudokuGame.board.print();
         final long startTime = System.currentTimeMillis();
-        check.solver.solve();
+        sudokuGame.board.solve();
         final long endTime = System.currentTimeMillis();
         long duration = endTime - startTime;
         System.out.println("Sudoku solved:");
-        check.board.print();
-        SudokuChecker checker = new SudokuChecker(check.board);
+        sudokuGame.board.print();
+        SudokuChecker checker = new SudokuChecker(sudokuGame.board);
         System.out.println("Is solved? " + checker.isSolved());
         System.out.println("Solved in " + duration + "ms");
         

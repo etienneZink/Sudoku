@@ -17,10 +17,10 @@ public class SolverFactory implements Factory {
 
     @Override
     public Solver getInstance(AbstractBoard board) {
-        //TODO switch on types -> polymorthism??
+        //TODO switch on types -> polymorthism?? usage?? 
 
         if(board instanceof ClassicSudokuBoard){
-            return new SudokuSolver(board);
+            return new SudokuSolver((ClassicSudokuBoard)board);
         } else {
             return null;
         }

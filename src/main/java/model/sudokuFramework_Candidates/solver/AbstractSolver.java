@@ -6,7 +6,7 @@ import model.sudokuFramework_Candidates.interfaces.Solver;
 public abstract class AbstractSolver implements Solver {
 
     @Override
-    public abstract  boolean solve();
+    public abstract boolean solve();
 
     protected abstract AbstractSolver getInstance(AbstractBoard board);
     
