@@ -3,6 +3,7 @@ package model.sudokuFramework_Candidates.solver;
 import model.sudokuFramework_Candidates.boards.AbstractBoard;
 import model.sudokuFramework_Candidates.boards.ClassicSudokuBoard;
 import model.sudokuFramework_Candidates.interfaces.Factory;
+import model.sudokuFramework_Candidates.interfaces.Solver;
 
 //TODO Dokumentation Singelton
 
@@ -15,7 +16,8 @@ public class SolverFactory implements Factory {
     }
 
     @Override
-    public AbstractSolver getInstance(AbstractBoard board) {
+    public Solver getInstance(AbstractBoard board) {
+        //TODO switch on types -> polymorthism??
 
         if(board instanceof ClassicSudokuBoard){
             return new SudokuSolver(board);

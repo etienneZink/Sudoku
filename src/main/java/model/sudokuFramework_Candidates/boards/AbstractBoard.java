@@ -10,19 +10,18 @@ public abstract class AbstractBoard {
     /**
      * Needs to be checked before working with a board.
      */
-    protected boolean successfullBuild = false;
     protected boolean solved = false;
 
     protected boolean indexInBoard(int value) {
         return (-1 < value && value < BOARD_SIZE) ? true : false;
     }
 
-    protected boolean isLegalValue(int value) {
-        return (0 < value && value < 10) ? true : false;
+    protected boolean correctLenght(int lenght){
+        return (lenght == BOARD_SIZE)? true: false;
     }
 
-    public boolean isBuild() {
-        return successfullBuild;
+    protected boolean isLegalValue(int value) {
+        return (0 < value && value < 10) ? true : false;
     }
 
     public boolean isSolved() {
@@ -32,4 +31,6 @@ public abstract class AbstractBoard {
     public void solved() {
         solved = true;
     }
+
+    
 }

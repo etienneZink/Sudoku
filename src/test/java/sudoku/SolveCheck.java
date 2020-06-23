@@ -1,15 +1,15 @@
 package sudoku;
 
 import model.sudokuFramework_Candidates.boards.ClassicSudokuBoard;
-import model.sudokuFramework_Candidates.solver.AbstractSolver;
+import model.sudokuFramework_Candidates.checker.SudokuChecker;
+import model.sudokuFramework_Candidates.interfaces.Solver;
 import model.sudokuFramework_Candidates.solver.SolverFactory;
-import model.sudokuFramework_Candidates.solver.SudokuSolveChecker;
 
 public class SolveCheck {
 
     private int[][] sudokuToSolve = new int[9][9];
     private ClassicSudokuBoard board;
-    private AbstractSolver solver;
+    private Solver solver;
 
     private SolveCheck(){
 
@@ -59,7 +59,12 @@ public class SolveCheck {
         sudokuToSolve[8][1] = 2;
         sudokuToSolve[8][7] = 6;
         
-        board = new ClassicSudokuBoard(sudokuToSolve);
+        try {
+            board = new ClassicSudokuBoard(sudokuToSolve);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
 
         solver = SolverFactory.get().getInstance(board);
 
@@ -74,7 +79,7 @@ public class SolveCheck {
         long duration = endTime - startTime;
         System.out.println("Sudoku solved:");
         check.board.print();
-        SudokuSolveChecker checker = new SudokuSolveChecker(check.board);
+        SudokuChecker checker = new SudokuChecker(check.board);
         System.out.println("Is solved? " + checker.isSolved());
         System.out.println("Solved in " + duration + "ms");
         

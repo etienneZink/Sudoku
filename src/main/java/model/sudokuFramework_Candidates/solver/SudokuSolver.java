@@ -5,16 +5,17 @@ import java.util.List;
 
 import model.sudokuFramework_Candidates.boards.AbstractBoard;
 import model.sudokuFramework_Candidates.boards.ClassicSudokuBoard;
+import model.sudokuFramework_Candidates.checker.SudokuChecker;
 import model.sudokuFramework_Candidates.fields.SudokuField;
+import model.sudokuFramework_Candidates.interfaces.Solver;
 
-public class SudokuSolver extends AbstractSolver {
+public class SudokuSolver implements Solver {
 
     ClassicSudokuBoard sudoku;
 
-    public SudokuSolver(AbstractBoard sudoku) {
+    public SudokuSolver(AbstractBoard sudoku){
         if (sudoku instanceof ClassicSudokuBoard) {
             this.sudoku = (ClassicSudokuBoard) sudoku;
-            successfullBuild = true;
         }
     }
 
@@ -23,7 +24,7 @@ public class SudokuSolver extends AbstractSolver {
         while (!sudoku.isSolved()) {
             solveSudoku();
         }
-        return new SudokuSolveChecker(sudoku).isSolved();
+        return new SudokuChecker(sudoku).isSolved();
     }
 
     private void solveSudoku() {
@@ -39,8 +40,7 @@ public class SudokuSolver extends AbstractSolver {
                 if (!field.isSet()) {
                     toRemove = new ArrayList<Integer>();
                     for (int candidate : field.getCandidates()) {
-                        if (sudoku.inColumn(row, column, candidate) || sudoku.inRow(row, column, candidate)
-                                || sudoku.inGroup(row, column, candidate)) {
+                        if (sudoku.checkValue(row, column, candidate)) {
                             toRemove.add(candidate);
                         }
                     }

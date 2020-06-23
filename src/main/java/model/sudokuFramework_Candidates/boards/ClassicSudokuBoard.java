@@ -1,8 +1,9 @@
 package model.sudokuFramework_Candidates.boards;
 
 import java.io.Serializable;
+import java.util.Objects;
 
-import model.sudokuFramework_Candidates.fields.Field;
+import model.sudokuFramework_Candidates.exceptions.NotBuildException;
 import model.sudokuFramework_Candidates.fields.SudokuField;
 
 //TODO Dokumentation
@@ -16,25 +17,82 @@ public final class ClassicSudokuBoard extends AbstractBoard implements Serializa
 
     private SudokuField[][] board = new SudokuField[BOARD_SIZE][BOARD_SIZE];;
 
-    public ClassicSudokuBoard(int[][] values) {
-        initialize(values);
+    public ClassicSudokuBoard(int[][] values) throws NotBuildException {
+        initialize(Objects.requireNonNull(values));
     }
 
-    public ClassicSudokuBoard(SudokuField[][] fields) {
-        initialize(fields);
+    public ClassicSudokuBoard(SudokuField[][] fields) throws NotBuildException {
+        initialize(Objects.requireNonNull(fields));
     }
 
-    public ClassicSudokuBoard(Field[][] fields) {
-        if (fields instanceof SudokuField[][]){
-        initialize((SudokuField[][]) fields);
-        }
-    }
-
-    public ClassicSudokuBoard(){
+    public ClassicSudokuBoard() {
         initialize();
     }
 
-    public boolean inColumn(int fieldRow, int column, int value) {
+    public boolean checkValue(int row, int column, int value) {
+        return (inRow(row, column, value) || inColumn(row, column, value) || inGroup(row, column, value)) ? true
+                : false;
+    }
+
+    public void print() {
+        int value;
+        for (int row = 0; row < BOARD_SIZE; ++row) {
+            for (int column = 0; column < BOARD_SIZE; ++column) {
+                if ((value = board[row][column].getValue()) == -1) {
+                    System.out.print(" " + "     ");
+                } else {
+                    System.out.print(value + "     ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    // TODO lagere for schleifen und checks aus, sodass je nach param andere innere
+    // Funtion ausgeführt wird
+    private void initialize(int[][] values) throws NotBuildException {
+        if (correctLenght(values.length)) {
+            for (int row = 0; row < BOARD_SIZE; ++row) {
+                if (correctLenght(values[row].length)) {
+                    for (int column = 0; column < BOARD_SIZE; ++column) {
+                        board[row][column] = new SudokuField(values[row][column]);
+                    }
+                } else {
+                    throw new NotBuildException();
+                }
+            }
+        } else {
+            throw new NotBuildException();
+        }
+
+    }
+
+    private void initialize(SudokuField[][] values) throws NotBuildException {
+        if (correctLenght(values.length)) {
+            for (int row = 0; row < BOARD_SIZE; ++row) {
+                if (correctLenght(values[row].length)) {
+                    for (int column = 0; column < BOARD_SIZE; ++column) {
+                        board[row][column] = values[row][column];
+                    }
+                } else {
+                    throw new NotBuildException();
+                }
+            }
+        } else {
+            throw new NotBuildException();
+        }
+
+    }
+
+    private void initialize(){
+        for (int row = 0; row < BOARD_SIZE; ++row) {
+            for (int column = 0; column < BOARD_SIZE; ++column) {
+                board[row][column] = new SudokuField();
+            }
+        }
+    }
+
+    private boolean inColumn(int fieldRow, int column, int value) {
         for (int row = 0; row < BOARD_SIZE; ++row) {
             if (value == board[row][column].getValue() && row != fieldRow) {
                 return true;
@@ -43,7 +101,7 @@ public final class ClassicSudokuBoard extends AbstractBoard implements Serializa
         return false;
     }
 
-    public boolean inRow(int row, int fieldColumn, int value) {
+    private boolean inRow(int row, int fieldColumn, int value) {
         for (int column = 0; column < BOARD_SIZE; ++column) {
             if (value == board[row][column].getValue() && column != fieldColumn) {
                 return true;
@@ -52,7 +110,7 @@ public final class ClassicSudokuBoard extends AbstractBoard implements Serializa
         return false;
     }
 
-    public boolean inGroup(int row, int column, int value) {
+    private boolean inGroup(int row, int column, int value) {
         int groupStartRow = (row / 3) * 3;
         int groupStartColumn = (column / 3) * 3;
 
@@ -66,78 +124,16 @@ public final class ClassicSudokuBoard extends AbstractBoard implements Serializa
         return false;
     }
 
-    public void print(){
-        int value;
-        for(int row = 0; row < BOARD_SIZE; ++row){
-            for(int column = 0; column < BOARD_SIZE; ++column){
-                if((value = board[row][column].getValue()) == -1){
-                    System.out.print(" " + "     ");
-                } else {
-                    System.out.print(value + "     ");
-                }
-            }
-            System.out.println();
-        }
-    }
-
-    private void initialize(){
-        for(int row = 0; row < BOARD_SIZE; ++row){
-            for(int column = 0; column < BOARD_SIZE; ++column){
-                board[row][column] = new SudokuField();
-            }
-        }
-    }
-
-    private void initialize(int[][] values) {
-        if (values.length == BOARD_SIZE) {
-            for (int row = 0; row < BOARD_SIZE; ++row) {
-                if (values[row].length == BOARD_SIZE) {
-                    for (int column = 0; column < BOARD_SIZE; ++column) {
-                        board[row][column] = new SudokuField(values[row][column]);
-                    }
-                } else {
-                    successfullBuild = false;
-                }
-            }
-            successfullBuild = true;
-
-        } else {
-            successfullBuild = false;
-        }
-
-    }
-    
-    private void initialize(SudokuField[][] fields) {
-        if (fields.length == BOARD_SIZE) {
-            for (int row = 0; row < BOARD_SIZE; ++row) {
-                if (fields[row].length == BOARD_SIZE) {
-                    for (int column = 0; column < BOARD_SIZE; ++column) {
-                        board[row][column] = new SudokuField(fields[row][column].getValue());
-                    }
-                    
-
-                } else {
-                    successfullBuild = false;
-                }
-            }
-            successfullBuild = true;
-
-        } else {
-            successfullBuild = false;
-        }
-    }
-
     public SudokuField[][] getBoard() {
         return board;
     }
 
-    public SudokuField getFieldAt(int row, int column){
+    public SudokuField getFieldAt(int row, int column) {
         return board[row][column];
     }
 
+    public void setFieldAt(int row, int column, int value) {
 
-    public void setFieldAt(int row, int column, int value){
-        
         SudokuField field;
         if (indexInBoard(row) && indexInBoard(column)) {
             field = board[row][column];
@@ -149,7 +145,7 @@ public final class ClassicSudokuBoard extends AbstractBoard implements Serializa
         }
     }
 
-    public void setFieldAt(int row, int column, SudokuField field){
+    public void setFieldAt(int row, int column, SudokuField field) {
         if (indexInBoard(row) && indexInBoard(column)) {
             field = board[row][column];
             if (!field.isSet()) {
@@ -159,6 +155,5 @@ public final class ClassicSudokuBoard extends AbstractBoard implements Serializa
             }
         }
     }
-
 
 }
