@@ -58,4 +58,12 @@ public class SudokuField extends Field {
         isToSet();
     }
 
+    @Override
+    public SudokuField initial() {
+        if (isSet()) {
+            setInitial();
+        }
+        return this;
+    }
+
 }

@@ -83,7 +83,7 @@ public final class ClassicSudokuBoard extends BasicBoard {
             for (int row = 0; row < BOARD_SIZE; ++row) {
                 if (correctLenght(values[row].length)) {
                     for (int column = 0; column < BOARD_SIZE; ++column) {
-                        board[row][column] = new SudokuField(values[row][column]);
+                        board[row][column] = new SudokuField(values[row][column]).initial();
                     }
                 } else {
                     throw new NotBuildException();
@@ -201,7 +201,7 @@ public final class ClassicSudokuBoard extends BasicBoard {
     }
 
     public void setFieldAt(int row, int column, SudokuField field) {
-        if (indexInBoard(row) && indexInBoard(column) && !board[row][column].isSet()) {
+        if (indexInBoard(row) && indexInBoard(column) && !board[row][column].isInitial()) {
             board[row][column] = field;
         }
     }
