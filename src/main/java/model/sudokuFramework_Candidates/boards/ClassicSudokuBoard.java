@@ -5,6 +5,7 @@ import java.util.Objects;
 import model.sudokuFramework_Candidates.checker.SudokuChecker;
 import model.sudokuFramework_Candidates.exceptions.NotBuildException;
 import model.sudokuFramework_Candidates.fields.SudokuField;
+import model.sudokuFramework_Candidates.fields.SudokuInitialField;
 import model.sudokuFramework_Candidates.solver.SudokuSolver;
 
 /**
@@ -83,7 +84,7 @@ public final class ClassicSudokuBoard extends BasicBoard {
             for (int row = 0; row < BOARD_SIZE; ++row) {
                 if (correctLenght(values[row].length)) {
                     for (int column = 0; column < BOARD_SIZE; ++column) {
-                        board[row][column] = new SudokuField(values[row][column]).initial();
+                        board[row][column] = new SudokuInitialField(values[row][column]);
                     }
                 } else {
                     throw new NotBuildException();

@@ -54,6 +54,4 @@ public abstract class Field implements Serializable {
     protected void setInitial(){
         initialField = true;
     }
-
-    public abstract Field initial();
 }

@@ -57,13 +57,4 @@ public class SudokuField extends Field {
         candidates.remove(index);
         isToSet();
     }
-
-    @Override
-    public SudokuField initial() {
-        if (isSet()) {
-            setInitial();
-        }
-        return this;
-    }
-
 }
