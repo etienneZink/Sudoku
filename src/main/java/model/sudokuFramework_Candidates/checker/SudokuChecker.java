@@ -12,9 +12,13 @@ public class SudokuChecker implements Checker{
 
     private ClassicSudokuBoard sudoku;
 
+    // constructors
+
     public SudokuChecker(ClassicSudokuBoard sudoku){
         this.sudoku = sudoku;
     }
+
+    // non-static methods
 
     @Override
     public boolean isSolved(){

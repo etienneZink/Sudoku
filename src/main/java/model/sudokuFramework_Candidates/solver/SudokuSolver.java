@@ -15,9 +15,13 @@ public class SudokuSolver implements Solver {
 
     ClassicSudokuBoard sudokuBoard;
 
+    // constructors
+
     public SudokuSolver(ClassicSudokuBoard sudokuBoard){
             this.sudokuBoard = sudokuBoard;
     }
+
+    // non-static methods
 
     /**
      * Solve the given <code>ClassicSudokuBoard</code>.

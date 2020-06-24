@@ -86,7 +86,6 @@ public class SolveCheck {
         try {
             sudokuGame.board = new ClassicSudokuBoard(sudokuGame.sudokuToSolve2);
         } catch (NotBuildException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         sudokuGame.board.print();

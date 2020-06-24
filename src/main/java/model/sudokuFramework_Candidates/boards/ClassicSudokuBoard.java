@@ -1,6 +1,5 @@
 package model.sudokuFramework_Candidates.boards;
 
-import java.io.Serializable;
 import java.util.Objects;
 
 import model.sudokuFramework_Candidates.checker.SudokuChecker;
@@ -8,16 +7,15 @@ import model.sudokuFramework_Candidates.exceptions.NotBuildException;
 import model.sudokuFramework_Candidates.fields.SudokuField;
 import model.sudokuFramework_Candidates.solver.SudokuSolver;
 
-//TODO Dokumentation
+/**
+ * Class that represents a classic sudoku game.
+ */
 
-public final class ClassicSudokuBoard extends BasicBoard implements Serializable {
-
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1801731341833282685L;
+public final class ClassicSudokuBoard extends BasicBoard {
 
     private SudokuField[][] board = new SudokuField[BOARD_SIZE][BOARD_SIZE];
+
+    // constructors
 
     public ClassicSudokuBoard(int[][] values) throws NotBuildException {
         initialize(Objects.requireNonNull(values));
@@ -31,6 +29,15 @@ public final class ClassicSudokuBoard extends BasicBoard implements Serializable
         initialize();
     }
 
+    // non-static methods
+
+    /**
+     * Checks if the <code>value</code> is already set in the <code>field-column/row/group</code>.
+     * @param row
+     * @param column
+     * @param value
+     * @return <code>true</code> if it is already set, else <code>false</code>.
+     */
     public boolean checkValue(int row, int column, int value) {
         return (inRow(row, column, value) || inColumn(row, column, value) || inGroup(row, column, value));
     }
@@ -65,6 +72,12 @@ public final class ClassicSudokuBoard extends BasicBoard implements Serializable
 
     // TODO lagere for schleifen und checks aus, sodass je nach param andere innere
     // Funtion ausgeführt wird
+
+    /**
+     * Initialiez the <code>board</code> with the given <code>values</code>.
+     * @param values
+     * @throws NotBuildException if the values were inappropriate.
+     */
     private void initialize(int[][] values) throws NotBuildException {
         if (correctLenght(values.length)) {
             for (int row = 0; row < BOARD_SIZE; ++row) {
@@ -82,6 +95,11 @@ public final class ClassicSudokuBoard extends BasicBoard implements Serializable
 
     }
 
+    /**
+     * Initialiez the <code>board</code> with the given <code>values</code>.
+     * @param values
+     * @throws NotBuildException if the values were inappropriate.
+     */
     private void initialize(SudokuField[][] values) throws NotBuildException {
         if (correctLenght(values.length)) {
             for (int row = 0; row < BOARD_SIZE; ++row) {
@@ -99,6 +117,11 @@ public final class ClassicSudokuBoard extends BasicBoard implements Serializable
 
     }
 
+    /**
+     * Initialiez the <code>board</code> with empty <code>SudokuFields</code>.
+     * @param values
+     * @throws NotBuildException if the values were inappropriate.
+     */
     private void initialize() {
         for (int row = 0; row < BOARD_SIZE; ++row) {
             for (int column = 0; column < BOARD_SIZE; ++column) {
@@ -107,6 +130,14 @@ public final class ClassicSudokuBoard extends BasicBoard implements Serializable
         }
     }
 
+
+    /**
+     * Checks if the <code>value</code> is already set in the <code>field-column</code>.
+     * @param row
+     * @param column
+     * @param value
+     * @return <code>true</code> if it is already set, else <code>false</code>.
+     */
     private boolean inColumn(int fieldRow, int column, int value) {
         for (int row = 0; row < BOARD_SIZE; ++row) {
             if (value == board[row][column].getValue() && row != fieldRow) {
@@ -116,6 +147,13 @@ public final class ClassicSudokuBoard extends BasicBoard implements Serializable
         return false;
     }
 
+    /**
+     * Checks if the <code>value</code> is already set in the <code>field-row</code>.
+     * @param row
+     * @param column
+     * @param value
+     * @return <code>true</code> if it is already set, else <code>false</code>.
+     */
     private boolean inRow(int row, int fieldColumn, int value) {
         for (int column = 0; column < BOARD_SIZE; ++column) {
             if (value == board[row][column].getValue() && column != fieldColumn) {
@@ -125,6 +163,13 @@ public final class ClassicSudokuBoard extends BasicBoard implements Serializable
         return false;
     }
 
+    /**
+     * Checks if the <code>value</code> is already set in the <code>field-group</code>.
+     * @param row
+     * @param column
+     * @param value
+     * @return <code>true</code> if it is already set, else <code>false</code>.
+     */
     private boolean inGroup(int row, int column, int value) {
         int groupStartRow = (row / 3) * 3;
         int groupStartColumn = (column / 3) * 3;
@@ -138,6 +183,8 @@ public final class ClassicSudokuBoard extends BasicBoard implements Serializable
         }
         return false;
     }
+
+    // getter and setter
 
     public SudokuField[][] getBoard() {
         return board;
