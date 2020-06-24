@@ -2,17 +2,18 @@ package model.sudokuFramework_Candidates.fields;
 
 import java.io.Serializable;
 
-//TODO Dokumetation
+/**
+ * Abstract class that represents a basic field in a game.
+ */
 
 public abstract class Field implements Serializable{
 
-    /**
-     *
-     */
     private static final long serialVersionUID = -3783448412446847604L;
 
     private int value;
     private boolean isSet = false;
+
+    // constructros 
 
     protected Field(){
         
@@ -22,6 +23,8 @@ public abstract class Field implements Serializable{
         this.value = value;
         isSet = true;
     }
+
+    // getter and setter
 
     public boolean isSet(){
         return isSet;
