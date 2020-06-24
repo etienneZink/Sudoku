@@ -10,7 +10,7 @@ import model.sudokuFramework_Candidates.solver.SudokuSolver;
 
 //TODO Dokumentation
 
-public final class ClassicSudokuBoard extends AbstractBoard implements Serializable {
+public final class ClassicSudokuBoard extends BasicBoard implements Serializable {
 
     /**
      *
@@ -38,11 +38,11 @@ public final class ClassicSudokuBoard extends AbstractBoard implements Serializa
     public void print() {
         int value;
         for (int row = 0; row < BOARD_SIZE; ++row) {
-            if(row % 3 == 0){
+            if (row % 3 == 0) {
                 System.out.println("-------------------------------------------------");
             }
             for (int column = 0; column < BOARD_SIZE; ++column) {
-                if(column % 3 == 0){
+                if (column % 3 == 0) {
                     System.out.print("|");
                 }
                 System.out.print("  ");
@@ -59,8 +59,8 @@ public final class ClassicSudokuBoard extends AbstractBoard implements Serializa
     }
 
     @Override
-    public boolean solve() {
-        return new SudokuSolver(this).solve();
+    public void solve() {
+        new SudokuSolver(this).solve();
     }
 
     // TODO lagere for schleifen und checks aus, sodass je nach param andere innere
@@ -147,29 +147,15 @@ public final class ClassicSudokuBoard extends AbstractBoard implements Serializa
         return board[row][column];
     }
 
-    public void setFieldAt(int row, int column, int value) {
-
-        SudokuField field;
-        if (indexInBoard(row) && indexInBoard(column)) {
-            field = board[row][column];
-            if (!field.isSet()) {
-                board[row][column] = new SudokuField(value);
-            }
-        }
+    @Override
+    public boolean isSolved() {
+        solved = new SudokuChecker(this).isSolved();
+        return solved;
     }
 
     public void setFieldAt(int row, int column, SudokuField field) {
-        if (indexInBoard(row) && indexInBoard(column)) {
-            field = board[row][column];
-            if (!field.isSet()) {
-                    board[row][column] = field;
-            }
+        if (indexInBoard(row) && indexInBoard(column) && !board[row][column].isSet()) {
+            board[row][column] = field;
         }
-    }
-
-    @Override
-    public boolean isSolved() {
-        solved =  new SudokuChecker(this).isSolved();
-        return solved;
     }
 }

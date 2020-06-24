@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.sudokuFramework_Candidates.boards.ClassicSudokuBoard;
-import model.sudokuFramework_Candidates.checker.SudokuChecker;
 import model.sudokuFramework_Candidates.fields.SudokuField;
 import model.sudokuFramework_Candidates.interfaces.Solver;
 
+/**
+ * Class which implements solver to solve a ClassicSudokuBoard.
+ * @see ClassicSudokuBoard
+ */
 public class SudokuSolver implements Solver {
 
     ClassicSudokuBoard sudokuBoard;
@@ -16,18 +19,25 @@ public class SudokuSolver implements Solver {
             this.sudokuBoard = sudokuBoard;
     }
 
+    /**
+     * Solve the given <code>ClassicSudokuBoard</code>.
+     */
     @Override
-    public boolean solve() {
+    public void solve() {
         while (!sudokuBoard.isSolved()) {
             solveSudoku();
         }
-        return new SudokuChecker(sudokuBoard).isSolved();
     }
 
+    /**
+     * Inner implementation of <code>solve()</code>. 
+     * Checks all fields of the <code>ClassicSudokuBoard</code>. If one isn't set, it iterates over the <code>candidates</code> of the field.
+     * If one <code>candidate</code> is already set in the <code>group/row/column</code>, it will be removed from the <code>candidates</code>. 
+     * If only one <code>candidate</code> is left, the field will be <code>set</code> with the <code>value</code> of this <code>candidate</code>. 
+     */
     private void solveSudoku() {
         SudokuField field;
         List<Integer> toRemove;
-
         for (int row = 0; row < sudokuBoard.BOARD_SIZE; ++row) {
             for (int column = 0; column < sudokuBoard.BOARD_SIZE; ++column) {
                 field = sudokuBoard.getFieldAt(row, column);

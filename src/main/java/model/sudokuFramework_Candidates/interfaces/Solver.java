@@ -1,5 +1,8 @@
 package model.sudokuFramework_Candidates.interfaces;
 
 public interface Solver {
-    public boolean solve();
+    /**
+     * Solve the given AbstractBoard or subtype.
+     */
+    public void solve();
 }

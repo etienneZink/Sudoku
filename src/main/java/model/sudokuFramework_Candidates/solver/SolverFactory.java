@@ -1,6 +1,6 @@
 package model.sudokuFramework_Candidates.solver;
 
-import model.sudokuFramework_Candidates.boards.AbstractBoard;
+import model.sudokuFramework_Candidates.boards.BasicBoard;
 import model.sudokuFramework_Candidates.boards.ClassicSudokuBoard;
 import model.sudokuFramework_Candidates.interfaces.Factory;
 import model.sudokuFramework_Candidates.interfaces.Solver;
@@ -16,7 +16,7 @@ public class SolverFactory implements Factory {
     }
 
     @Override
-    public Solver getInstance(AbstractBoard board) {
+    public Solver getInstance(BasicBoard board) {
         //TODO switch on types -> polymorthism?? usage?? 
 
         if(board instanceof ClassicSudokuBoard){

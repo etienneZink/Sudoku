@@ -1,7 +1,12 @@
 package model.sudokuFramework_Candidates.interfaces;
 
-import model.sudokuFramework_Candidates.boards.AbstractBoard;
+import model.sudokuFramework_Candidates.boards.BasicBoard;
 
 public interface Factory {
-    public Solver getInstance(AbstractBoard board);
+    /**
+     * 
+     * @param board
+     * @return <code>Solver</code> or subtype based on the <code>board</code>
+     */
+    public Solver getInstance(BasicBoard board);
 }
