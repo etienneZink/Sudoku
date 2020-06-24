@@ -3,6 +3,7 @@ package model.sudokuFramework_Candidates.boards;
 import java.io.Serializable;
 import java.util.Objects;
 
+import model.sudokuFramework_Candidates.checker.SudokuChecker;
 import model.sudokuFramework_Candidates.exceptions.NotBuildException;
 import model.sudokuFramework_Candidates.fields.SudokuField;
 import model.sudokuFramework_Candidates.solver.SudokuSolver;
@@ -164,5 +165,11 @@ public final class ClassicSudokuBoard extends AbstractBoard implements Serializa
                     board[row][column] = field;
             }
         }
+    }
+
+    @Override
+    public boolean isSolved() {
+        solved =  new SudokuChecker(this).isSolved();
+        return solved;
     }
 }

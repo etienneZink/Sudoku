@@ -20,14 +20,12 @@ public abstract class AbstractBoard {
         return (lenght == BOARD_SIZE)? true: false;
     }
 
-    public boolean isSolved() {
-        return solved;
-    }
-
-    public void solved() {
-        solved = true;
-    }
+    public abstract boolean isSolved();
 
     public abstract boolean solve();
+
+    public void solved(){
+        solved = true;
+    }
     
 }

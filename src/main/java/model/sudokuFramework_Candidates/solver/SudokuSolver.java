@@ -25,7 +25,6 @@ public class SudokuSolver implements Solver {
     }
 
     private void solveSudoku() {
-        boolean somethingToChanged = false;
         SudokuField field;
         List<Integer> toRemove;
 
@@ -43,12 +42,8 @@ public class SudokuSolver implements Solver {
                         field.removeCandidate(candidateToRemove);
                         sudokuBoard.setFieldAt(row, column, field);
                     }
-                    somethingToChanged = true;
                 }
             }
-        }
-        if (!somethingToChanged) {
-            sudokuBoard.solved();
         }
     }
 
