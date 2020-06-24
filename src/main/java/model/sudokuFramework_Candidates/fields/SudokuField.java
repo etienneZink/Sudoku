@@ -1,9 +1,7 @@
 package model.sudokuFramework_Candidates.fields;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 
 //TODO Dokumentation
 
@@ -35,18 +33,20 @@ public class SudokuField extends Field {
     private void initialize() {
         candidates = new HashSet<Integer>(9);
         for (int i = 0; i < 9; ++i) {
+            //candidates.add(i + 1);
             candidates.add(i + 1);
         }
     }
 
-    private void isToSet(){
+    public void isToSet(){
         if (candidates.size() == 1) {
             Iterator<Integer> it = candidates.iterator();
             if(it.hasNext()){
                 setValue(it.next());
                 setIsSet(true);
+                
+                
             }
-            
         }
     }
 

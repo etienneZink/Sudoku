@@ -1,7 +1,6 @@
 package model.sudokuFramework_Candidates.solver;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 
 import model.sudokuFramework_Candidates.boards.ClassicSudokuBoard;
 import model.sudokuFramework_Candidates.exceptions.NotSolvableException;
@@ -47,21 +46,20 @@ public class SudokuSolver implements Solver {
     private boolean solveSudoku() {
         SudokuField field;
         boolean somethingChanged = false;
-        List<Integer> toRemove;
+        HashSet<Integer> toRemove;
         for (int row = 0; row < sudokuBoard.BOARD_SIZE; ++row) {
             for (int column = 0; column < sudokuBoard.BOARD_SIZE; ++column) {
                 field = sudokuBoard.getFieldAt(row, column);
                 if (!field.isSet()) {
-                    toRemove = new ArrayList<Integer>();
+                    toRemove = new HashSet<Integer>();
                     for (int candidate : field.getCandidates()) {
                         if (sudokuBoard.checkValue(row, column, candidate)) {
                             toRemove.add(candidate);
                         }
                     }
-                    for (int candidateToRemove : toRemove) {
-                        field.removeCandidate(candidateToRemove);
-                        sudokuBoard.setFieldAt(row, column, field);
-                    }
+                    field.getCandidates().removeAll(toRemove);
+                    field.isToSet();
+                    sudokuBoard.setFieldAt(row, column, field);
                     somethingChanged = true;
                 }
             }
