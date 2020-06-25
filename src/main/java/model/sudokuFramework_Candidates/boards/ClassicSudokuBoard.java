@@ -71,6 +71,16 @@ public final class ClassicSudokuBoard extends BasicBoard {
         new SudokuSolver(this).solve();
     }
 
+    /**
+     * Checks if the <code>ClassicSudokuBoard</code> was solved.
+     * @return <code>True</code> if the <code>ClassicSudokuBoard</code> is solved, else <code>false</code>.s
+     */
+    @Override
+    public boolean isSolved() {
+        solved = new SudokuChecker(this).isSolved();
+        return solved;
+    }
+
     // TODO lagere for schleifen und checks aus, sodass je nach param andere innere
     // Funtion ausgeführt wird
 
@@ -195,9 +205,11 @@ public final class ClassicSudokuBoard extends BasicBoard {
         return board[row][column];
     }
 
-    @Override
-    public boolean isSolved() {
-        solved = new SudokuChecker(this).isSolved();
+    /**
+     * 
+     * @return The current value of <code>solved</code> without <code>valuation</code>, if this is the correct value or not.
+     */
+    public boolean getSolved(){
         return solved;
     }
 

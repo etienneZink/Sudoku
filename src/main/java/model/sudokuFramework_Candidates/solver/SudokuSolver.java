@@ -30,8 +30,8 @@ public class SudokuSolver implements Solver {
     @Override
     public void solve() {
         clear();
-        while (!sudokuBoard.isSolved()) {
-            if(!solveSudoku()){
+        while (!sudokuBoard.getSolved()) {
+            if(!solveSudoku() && !sudokuBoard.isSolved()){
                 throw new NotSolvableException();
             }
         }
