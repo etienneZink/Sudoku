@@ -1,10 +1,10 @@
-package model.sudoku_Framework.classes;
+package com.github.etienneZink.model.sudoku_Framework.classes;
 
 import java.util.HashMap;
 import java.util.Objects;
 
-import model.sudoku_Framework.exceptions.WrongValueException;
-import model.sudoku_Framework.interfaces.Factory;
+import com.github.etienneZink.model.sudoku_Framework.exceptions.WrongValueException;
+import com.github.etienneZink.model.sudoku_Framework.interfaces.Factory;
 
 /**
  * Singelton factory which stores all different <code>Cell</code> objects in a

@@ -1,12 +1,12 @@
-package model.sudoku_Framework.classes;
+package com.github.etienneZink.model.sudoku_Framework.classes;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-import model.sudoku_Framework.exceptions.NoSuitingArrayException;
-import model.sudoku_Framework.exceptions.ValueNotSetException;
-import model.sudoku_Framework.exceptions.WrongValueException;
-import model.sudoku_Framework.interfaces.Factory;
+import com.github.etienneZink.model.sudoku_Framework.exceptions.NoSuitingArrayException;
+import com.github.etienneZink.model.sudoku_Framework.exceptions.ValueNotSetException;
+import com.github.etienneZink.model.sudoku_Framework.exceptions.WrongValueException;
+import com.github.etienneZink.model.sudoku_Framework.interfaces.Factory;
 
 /**
  * Serializable class to represent a classic sudoku field with immutable

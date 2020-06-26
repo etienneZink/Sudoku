@@ -1,23 +1,23 @@
-package model.sudokuFramework_Candidates.solver;
+package com.github.etienneZink.model.sudokuFramework_Candidates.solver;
 
 import java.util.HashSet;
 
-import model.sudokuFramework_Candidates.boards.ClassicSudokuBoard;
-import model.sudokuFramework_Candidates.exceptions.NotSolvableException;
-import model.sudokuFramework_Candidates.fields.SudokuField;
-import model.sudokuFramework_Candidates.interfaces.Solver;
+import com.github.etienneZink.model.sudokuFramework_Candidates.boards.ClassicSudoku;
+import com.github.etienneZink.model.sudokuFramework_Candidates.exceptions.NotSolvableException;
+import com.github.etienneZink.model.sudokuFramework_Candidates.fields.SudokuField;
+import com.github.etienneZink.model.sudokuFramework_Candidates.interfaces.Solver;
 
 /**
  * Class which implements solver to solve a ClassicSudokuBoard.
- * @see ClassicSudokuBoard
+ * @see ClassicSudoku
  */
 public class SudokuSolver implements Solver {
 
-    ClassicSudokuBoard sudokuBoard;
+    ClassicSudoku sudokuBoard;
 
     // constructors
 
-    public SudokuSolver(ClassicSudokuBoard sudokuBoard){
+    public SudokuSolver(ClassicSudoku sudokuBoard){
             this.sudokuBoard = sudokuBoard;
     }
 

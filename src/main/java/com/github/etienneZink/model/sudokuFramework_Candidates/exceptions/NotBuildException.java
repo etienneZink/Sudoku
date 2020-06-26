@@ -1,4 +1,4 @@
-package model.sudokuFramework_Candidates.exceptions;
+package com.github.etienneZink.model.sudokuFramework_Candidates.exceptions;
 
 /**
  * Exception if the build of an <code>AbstractBoard</code> subtype did't work.

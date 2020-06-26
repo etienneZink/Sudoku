@@ -1,32 +1,38 @@
-package model.sudokuFramework_Candidates.boards;
+package com.github.etienneZink.model.sudokuFramework_Candidates.boards;
 
 import java.util.Objects;
 
-import model.sudokuFramework_Candidates.checker.SudokuChecker;
-import model.sudokuFramework_Candidates.exceptions.NotBuildException;
-import model.sudokuFramework_Candidates.fields.SudokuField;
-import model.sudokuFramework_Candidates.fields.SudokuInitialField;
-import model.sudokuFramework_Candidates.solver.SudokuSolver;
+import com.github.etienneZink.model.sudokuFramework_Candidates.checker.SudokuChecker;
+import com.github.etienneZink.model.sudokuFramework_Candidates.exceptions.NotBuildException;
+import com.github.etienneZink.model.sudokuFramework_Candidates.fields.SudokuField;
+import com.github.etienneZink.model.sudokuFramework_Candidates.fields.SudokuInitialField;
+import com.github.etienneZink.model.sudokuFramework_Candidates.solver.SudokuSolver;
 
 /**
  * Class that represents a classic sudoku game.
  */
 
-public final class ClassicSudokuBoard extends BasicBoard {
+public final class ClassicSudoku extends BasicBoard {
 
-    private SudokuField[][] board = new SudokuField[BOARD_SIZE][BOARD_SIZE];
+    private SudokuField[][] sudoku = new SudokuField[BOARD_SIZE][BOARD_SIZE];
+    private SudokuField[][] solvedSudoku = new SudokuField[BOARD_SIZE][BOARD_SIZE];
 
     // constructors
 
-    public ClassicSudokuBoard(int[][] values) throws NotBuildException {
+    public ClassicSudoku(int BOARD_SIZE, int[][] values) throws NotBuildException {
+        super(BOARD_SIZE);
         initialize(Objects.requireNonNull(values));
     }
 
-    public ClassicSudokuBoard(SudokuField[][] fields) throws NotBuildException {
-        initialize(Objects.requireNonNull(fields));
+    public ClassicSudoku(int BOARD_SIZE, SudokuField[][] fields) throws NotBuildException {
+        super(BOARD_SIZE);
+        //initialize(Objects.requireNonNull(fields));
+        sudoku = fields;
+        solve();
     }
 
-    public ClassicSudokuBoard() {
+    public ClassicSudoku(int BOARD_SIZE) {
+        super(BOARD_SIZE);
         initialize();
     }
 
@@ -54,7 +60,7 @@ public final class ClassicSudokuBoard extends BasicBoard {
                     System.out.print("|");
                 }
                 System.out.print("  ");
-                if ((value = board[row][column].getValue()) == -1) {
+                if ((value = sudoku[row][column].getValue()) == -1) {
                     System.out.print(" " + "  ");
                 } else {
                     System.out.print(value + "  ");
@@ -85,7 +91,7 @@ public final class ClassicSudokuBoard extends BasicBoard {
     // Funtion ausgeführt wird
 
     /**
-     * Initialiez the <code>board</code> with the given <code>values</code>.
+     * Initialiez the <code>sudoku</code> with the given <code>values</code>.
      * @param values
      * @throws NotBuildException if the values were inappropriate.
      */
@@ -94,7 +100,7 @@ public final class ClassicSudokuBoard extends BasicBoard {
             for (int row = 0; row < BOARD_SIZE; ++row) {
                 if (correctLenght(values[row].length)) {
                     for (int column = 0; column < BOARD_SIZE; ++column) {
-                        board[row][column] = new SudokuInitialField(values[row][column]);
+                        sudoku[row][column] = new SudokuInitialField(values[row][column]);
                     }
                 } else {
                     throw new NotBuildException();
@@ -107,7 +113,7 @@ public final class ClassicSudokuBoard extends BasicBoard {
     }
 
     /**
-     * Initialiez the <code>board</code> with the given <code>values</code>.
+     * Initialiez the <code>sudoku</code> with the given <code>values</code>.
      * @param values
      * @throws NotBuildException if the values were inappropriate.
      */
@@ -116,7 +122,7 @@ public final class ClassicSudokuBoard extends BasicBoard {
             for (int row = 0; row < BOARD_SIZE; ++row) {
                 if (correctLenght(values[row].length)) {
                     for (int column = 0; column < BOARD_SIZE; ++column) {
-                        board[row][column] = values[row][column];
+                        sudoku[row][column] = values[row][column];
                     }
                 } else {
                     throw new NotBuildException();
@@ -129,14 +135,14 @@ public final class ClassicSudokuBoard extends BasicBoard {
     }
 
     /**
-     * Initialiez the <code>board</code> with empty <code>SudokuFields</code>.
+     * Initialiez the <code>sudoku</code> with empty <code>SudokuFields</code>.
      * @param values
      * @throws NotBuildException if the values were inappropriate.
      */
     private void initialize() {
         for (int row = 0; row < BOARD_SIZE; ++row) {
             for (int column = 0; column < BOARD_SIZE; ++column) {
-                board[row][column] = new SudokuField();
+                sudoku[row][column] = new SudokuField();
             }
         }
     }
@@ -151,7 +157,7 @@ public final class ClassicSudokuBoard extends BasicBoard {
      */
     private boolean inColumn(int fieldRow, int column, int value) {
         for (int row = 0; row < BOARD_SIZE; ++row) {
-            if (value == board[row][column].getValue() && row != fieldRow) {
+            if (value == sudoku[row][column].getValue() && row != fieldRow) {
                 return true;
             }
         }
@@ -167,7 +173,7 @@ public final class ClassicSudokuBoard extends BasicBoard {
      */
     private boolean inRow(int row, int fieldColumn, int value) {
         for (int column = 0; column < BOARD_SIZE; ++column) {
-            if (value == board[row][column].getValue() && column != fieldColumn) {
+            if (value == sudoku[row][column].getValue() && column != fieldColumn) {
                 return true;
             }
         }
@@ -187,7 +193,7 @@ public final class ClassicSudokuBoard extends BasicBoard {
 
         for (int tempRow = groupStartRow; tempRow < groupStartRow + 3; ++tempRow) {
             for (int tempColumn = groupStartColumn; tempColumn < groupStartColumn + 3; ++tempColumn) {
-                if (value == board[tempRow][tempColumn].getValue() && row != tempRow && column != tempColumn) {
+                if (value == sudoku[tempRow][tempColumn].getValue() && row != tempRow && column != tempColumn) {
                     return true;
                 }
             }
@@ -197,12 +203,12 @@ public final class ClassicSudokuBoard extends BasicBoard {
 
     // getter and setter
 
-    public SudokuField[][] getBoard() {
-        return board;
+    public SudokuField[][] getSudoku() {
+        return sudoku;
     }
 
     public SudokuField getFieldAt(int row, int column) {
-        return board[row][column];
+        return sudoku[row][column];
     }
 
     /**
@@ -214,8 +220,13 @@ public final class ClassicSudokuBoard extends BasicBoard {
     }
 
     public void setFieldAt(int row, int column, SudokuField field) {
-        if (indexInBoard(row) && indexInBoard(column) && !board[row][column].isInitial()) {
-            board[row][column] = field;
+        if (indexInBoard(row) && indexInBoard(column) && !sudoku[row][column].isInitial()) {
+            sudoku[row][column] = field;
         }
     }
+
+    public SudokuField[][] getSolvedSudoku() {
+        return solvedSudoku;
+    }
+
 }

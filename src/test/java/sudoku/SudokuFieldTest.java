@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import model.sudokuFramework_Candidates.fields.SudokuField;
+import com.github.etienneZink.model.sudokuFramework_Candidates.fields.SudokuField;
 
 public class SudokuFieldTest {
 

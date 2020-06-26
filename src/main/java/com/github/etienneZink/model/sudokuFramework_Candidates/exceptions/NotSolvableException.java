@@ -1,4 +1,4 @@
-package model.sudokuFramework_Candidates.exceptions;
+package com.github.etienneZink.model.sudokuFramework_Candidates.exceptions;
 
 public class NotSolvableException extends RuntimeException {
 

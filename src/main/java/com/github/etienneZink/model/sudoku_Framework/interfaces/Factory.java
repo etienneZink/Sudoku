@@ -1,7 +1,7 @@
-package model.sudoku_Framework.interfaces;
+package com.github.etienneZink.model.sudoku_Framework.interfaces;
 
-import model.sudoku_Framework.classes.Cell;
-import model.sudoku_Framework.exceptions.WrongValueException;
+import com.github.etienneZink.model.sudoku_Framework.classes.Cell;
+import com.github.etienneZink.model.sudoku_Framework.exceptions.WrongValueException;
 
 public interface Factory {
     public Cell getInstance();

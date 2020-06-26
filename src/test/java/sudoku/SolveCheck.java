@@ -1,8 +1,8 @@
 package sudoku;
 
-import model.sudokuFramework_Candidates.boards.ClassicSudokuBoard;
-import model.sudokuFramework_Candidates.checker.SudokuChecker;
-import model.sudokuFramework_Candidates.exceptions.NotBuildException;
+import com.github.etienneZink.model.sudokuFramework_Candidates.boards.ClassicSudoku;
+import com.github.etienneZink.model.sudokuFramework_Candidates.checker.SudokuChecker;
+import com.github.etienneZink.model.sudokuFramework_Candidates.exceptions.NotBuildException;
 
 public class SolveCheck {
 
@@ -11,7 +11,7 @@ public class SolveCheck {
             { 0, 0, 1, 8, 0, 6, 4, 0, 0 }, { 0, 0, 8, 1, 0, 2, 9, 0, 0 }, { 7, 0, 0, 0, 0, 0, 0, 0, 8 },
             { 0, 0, 6, 7, 0, 8, 2, 0, 0 }, { 0, 0, 2, 6, 0, 9, 5, 0, 0 }, { 8, 0, 0, 2, 0, 3, 0, 0, 9 },
             { 0, 0, 5, 0, 1, 0, 3, 0, 0 } };
-    private ClassicSudokuBoard board;
+    private ClassicSudoku board;
 
     private SolveCheck() {
 
@@ -62,7 +62,7 @@ public class SolveCheck {
         sudokuToSolve[8][7] = 6;
 
         try {
-            board = new ClassicSudokuBoard(sudokuToSolve);
+            board = new ClassicSudoku(9, sudokuToSolve);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -84,7 +84,7 @@ public class SolveCheck {
 
         System.out.println("Sudoku to solve:");
         try {
-            sudokuGame.board = new ClassicSudokuBoard(sudokuGame.sudokuToSolve2);
+            sudokuGame.board = new ClassicSudoku(9, sudokuGame.sudokuToSolve2);
         } catch (NotBuildException e) {
             e.printStackTrace();
         }

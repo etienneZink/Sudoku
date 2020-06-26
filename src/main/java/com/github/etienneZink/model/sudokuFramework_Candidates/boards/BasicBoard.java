@@ -1,15 +1,20 @@
-package model.sudokuFramework_Candidates.boards;
+package com.github.etienneZink.model.sudokuFramework_Candidates.boards;
 
 
 /**
- * Abstract implementation of a basic game-board with the <code>BOARD_SIZE</code> 9.
+ * Abstract implementation of a basic game-board with the <code>BOARD_SIZE</code>.
  */
 
 public abstract class BasicBoard {
 
-    public final int BOARD_SIZE = 9;
+    public final int BOARD_SIZE;
 
     protected boolean solved = false;
+    private boolean isSolvable;
+
+    public BasicBoard(int BOARD_SIZE){
+        this.BOARD_SIZE = BOARD_SIZE;
+    }
 
     /**
      * Checks if the given <code>index</code> is appropriate for an <code>array</code> with <code>length == BOARD_SIZE</code>.

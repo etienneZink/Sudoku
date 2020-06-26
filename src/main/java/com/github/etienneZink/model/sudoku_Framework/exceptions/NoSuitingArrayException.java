@@ -1,4 +1,4 @@
-package model.sudoku_Framework.exceptions;
+package com.github.etienneZink.model.sudoku_Framework.exceptions;
 
 public class NoSuitingArrayException extends Exception{
     

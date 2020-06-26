@@ -1,4 +1,4 @@
-package model.sudokuFramework_Candidates.interfaces;
+package com.github.etienneZink.model.sudokuFramework_Candidates.interfaces;
 
 public interface Solver {
     /**

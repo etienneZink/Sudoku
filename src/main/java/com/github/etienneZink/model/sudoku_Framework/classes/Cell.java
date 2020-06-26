@@ -1,8 +1,8 @@
-package model.sudoku_Framework.classes;
+package com.github.etienneZink.model.sudoku_Framework.classes;
 
 import java.io.Serializable;
 
-import model.sudoku_Framework.exceptions.ValueNotSetException;
+import com.github.etienneZink.model.sudoku_Framework.exceptions.ValueNotSetException;
 
 /**
  * Immutable and serializable class for inner structure of <code>Sudoku</code>.
