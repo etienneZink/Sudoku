@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 //TODO Dokumentation
 
-public class SudokuField extends Field {
+public class SudokuField extends Field{
 
     private static final long serialVersionUID = 6812321149646212285L;
 
@@ -13,18 +13,18 @@ public class SudokuField extends Field {
 
     public SudokuField() {
         super();
-        initialize();
+        initializeCandidates();
     }
 
     public SudokuField(int value) {
         super(value);
         if(!isLegalValue(value)){
             setIsSet(false);
-            initialize();
+            initializeCandidates();
         }
     }
 
-    private void initialize() {
+    private void initializeCandidates() {
         candidates = new HashSet<Integer>(9);
         for (int i = 0; i < 9; ++i) {
             candidates.add(i + 1);
@@ -59,4 +59,5 @@ public class SudokuField extends Field {
     public void addCandidate(int value){
         candidates.add(value);
     }
+
 }

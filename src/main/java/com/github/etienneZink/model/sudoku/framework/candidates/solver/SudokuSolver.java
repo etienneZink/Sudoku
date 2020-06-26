@@ -52,7 +52,7 @@ public class SudokuSolver implements Solver {
         HashSet<Integer> toRemove;
         for (int row = 0; row < sudokuBoard.BOARD_SIZE; ++row) {
             for (int column = 0; column < sudokuBoard.BOARD_SIZE; ++column) {
-                field = sudokuBoard.getFieldAt(row, column);
+                field = (SudokuField) sudokuBoard.getFieldAt(row, column);
                 if (!field.isSet()) {
                     toRemove = new HashSet<Integer>();
                     for (int candidate : field.getCandidates()) {

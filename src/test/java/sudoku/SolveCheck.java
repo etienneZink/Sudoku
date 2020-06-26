@@ -71,28 +71,39 @@ public class SolveCheck {
     }
 
     public static void main(String[] args) {
+
         long startTime = System.currentTimeMillis();
         SolveCheck sudokuGame = new SolveCheck();
         long endTime = System.currentTimeMillis();
+
         System.out.println("Sudoku to solve:");
-        sudokuGame.board.print(sudokuGame.board.getSudoku());   
+
+        sudokuGame.board.print();   
+
         long duration = endTime - startTime;
         System.out.println("Sudoku solved:");
-        sudokuGame.board.print(sudokuGame.board.getSolvedSudoku());
-        SudokuChecker checker = new SudokuChecker(sudokuGame.board);
-        System.out.println("Is solved? " + checker.isSolved());
+
+        sudokuGame.board.printSolved();
+
+        //SudokuChecker checker = new SudokuChecker(sudokuGame.board);
+        System.out.println("Is solved? " + sudokuGame.board.isSolved());
         System.out.println("Solved in " + duration + "ms");
 
         System.out.println("Sudoku to solve:");
-        sudokuGame.board.print(sudokuGame.board.getSudoku());
+
+        sudokuGame.board.print();
+
         startTime = System.currentTimeMillis();
         sudokuGame.board = new ClassicSudoku(sudokuGame.sudokuToSolve2);
         endTime = System.currentTimeMillis();
+
         duration = endTime - startTime;
         System.out.println("Sudoku solved:");
-        sudokuGame.board.print(sudokuGame.board.getSolvedSudoku());
-        checker = new SudokuChecker(sudokuGame.board);
-        System.out.println("Is solved? " + checker.isSolved());
+
+        sudokuGame.board.printSolved();
+
+        //checker = new SudokuChecker(sudokuGame.board);
+        System.out.println("Is solved? " + sudokuGame.board.isSolved());
         System.out.println("Solved in " + duration + "ms");
         
     }

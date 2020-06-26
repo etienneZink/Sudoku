@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Abstract class that represents a basic field in a game.
  */
 
-public abstract class Field implements Serializable {
+public class Field implements Serializable {
 
     private static final long serialVersionUID = -3783448412446847604L;
 
@@ -16,11 +16,11 @@ public abstract class Field implements Serializable {
 
     // constructros
 
-    protected Field() {
+    public Field() {
 
     }
 
-    protected Field(int value) {
+    public Field(int value) {
         this.value = value;
         isSet = true;
     }
@@ -51,7 +51,7 @@ public abstract class Field implements Serializable {
         this.value = value;
     }
 
-    protected void setInitial(){
+    protected void setInitial() {
         initialField = true;
     }
 }
