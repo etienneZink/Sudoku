@@ -1,7 +1,7 @@
 package sudoku;
 
-import com.github.etienneZink.model.sudokuFramework_Candidates.boards.ClassicSudoku;
-import com.github.etienneZink.model.sudokuFramework_Candidates.checker.SudokuChecker;
+import com.github.etienneZink.model.sudoku.framework.candidates.boards.ClassicSudoku;
+import com.github.etienneZink.model.sudoku.framework.candidates.checker.SudokuChecker;
 
 public class SolveCheck {
 

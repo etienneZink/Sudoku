@@ -1,4 +1,4 @@
-package com.github.etienneZink.model.sudokuFramework_Candidates.boards;
+package com.github.etienneZink.model.sudoku.framework.candidates.boards;
 
 
 /**

@@ -1,24 +1,28 @@
-package com.github.etienneZink.model.sudokuFramework_Candidates.boards;
+package com.github.etienneZink.model.sudoku.framework.candidates.boards;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-import com.github.etienneZink.model.sudokuFramework_Candidates.checker.SudokuChecker;
-import com.github.etienneZink.model.sudokuFramework_Candidates.fields.SudokuField;
-import com.github.etienneZink.model.sudokuFramework_Candidates.fields.SudokuInitialField;
-import com.github.etienneZink.model.sudokuFramework_Candidates.solver.SudokuSolver;
+import com.github.etienneZink.model.sudoku.framework.candidates.checker.SudokuChecker;
+import com.github.etienneZink.model.sudoku.framework.candidates.fields.SudokuField;
+import com.github.etienneZink.model.sudoku.framework.candidates.fields.SudokuInitialField;
+import com.github.etienneZink.model.sudoku.framework.candidates.solver.SudokuSolver;
 
 /**
  * Class that represents a classic sudoku game.
  */
 
  //TODO Dokumentation überarbeiten
-public final class ClassicSudoku extends BasicBoard {
+public final class ClassicSudoku extends BasicBoard implements Serializable{
+
+    private static final long serialVersionUID = 3947440594492979142L;
 
     private SudokuField[][] sudoku = new SudokuField[BOARD_SIZE][BOARD_SIZE];
     private SudokuField[][] solvedSudoku;
 
     // constructors
 
+    @Deprecated
     public ClassicSudoku(int[][] values){
         super(values.length);
         initialize(Objects.requireNonNull(values));
@@ -68,6 +72,10 @@ public final class ClassicSudoku extends BasicBoard {
         System.out.println("-------------------------------------------------");
     }
 
+    /**
+     * Solves the <code>ClassicSudoku</code> and <code>set</code> its <code>sudoku</code> to the solved version of it, if it exists,  
+     * and <code>sets isSolvable</code>.
+     */
     @Override
     protected void solve() {
         setSolvable(new SudokuSolver(this).solve());
@@ -77,7 +85,7 @@ public final class ClassicSudoku extends BasicBoard {
      * Checks if the <code>ClassicSudokuBoard</code> was solved.
      * 
      * @return <code>True</code> if the <code>ClassicSudokuBoard</code> is solved,
-     *         else <code>false</code>.s
+     *         else <code>false</code>.
      */
     @Override
     public boolean isSolved() {
@@ -85,18 +93,21 @@ public final class ClassicSudoku extends BasicBoard {
         return getSolved();
     }
 
+    /**
+     * Initialize the <code>solvedSudoku</code>.
+     */
     private void initialize(){
-        setSolvedSudoku();
+        solve();
+        solvedSudoku = getFieldsOf(sudoku);
+        clear();
     }
-
-    // TODO lagere for schleifen und checks aus, sodass je nach param andere innere
-    // Funtion ausgeführt wird
 
     /**
      * Initialiez the <code>sudoku</code> with the given <code>values</code>.
      * 
      * @param values
      */
+    @Deprecated
     private void initialize(int[][] values) {
         if (correctLenght(values.length)) {
             for (int row = 0; row < BOARD_SIZE; ++row) {
@@ -182,17 +193,16 @@ public final class ClassicSudoku extends BasicBoard {
         }
     }
 
-    private void setSolvedSudoku() {
-        solve();
-        solvedSudoku = getFieldsOf(sudoku);
-        clear();
-    }
-
-    private SudokuField[][] getFieldsOf(SudokuField[][] originalSudoku) {
+    /**
+     * 
+     * @param originalFields
+     * @return New instance of <code>SudokuField[][]</code> but with same <code>values</code> as <code>originalFields</code>.
+     */
+    private SudokuField[][] getFieldsOf(SudokuField[][] originalFields) {
         SudokuField[][] tempSudoku = new SudokuField[BOARD_SIZE][BOARD_SIZE];
         for (int row = 0; row < BOARD_SIZE; ++row) {
             for (int column = 0; column < BOARD_SIZE; ++column) {
-                tempSudoku[row][column] = originalSudoku[row][column];
+                tempSudoku[row][column] = originalFields[row][column];
             }
         }
         return tempSudoku;

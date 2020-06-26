@@ -1,11 +1,11 @@
-package com.github.etienneZink.model.sudokuFramework_Candidates.checker;
+package com.github.etienneZink.model.sudoku.framework.candidates.checker;
 
-import com.github.etienneZink.model.sudokuFramework_Candidates.boards.ClassicSudoku;
-import com.github.etienneZink.model.sudokuFramework_Candidates.fields.SudokuField;
-import com.github.etienneZink.model.sudokuFramework_Candidates.interfaces.Checker;
+import com.github.etienneZink.model.sudoku.framework.candidates.boards.ClassicSudoku;
+import com.github.etienneZink.model.sudoku.framework.candidates.fields.SudokuField;
+import com.github.etienneZink.model.sudoku.framework.candidates.interfaces.Checker;
 
 /**
- * Class to check if a ClassicSudokuBoard is solved or not.
+ * Class to check if a ClassicSudoku is solved or not.
  * @see ClassicSudoku
  */
 public class SudokuChecker implements Checker{

@@ -1,4 +1,4 @@
-package com.github.etienneZink.model.sudokuFramework_Candidates.fields;
+package com.github.etienneZink.model.sudoku.framework.candidates.fields;
 
 public class SudokuInitialField extends SudokuField{
 

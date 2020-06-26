@@ -3,10 +3,10 @@ package sudoku;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import com.github.etienneZink.model.sudoku.framework.candidates.fields.SudokuField;
+
 import org.junit.Before;
 import org.junit.Test;
-
-import com.github.etienneZink.model.sudokuFramework_Candidates.fields.SudokuField;
 
 public class SudokuFieldTest {
 
