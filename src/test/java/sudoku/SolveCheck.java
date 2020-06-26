@@ -2,15 +2,17 @@ package sudoku;
 
 import com.github.etienneZink.model.sudokuFramework_Candidates.boards.ClassicSudoku;
 import com.github.etienneZink.model.sudokuFramework_Candidates.checker.SudokuChecker;
-import com.github.etienneZink.model.sudokuFramework_Candidates.exceptions.NotBuildException;
 
 public class SolveCheck {
 
     private int[][] sudokuToSolve = new int[9][9];
-    private int[][] sudokuToSolve2 = { { 0, 0, 3, 0, 2, 0, 6, 0, 0 }, { 9, 0, 0, 3, 0, 5, 0, 0, 1 },
+    private int[][] sudokuToSolve2 = 
+    
+    { { 0, 0, 3, 0, 2, 0, 6, 0, 0 }, { 9, 0, 0, 3, 0, 5, 0, 0, 1 },
             { 0, 0, 1, 8, 0, 6, 4, 0, 0 }, { 0, 0, 8, 1, 0, 2, 9, 0, 0 }, { 7, 0, 0, 0, 0, 0, 0, 0, 8 },
             { 0, 0, 6, 7, 0, 8, 2, 0, 0 }, { 0, 0, 2, 6, 0, 9, 5, 0, 0 }, { 8, 0, 0, 2, 0, 3, 0, 0, 9 },
             { 0, 0, 5, 0, 1, 0, 3, 0, 0 } };
+            
     private ClassicSudoku board;
 
     private SolveCheck() {
@@ -62,39 +64,33 @@ public class SolveCheck {
         sudokuToSolve[8][7] = 6;
 
         try {
-            board = new ClassicSudoku(9, sudokuToSolve);
+            board = new ClassicSudoku(sudokuToSolve);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public static void main(String[] args) {
-        SolveCheck sudokuGame = new SolveCheck();
-        System.out.println("Sudoku to solve:");
-        sudokuGame.board.print();
         long startTime = System.currentTimeMillis();
-        sudokuGame.board.solve();
+        SolveCheck sudokuGame = new SolveCheck();
         long endTime = System.currentTimeMillis();
+        System.out.println("Sudoku to solve:");
+        sudokuGame.board.print(sudokuGame.board.getSudoku());   
         long duration = endTime - startTime;
         System.out.println("Sudoku solved:");
-        sudokuGame.board.print();
+        sudokuGame.board.print(sudokuGame.board.getSolvedSudoku());
         SudokuChecker checker = new SudokuChecker(sudokuGame.board);
         System.out.println("Is solved? " + checker.isSolved());
         System.out.println("Solved in " + duration + "ms");
 
         System.out.println("Sudoku to solve:");
-        try {
-            sudokuGame.board = new ClassicSudoku(9, sudokuGame.sudokuToSolve2);
-        } catch (NotBuildException e) {
-            e.printStackTrace();
-        }
-        sudokuGame.board.print();
+        sudokuGame.board.print(sudokuGame.board.getSudoku());
         startTime = System.currentTimeMillis();
-        sudokuGame.board.solve();
+        sudokuGame.board = new ClassicSudoku(sudokuGame.sudokuToSolve2);
         endTime = System.currentTimeMillis();
         duration = endTime - startTime;
         System.out.println("Sudoku solved:");
-        sudokuGame.board.print();
+        sudokuGame.board.print(sudokuGame.board.getSolvedSudoku());
         checker = new SudokuChecker(sudokuGame.board);
         System.out.println("Is solved? " + checker.isSolved());
         System.out.println("Solved in " + duration + "ms");

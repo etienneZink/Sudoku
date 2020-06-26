@@ -9,11 +9,17 @@ public abstract class BasicBoard {
 
     public final int BOARD_SIZE;
 
-    protected boolean solved = false;
+    private boolean solved = false;
     private boolean isSolvable;
 
     public BasicBoard(int BOARD_SIZE){
-        this.BOARD_SIZE = BOARD_SIZE;
+        double BOARD_SIZE_ROOT = Math.sqrt(BOARD_SIZE);
+        if(BOARD_SIZE_ROOT == Math.floor(BOARD_SIZE_ROOT)){
+            this.BOARD_SIZE = BOARD_SIZE;
+        } else {
+            this.BOARD_SIZE = 9;
+        }
+        
     }
 
     /**
@@ -35,6 +41,26 @@ public abstract class BasicBoard {
     }
 
     /**
+     * 
+     * @return The current value of <code>solved</code> without <code>valuation</code>, if this is the correct value or not.
+     */
+    public boolean getSolved(){
+        return solved;
+    }
+
+    public boolean isSolvable(){
+        return isSolvable;
+    }
+
+    protected void setIsSolved(boolean isSolved){
+        this.solved = isSolved;
+    }
+
+    protected void setSolvable(boolean isSolvable){
+        this.isSolvable = isSolvable;
+    }
+
+    /**
      * Checks if the <code>AbstactBoard</code> subtype is solved.
      * @return <code>true</code> if it is solved, else <code>false</code>.
      */
@@ -43,6 +69,7 @@ public abstract class BasicBoard {
     /**
      * Solved the <code>BasicBoard</code> subtype.
      */
-    public abstract void solve();
+    protected abstract void solve();
+    
     
 }

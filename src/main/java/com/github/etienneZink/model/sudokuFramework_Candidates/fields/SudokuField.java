@@ -7,9 +7,6 @@ import java.util.Iterator;
 
 public class SudokuField extends Field {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 6812321149646212285L;
 
     private HashSet<Integer> candidates;
@@ -20,11 +17,8 @@ public class SudokuField extends Field {
     }
 
     public SudokuField(int value) {
-        //TODO more sexy -> anderer weg es auszudrücken
-        if(isLegalValue(value)){
-            setValue(value);
-            setIsSet(true);
-        } else {
+        super(value);
+        if(!isLegalValue(value)){
             setIsSet(false);
             initialize();
         }
@@ -33,7 +27,6 @@ public class SudokuField extends Field {
     private void initialize() {
         candidates = new HashSet<Integer>(9);
         for (int i = 0; i < 9; ++i) {
-            //candidates.add(i + 1);
             candidates.add(i + 1);
         }
     }
