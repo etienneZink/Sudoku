@@ -6,9 +6,10 @@ import com.github.etienneZink.model.sudoku.framework.candidates.fields.Field;
 import com.github.etienneZink.model.sudoku.framework.candidates.interfaces.FieldFactory;
 
 /**
- * Abstract implementation of a basic game-board with the
- * <code>BOARD_SIZE</code>.
+ * Abstract implementation of a basic game-board.
  */
+
+ //TODO Dokumentation
 
 public abstract class BasicBoard implements Serializable{
 
