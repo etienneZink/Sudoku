@@ -1,10 +1,9 @@
 package com.github.etienneZink.model.sudoku.framework.candidates.boards;
 
-import java.io.Serializable;
 
 import com.github.etienneZink.model.sudoku.framework.candidates.checker.SudokuChecker;
+import com.github.etienneZink.model.sudoku.framework.candidates.fields.SudokuFieldFactory;
 import com.github.etienneZink.model.sudoku.framework.candidates.fields.SudokuField;
-import com.github.etienneZink.model.sudoku.framework.candidates.fields.SudokuInitialField;
 import com.github.etienneZink.model.sudoku.framework.candidates.solver.SudokuSolver;
 
 /**
@@ -12,17 +11,11 @@ import com.github.etienneZink.model.sudoku.framework.candidates.solver.SudokuSol
  */
 
 // TODO Dokumentation überarbeiten
-public final class ClassicSudoku extends BasicBoard<SudokuField> implements Serializable {
+public final class ClassicSudoku extends BasicBoard {
 
     private static final long serialVersionUID = 3947440594492979142L;
 
     // constructors
-
-    @Deprecated
-    public ClassicSudoku(int[][] values) {
-        super();
-        initialize(values);
-    }
 
     public ClassicSudoku(SudokuField[][] fields) {
         super(fields);
@@ -100,24 +93,8 @@ public final class ClassicSudoku extends BasicBoard<SudokuField> implements Seri
         return getSolved();
     }
 
-    /**
-     * Initialiez the <code>sudoku</code> with the given <code>values</code>.
-     * 
-     * @param values
-     */
-
-    @Deprecated
-    private void initialize(int[][] values) {
-        if (correctLenght(values.length)) {
-            for (int row = 0; row < BOARD_SIZE; ++row) {
-                if (correctLenght(values[row].length)) {
-                    for (int column = 0; column < BOARD_SIZE; ++column) {
-                        setFieldAt(row, column, new SudokuInitialField(values[row][column]));
-                    }
-                }
-            }
-        }
-        initialize();
+    @Override
+    protected void setFactory() {
+        this.factory = new SudokuFieldFactory();
     }
-
 }

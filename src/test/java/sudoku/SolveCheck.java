@@ -1,18 +1,34 @@
 package sudoku;
 
 import com.github.etienneZink.model.sudoku.framework.candidates.boards.ClassicSudoku;
-import com.github.etienneZink.model.sudoku.framework.candidates.checker.SudokuChecker;
+import com.github.etienneZink.model.sudoku.framework.candidates.fields.SudokuField;
+import com.github.etienneZink.model.sudoku.framework.candidates.fields.SudokuInitialField;
 
 public class SolveCheck {
 
     private int[][] sudokuToSolve = new int[9][9];
-    private int[][] sudokuToSolve2 = 
-    
-    { { 0, 0, 3, 0, 2, 0, 6, 0, 0 }, { 9, 0, 0, 3, 0, 5, 0, 0, 1 },
-            { 0, 0, 1, 8, 0, 6, 4, 0, 0 }, { 0, 0, 8, 1, 0, 2, 9, 0, 0 }, { 7, 0, 0, 0, 0, 0, 0, 0, 8 },
-            { 0, 0, 6, 7, 0, 8, 2, 0, 0 }, { 0, 0, 2, 6, 0, 9, 5, 0, 0 }, { 8, 0, 0, 2, 0, 3, 0, 0, 9 },
-            { 0, 0, 5, 0, 1, 0, 3, 0, 0 } };
-            
+    private SudokuField[][] sudokuToSolve2 =
+
+            { { new SudokuInitialField(0), new SudokuInitialField(0), new SudokuInitialField(3), new SudokuInitialField(0), new SudokuInitialField(2),
+                    new SudokuInitialField(0), new SudokuInitialField(6), new SudokuInitialField(0), new SudokuInitialField(0) },
+                    { new SudokuInitialField(9), new SudokuInitialField(0), new SudokuInitialField(0), new SudokuInitialField(3),
+                            new SudokuInitialField(0), new SudokuInitialField(5), new SudokuInitialField(0), new SudokuInitialField(0),
+                            new SudokuInitialField(1) },
+                    { new SudokuInitialField(0), new SudokuInitialField(0), new SudokuInitialField(1), new SudokuInitialField(8), new SudokuInitialField(0),
+                            new SudokuInitialField(6), new SudokuInitialField(4), new SudokuInitialField(0), new SudokuInitialField(0) },
+                    { new SudokuInitialField(0), new SudokuInitialField(0), new SudokuInitialField(8), new SudokuInitialField(1), new SudokuInitialField(0),
+                            new SudokuInitialField(2), new SudokuInitialField(9), new SudokuInitialField(0), new SudokuInitialField(0) },
+                    { new SudokuInitialField(7), new SudokuInitialField(0), new SudokuInitialField(0), new SudokuInitialField(0), new SudokuInitialField(0),
+                            new SudokuInitialField(0), new SudokuInitialField(0), new SudokuInitialField(0), new SudokuInitialField(8) },
+                    { new SudokuInitialField(0), new SudokuInitialField(0), new SudokuInitialField(6), new SudokuInitialField(7), new SudokuInitialField(0), new SudokuInitialField(8),
+                            new SudokuInitialField(2), new SudokuInitialField(0), new SudokuInitialField(0) },
+                    { new SudokuInitialField(0), new SudokuInitialField(0), new SudokuInitialField(2), new SudokuInitialField(6),
+                            new SudokuInitialField(0), new SudokuInitialField(9), new SudokuInitialField(5), new SudokuInitialField(0), new SudokuInitialField(0) },
+                    { new SudokuInitialField(8), new SudokuInitialField(0), new SudokuInitialField(0), new SudokuInitialField(2), new SudokuInitialField(0),
+                            new SudokuInitialField(3), new SudokuInitialField(0), new SudokuInitialField(0), new SudokuInitialField(9) },
+                    { new SudokuInitialField(0), new SudokuInitialField(0), new SudokuInitialField(5), new SudokuInitialField(0), new SudokuInitialField(1),
+                            new SudokuInitialField(0), new SudokuInitialField(3), new SudokuInitialField(0), new SudokuInitialField(0) } };
+
     private ClassicSudoku board;
 
     private SolveCheck() {
@@ -64,7 +80,7 @@ public class SolveCheck {
         sudokuToSolve[8][7] = 6;
 
         try {
-            board = new ClassicSudoku(sudokuToSolve);
+            board = new ClassicSudoku(sudokuToSolve2);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -78,14 +94,14 @@ public class SolveCheck {
 
         System.out.println("Sudoku to solve:");
 
-        sudokuGame.board.print();   
+        sudokuGame.board.print();
 
         long duration = endTime - startTime;
         System.out.println("Sudoku solved:");
 
         sudokuGame.board.printSolved();
 
-        //SudokuChecker checker = new SudokuChecker(sudokuGame.board);
+        // SudokuChecker checker = new SudokuChecker(sudokuGame.board);
         System.out.println("Is solved? " + sudokuGame.board.isSolved());
         System.out.println("Solved in " + duration + "ms");
 
@@ -102,9 +118,9 @@ public class SolveCheck {
 
         sudokuGame.board.printSolved();
 
-        //checker = new SudokuChecker(sudokuGame.board);
+        // checker = new SudokuChecker(sudokuGame.board);
         System.out.println("Is solved? " + sudokuGame.board.isSolved());
         System.out.println("Solved in " + duration + "ms");
-        
+
     }
 }

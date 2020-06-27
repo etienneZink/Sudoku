@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import com.github.etienneZink.model.sudoku.framework.candidates.fields.SudokuField;
+import com.github.etienneZink.model.sudoku.framework.candidates.fields.SudokuFieldFactory;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,11 +13,12 @@ public class SudokuFieldTest {
 
     SudokuField fieldWithoutValue;
     SudokuField fieldValue;
+    SudokuFieldFactory factory = new SudokuFieldFactory();
 
     @Before
     public void setUp() {
-        fieldWithoutValue = new SudokuField();
-        fieldValue = new SudokuField(1);
+        fieldWithoutValue = (SudokuField) factory.emptyField();
+        fieldValue = (SudokuField) factory.newField(1);
     }
 
     @Test

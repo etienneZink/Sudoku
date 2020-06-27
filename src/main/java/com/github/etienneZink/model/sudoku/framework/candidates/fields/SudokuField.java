@@ -3,6 +3,7 @@ package com.github.etienneZink.model.sudoku.framework.candidates.fields;
 import java.util.HashSet;
 import java.util.Iterator;
 
+
 //TODO Dokumentation
 
 public class SudokuField extends Field{
@@ -10,21 +11,22 @@ public class SudokuField extends Field{
     private static final long serialVersionUID = 6812321149646212285L;
 
     private HashSet<Integer> candidates;
+    
 
-    public SudokuField() {
+    protected SudokuField() {
         super();
-        initializeCandidates();
+        initialize();
     }
 
-    public SudokuField(int value) {
+    protected SudokuField(int value) {
         super(value);
         if(!isLegalValue(value)){
             setIsSet(false);
-            initializeCandidates();
+            initialize();
         }
     }
 
-    private void initializeCandidates() {
+    private void initialize() {
         candidates = new HashSet<Integer>(9);
         for (int i = 0; i < 9; ++i) {
             candidates.add(i + 1);

@@ -1,15 +1,18 @@
 package com.github.etienneZink.model.sudoku.framework.candidates.boards;
 
-import java.lang.reflect.Constructor;
+import java.io.Serializable;
 
 import com.github.etienneZink.model.sudoku.framework.candidates.fields.Field;
+import com.github.etienneZink.model.sudoku.framework.candidates.interfaces.FieldFactory;
 
 /**
  * Abstract implementation of a basic game-board with the
  * <code>BOARD_SIZE</code>.
  */
 
-public abstract class BasicBoard<T extends Field> {
+public abstract class BasicBoard implements Serializable{
+
+    private static final long serialVersionUID = 6535261797996973259L;
 
     public final int BOARD_SIZE;
     public final int BOARD_SIZE_ROOT;
@@ -17,20 +20,13 @@ public abstract class BasicBoard<T extends Field> {
     private boolean solved = false;
     private boolean isSolvable;
 
-    Class<T> classT;
-    Constructor<T> ct;
+    private Field[][] fields;
+    private Field[][] solvedFields;
 
-    private T[][] fields;
-    private T[][] solvedFields;
+    protected FieldFactory factory;
 
-    public BasicBoard() {
-        this.BOARD_SIZE = 9;
-        this.BOARD_SIZE_ROOT = 3;
-        this.fields = (T[][]) new Field[BOARD_SIZE][BOARD_SIZE];
-    }
-
-    public BasicBoard(T[][] fields) {
-        // TODO more sexy
+    public BasicBoard(Field[][] fields) {
+        preInitialize();
         double BOARD_SIZE_ROOT = Math.sqrt(fields.length);
 
         if (BOARD_SIZE_ROOT == Math.floor(BOARD_SIZE_ROOT)) {
@@ -40,7 +36,7 @@ public abstract class BasicBoard<T extends Field> {
         } else {
             this.BOARD_SIZE = 9;
             this.BOARD_SIZE_ROOT = 3;
-            this.fields = (T[][]) new Field[BOARD_SIZE][BOARD_SIZE];
+            this.fields = factory.emptyArray(BOARD_SIZE, BOARD_SIZE);
         }
         initialize();
     }
@@ -83,6 +79,10 @@ public abstract class BasicBoard<T extends Field> {
         return (lenght == BOARD_SIZE) ? true : false;
     }
 
+    protected void preInitialize() {
+        setFactory();
+    }
+
     /**
      * Initialize the <code>solvedSudoku</code>.
      */
@@ -99,10 +99,11 @@ public abstract class BasicBoard<T extends Field> {
         for (int row = 0; row < BOARD_SIZE; ++row) {
             for (int column = 0; column < BOARD_SIZE; ++column) {
                 if (!fields[row][column].isInitial()) {
-                    fields[row][column] = (T) new Field();
+                        fields[row][column] = factory.emptyField();
                 }
             }
         }
+
     }
 
     /**
@@ -111,9 +112,9 @@ public abstract class BasicBoard<T extends Field> {
      * @return New instance of <code>SudokuField[][]</code> but with same
      *         <code>values</code> as <code>originalFields</code>.
      */
-    private T[][] getFieldsOf(T[][] originalFields) {
+    private Field[][] getFieldsOf(Field[][] originalFields) {
 
-        T[][] tempSudoku = (T[][]) new Field[BOARD_SIZE][BOARD_SIZE];
+        Field[][] tempSudoku = factory.emptyArray(BOARD_SIZE, BOARD_SIZE);
         for (int row = 0; row < BOARD_SIZE; ++row) {
             for (int column = 0; column < BOARD_SIZE; ++column) {
                 tempSudoku[row][column] = originalFields[row][column];
@@ -196,23 +197,23 @@ public abstract class BasicBoard<T extends Field> {
         return isSolvable;
     }
 
-    public T[][] getFields() {
+    public Field[][] getFields() {
         return fields;
     }
 
-    public T[][] getSolvedFields() {
+    public Field[][] getSolvedFields() {
         return solvedFields;
     }
 
-    public T getFieldAt(int row, int column) {
+    public Field getFieldAt(int row, int column) {
         return fields[row][column];
     }
 
-    public T getSolvedFieldAt(int row, int column) {
+    public Field getSolvedFieldAt(int row, int column) {
         return solvedFields[row][column];
     }
 
-    public void setFieldAt(int row, int column, T field) {
+    public void setFieldAt(int row, int column, Field field) {
         if (indexInBoard(row) && indexInBoard(column)) {
             if (fields[row][column] == null) {
                 fields[row][column] = field;
@@ -239,13 +240,14 @@ public abstract class BasicBoard<T extends Field> {
      */
     public abstract boolean isSolved();
 
+    public abstract void print();
+
+    public abstract void printSolved();
+
     /**
      * Solved the <code>BasicBoard</code> subtype.
      */
     protected abstract void solve();
 
-    public abstract void print();
-
-    public abstract void printSolved();
-
+    protected abstract void setFactory();
 }

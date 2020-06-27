@@ -1,7 +1,6 @@
 package com.github.etienneZink.model.sudoku.framework.candidates.checker;
 
 import com.github.etienneZink.model.sudoku.framework.candidates.boards.ClassicSudoku;
-import com.github.etienneZink.model.sudoku.framework.candidates.fields.Field;
 import com.github.etienneZink.model.sudoku.framework.candidates.fields.SudokuField;
 import com.github.etienneZink.model.sudoku.framework.candidates.interfaces.Checker;
 
@@ -21,7 +20,6 @@ public class SudokuChecker implements Checker{
 
     // non-static methods
 
-    //TODO only works if SudokuField is changed to Field
     @Override
     public boolean isSolved(){
         SudokuField field;

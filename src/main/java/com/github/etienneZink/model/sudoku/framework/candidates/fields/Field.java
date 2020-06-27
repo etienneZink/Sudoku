@@ -3,7 +3,7 @@ package com.github.etienneZink.model.sudoku.framework.candidates.fields;
 import java.io.Serializable;
 
 /**
- * Abstract class that represents a basic field in a game.
+ * Class that represents a basic field in a game.
  */
 
 public class Field implements Serializable {
@@ -16,11 +16,11 @@ public class Field implements Serializable {
 
     // constructros
 
-    public Field() {
-
+    protected Field() {
+        
     }
 
-    public Field(int value) {
+    protected Field(int value) {
         this.value = value;
         isSet = true;
     }
