@@ -2,7 +2,10 @@ package com.github.etienneZink.model.sudoku.framework.candidates.fields;
 
 import com.github.etienneZink.model.sudoku.framework.candidates.interfaces.FieldFactory;
 
-
+/**
+ * Factory for the class <code>SudokuField</code>.
+ * @see SudokuField
+ */
 public class SudokuFieldFactory implements FieldFactory{
 
     @Override

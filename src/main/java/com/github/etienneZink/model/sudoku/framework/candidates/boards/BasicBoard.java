@@ -9,9 +9,9 @@ import com.github.etienneZink.model.sudoku.framework.candidates.interfaces.Field
  * Abstract implementation of a basic game-board.
  */
 
- //TODO Dokumentation
+// TODO Dokumentation
 
-public abstract class BasicBoard implements Serializable{
+public abstract class BasicBoard implements Serializable {
 
     private static final long serialVersionUID = 6535261797996973259L;
 
@@ -69,17 +69,6 @@ public abstract class BasicBoard implements Serializable{
         return (-1 < index && index < BOARD_SIZE) ? true : false;
     }
 
-    /**
-     * Ckecks if the given legth is equal to the <code>BOARD_SIZE</code>.
-     * 
-     * @param lenght
-     * @return <code>true</code> if <code>length == BOARD_SIZE</code>, else
-     *         <code>false</code>.
-     */
-    protected boolean correctLenght(int lenght) {
-        return (lenght == BOARD_SIZE) ? true : false;
-    }
-
     protected void preInitialize() {
         setFactory();
     }
@@ -94,27 +83,28 @@ public abstract class BasicBoard implements Serializable{
     }
 
     /**
-     * Clears all <code>fields</code>, which aren't <code>initial</code>.
+     * Clears all <code>Field</code> objects in <code>fields</code>, which aren't
+     * <code>initial</code>.
      */
     private void clear() {
         for (int row = 0; row < BOARD_SIZE; ++row) {
             for (int column = 0; column < BOARD_SIZE; ++column) {
                 if (!fields[row][column].isInitial()) {
-                        fields[row][column] = factory.emptyField();
+                    fields[row][column] = factory.emptyField();
                 }
             }
         }
+        solved = false;
 
     }
 
     /**
      * 
      * @param originalFields
-     * @return New instance of <code>SudokuField[][]</code> but with same
+     * @return New instance of <code>Field[][]</code> but with same
      *         <code>values</code> as <code>originalFields</code>.
      */
     private Field[][] getFieldsOf(Field[][] originalFields) {
-
         Field[][] tempSudoku = factory.emptyArray(BOARD_SIZE, BOARD_SIZE);
         for (int row = 0; row < BOARD_SIZE; ++row) {
             for (int column = 0; column < BOARD_SIZE; ++column) {
@@ -134,9 +124,11 @@ public abstract class BasicBoard implements Serializable{
      * @return <code>true</code> if it is already set, else <code>false</code>.
      */
     private boolean inColumn(int fieldRow, int column, int value) {
-        for (int row = 0; row < BOARD_SIZE; ++row) {
-            if (value == fields[row][column].getValue() && row != fieldRow) {
-                return true;
+        if (indexInBoard(fieldRow) && indexInBoard(column)) {
+            for (int row = 0; row < BOARD_SIZE; ++row) {
+                if (value == fields[row][column].getValue() && row != fieldRow) {
+                    return true;
+                }
             }
         }
         return false;
@@ -152,9 +144,11 @@ public abstract class BasicBoard implements Serializable{
      * @return <code>true</code> if it is already set, else <code>false</code>.
      */
     private boolean inRow(int row, int fieldColumn, int value) {
-        for (int column = 0; column < BOARD_SIZE; ++column) {
-            if (value == fields[row][column].getValue() && column != fieldColumn) {
-                return true;
+        if (indexInBoard(row) && indexInBoard(fieldColumn)) {
+            for (int column = 0; column < BOARD_SIZE; ++column) {
+                if (value == fields[row][column].getValue() && column != fieldColumn) {
+                    return true;
+                }
             }
         }
         return false;
@@ -173,10 +167,12 @@ public abstract class BasicBoard implements Serializable{
         int groupStartRow = (row / BOARD_SIZE_ROOT) * BOARD_SIZE_ROOT;
         int groupStartColumn = (column / BOARD_SIZE_ROOT) * BOARD_SIZE_ROOT;
 
-        for (int tempRow = groupStartRow; tempRow < groupStartRow + BOARD_SIZE_ROOT; ++tempRow) {
-            for (int tempColumn = groupStartColumn; tempColumn < groupStartColumn + BOARD_SIZE_ROOT; ++tempColumn) {
-                if (value == fields[tempRow][tempColumn].getValue() && row != tempRow && column != tempColumn) {
-                    return true;
+        if (indexInBoard(row) && indexInBoard(column)) {
+            for (int tempRow = groupStartRow; tempRow < groupStartRow + BOARD_SIZE_ROOT; ++tempRow) {
+                for (int tempColumn = groupStartColumn; tempColumn < groupStartColumn + BOARD_SIZE_ROOT; ++tempColumn) {
+                    if (value == fields[tempRow][tempColumn].getValue() && row != tempRow && column != tempColumn) {
+                        return true;
+                    }
                 }
             }
         }
@@ -206,24 +202,43 @@ public abstract class BasicBoard implements Serializable{
         return solvedFields;
     }
 
+    /**
+     * 
+     * @param row
+     * @param column
+     * @return The field at <code>[row][column]</code> or <code>null</code> if the
+     *         row or column is inappropriate.
+     */
     public Field getFieldAt(int row, int column) {
-        return fields[row][column];
-    }
-
-    public Field getSolvedFieldAt(int row, int column) {
-        return solvedFields[row][column];
-    }
-
-    public void setFieldAt(int row, int column, Field field) {
         if (indexInBoard(row) && indexInBoard(column)) {
-            if (fields[row][column] == null) {
-                fields[row][column] = field;
-            } else {
-                if (!fields[row][column].isInitial()) {
-                    fields[row][column] = field;
-                }
-            }
+            return fields[row][column];
+        } else {
+            return null;
         }
+    }
+
+    /**
+     * 
+     * @param row
+     * @param column
+     * @return The solved field at <code>[row][column]</code> or <code>null</code>
+     *         if the row or column is inappropriate.
+     */
+    public Field getSolvedFieldAt(int row, int column) {
+        if (indexInBoard(row) && indexInBoard(column)) {
+            return solvedFields[row][column];
+        } else {
+            return null;
+        }
+    }
+
+    public boolean setFieldAt(int row, int column, Field field) {
+        if (indexInBoard(row) && indexInBoard(column)
+                && (fields[row][column] == null || !fields[row][column].isInitial())) {
+            fields[row][column] = field;
+            return true;
+        }
+        return false;
     }
 
     protected void setIsSolved(boolean isSolved) {
@@ -233,6 +248,8 @@ public abstract class BasicBoard implements Serializable{
     protected void setSolvable(boolean isSolvable) {
         this.isSolvable = isSolvable;
     }
+
+    // abstract methods
 
     /**
      * Checks if the <code>AbstactBoard</code> subtype is solved.

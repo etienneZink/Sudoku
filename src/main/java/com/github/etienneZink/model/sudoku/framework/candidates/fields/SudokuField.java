@@ -2,16 +2,20 @@ package com.github.etienneZink.model.sudoku.framework.candidates.fields;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import com.github.etienneZink.model.sudoku.framework.candidates.boards.ClassicSudoku;
 
-
-//TODO Dokumentation
-
-public class SudokuField extends Field{
+/**
+ * Class that represents the basic <code>Field</code> in a <code>ClassicSudoku</code> with a
+ * <code>HashSet</code> of <code>candidates</code> which represents the values possible for this field.
+ * 
+ * @see Field
+ * @see ClassicSudoku
+ */
+public class SudokuField extends Field {
 
     private static final long serialVersionUID = 6812321149646212285L;
 
     private HashSet<Integer> candidates;
-    
 
     protected SudokuField() {
         super();
@@ -20,7 +24,7 @@ public class SudokuField extends Field{
 
     protected SudokuField(int value) {
         super(value);
-        if(!isLegalValue(value)){
+        if (!isLegalValue(value)) {
             setIsSet(false);
             initialize();
         }
@@ -33,33 +37,37 @@ public class SudokuField extends Field{
         }
     }
 
-    public void isToSet(){
-        if (candidates.size() == 1) {
-            Iterator<Integer> it = candidates.iterator();
-            if(it.hasNext()){
-                setValue(it.next());
-                setIsSet(true);
-                
-                
-            }
-        }
-    }
-
     private boolean isLegalValue(int value) {
         return (0 < value && value < 10) ? true : false;
-    }
-
-    public HashSet<Integer> getCandidates() {
-        return candidates;
     }
 
     public void removeCandidate(int value) {
         candidates.remove(value);
         isToSet();
     }
+    
+    /**
+     * Checks if the value of the <code>SudokuField</code> can be set.
+     * @return <code>isSet</code>
+     */
+    public boolean isToSet() {
+        if (candidates.size() == 1) {
+            Iterator<Integer> it = candidates.iterator();
+            if (it.hasNext()) {
+                setValue(it.next());
+                setIsSet(true);
+            }
+        }
+        return isSet();
+    }
 
-    public void addCandidate(int value){
+    public void addCandidate(int value) {
         candidates.add(value);
     }
 
+    // getter and setter
+
+    public HashSet<Integer> getCandidates() {
+        return candidates;
+    }
 }
