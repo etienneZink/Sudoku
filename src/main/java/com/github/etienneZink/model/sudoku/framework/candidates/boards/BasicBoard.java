@@ -256,7 +256,16 @@ public abstract class BasicBoard implements Serializable {
      */
     protected abstract void solve();
 
+    /**
+     * 
+     * @return New subtype object of the class <code>Field</code> which is used in the <code>BasicBoard</code> subtype.
+     */
     protected abstract Field newEmptyField();
 
+    /**
+     * @param rows
+     * @param columns
+     * @return New subtype array of the class <code>Field</code> which is used in the <code>BasicBoard</code> subtype.
+     */
     protected abstract Field[][] newArray(int rows, int columns);
 }
