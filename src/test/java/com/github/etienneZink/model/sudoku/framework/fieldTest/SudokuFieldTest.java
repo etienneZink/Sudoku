@@ -1,10 +1,9 @@
-package sudoku;
+package com.github.etienneZink.model.sudoku.framework.fieldTest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import com.github.etienneZink.model.sudoku.framework.candidates.fields.SudokuField;
-import com.github.etienneZink.model.sudoku.framework.candidates.fields.SudokuFieldFactory;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,12 +12,11 @@ public class SudokuFieldTest {
 
     SudokuField fieldWithoutValue;
     SudokuField fieldValue;
-    SudokuFieldFactory factory = new SudokuFieldFactory();
 
     @Before
     public void setUp() {
-        fieldWithoutValue = (SudokuField) factory.emptyField();
-        fieldValue = (SudokuField) factory.newField(1);
+        fieldWithoutValue = new SudokuField();
+        fieldValue = new SudokuField(1);
     }
 
     @Test
@@ -27,8 +25,8 @@ public class SudokuFieldTest {
             fieldWithoutValue.removeCandidate(i);
         }
        
-        assertTrue("tests if field was set",fieldWithoutValue.isSet());
-        assertEquals("tests if field has value as expected",9, fieldWithoutValue.getValue());
+        assertTrue(fieldWithoutValue.isSet());
+        assertEquals(9, fieldWithoutValue.getValue());
     }
 
     @Test
