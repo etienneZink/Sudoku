@@ -2,7 +2,7 @@ package com.github.etienneZink.model.sudoku.framework.candidates.boards;
 
 
 import com.github.etienneZink.model.sudoku.framework.candidates.checker.SudokuChecker;
-import com.github.etienneZink.model.sudoku.framework.candidates.fields.SudokuFieldFactory;
+import com.github.etienneZink.model.sudoku.framework.candidates.fields.Field;
 import com.github.etienneZink.model.sudoku.framework.candidates.fields.SudokuField;
 import com.github.etienneZink.model.sudoku.framework.candidates.solver.SudokuSolver;
 
@@ -10,7 +10,6 @@ import com.github.etienneZink.model.sudoku.framework.candidates.solver.SudokuSol
  * Class that represents a classic sudoku game.
  */
 
-// TODO Dokumentation überarbeiten
 public final class ClassicSudoku extends BasicBoard {
 
     private static final long serialVersionUID = 3947440594492979142L;
@@ -94,7 +93,13 @@ public final class ClassicSudoku extends BasicBoard {
     }
 
     @Override
-    protected void setFactory() {
-        this.factory = new SudokuFieldFactory();
+    protected Field newEmptyField() {
+        return new SudokuField();
     }
+
+    @Override
+    protected Field[][] newArray(int rows, int columns) {
+        return new SudokuField[rows][columns];
+    }
+
 }

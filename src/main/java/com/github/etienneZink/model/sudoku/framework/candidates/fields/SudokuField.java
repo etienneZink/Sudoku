@@ -17,12 +17,12 @@ public class SudokuField extends Field {
 
     private HashSet<Integer> candidates;
 
-    protected SudokuField() {
+    public SudokuField() {
         super();
         initialize();
     }
 
-    protected SudokuField(int value) {
+    public SudokuField(int value) {
         super(value);
         if (!isLegalValue(value)) {
             setIsSet(false);

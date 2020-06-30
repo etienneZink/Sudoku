@@ -3,13 +3,10 @@ package com.github.etienneZink.model.sudoku.framework.candidates.boards;
 import java.io.Serializable;
 
 import com.github.etienneZink.model.sudoku.framework.candidates.fields.Field;
-import com.github.etienneZink.model.sudoku.framework.candidates.interfaces.FieldFactory;
 
 /**
  * Abstract implementation of a basic game-board.
  */
-
-// TODO Dokumentation
 
 public abstract class BasicBoard implements Serializable {
 
@@ -24,10 +21,7 @@ public abstract class BasicBoard implements Serializable {
     private Field[][] fields;
     private Field[][] solvedFields;
 
-    protected FieldFactory factory;
-
     public BasicBoard(Field[][] fields) {
-        preInitialize();
         double BOARD_SIZE_ROOT = Math.sqrt(fields.length);
 
         if (BOARD_SIZE_ROOT == Math.floor(BOARD_SIZE_ROOT)) {
@@ -37,7 +31,7 @@ public abstract class BasicBoard implements Serializable {
         } else {
             this.BOARD_SIZE = 9;
             this.BOARD_SIZE_ROOT = 3;
-            this.fields = factory.emptyArray(BOARD_SIZE, BOARD_SIZE);
+            this.fields = newArray(BOARD_SIZE, BOARD_SIZE);
         }
         initialize();
     }
@@ -69,10 +63,6 @@ public abstract class BasicBoard implements Serializable {
         return (-1 < index && index < BOARD_SIZE) ? true : false;
     }
 
-    protected void preInitialize() {
-        setFactory();
-    }
-
     /**
      * Initialize the <code>solvedSudoku</code>.
      */
@@ -90,12 +80,11 @@ public abstract class BasicBoard implements Serializable {
         for (int row = 0; row < BOARD_SIZE; ++row) {
             for (int column = 0; column < BOARD_SIZE; ++column) {
                 if (!fields[row][column].isInitial()) {
-                    fields[row][column] = factory.emptyField();
+                    fields[row][column] = newEmptyField();
                 }
             }
         }
         solved = false;
-
     }
 
     /**
@@ -105,7 +94,7 @@ public abstract class BasicBoard implements Serializable {
      *         <code>values</code> as <code>originalFields</code>.
      */
     private Field[][] getFieldsOf(Field[][] originalFields) {
-        Field[][] tempSudoku = factory.emptyArray(BOARD_SIZE, BOARD_SIZE);
+        Field[][] tempSudoku = newArray(BOARD_SIZE, BOARD_SIZE);
         for (int row = 0; row < BOARD_SIZE; ++row) {
             for (int column = 0; column < BOARD_SIZE; ++column) {
                 tempSudoku[row][column] = originalFields[row][column];
@@ -267,5 +256,7 @@ public abstract class BasicBoard implements Serializable {
      */
     protected abstract void solve();
 
-    protected abstract void setFactory();
+    protected abstract Field newEmptyField();
+
+    protected abstract Field[][] newArray(int rows, int columns);
 }
