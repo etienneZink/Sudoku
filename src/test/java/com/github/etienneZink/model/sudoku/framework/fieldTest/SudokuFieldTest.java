@@ -12,11 +12,13 @@ public class SudokuFieldTest {
 
     SudokuField fieldWithoutValue;
     SudokuField fieldValue;
+    SudokuField fieldWrongValue;
 
     @Before
     public void setUp() {
         fieldWithoutValue = new SudokuField();
         fieldValue = new SudokuField(1);
+        fieldWrongValue = new SudokuField(-1);
     }
 
     @Test
@@ -31,6 +33,7 @@ public class SudokuFieldTest {
 
     @Test
     public void setTest(){
-        assertTrue("tests if value was set", fieldValue.isSet());
+        assertTrue(fieldValue.isSet());
+        assertTrue(!fieldWrongValue.isSet());
     }
 }

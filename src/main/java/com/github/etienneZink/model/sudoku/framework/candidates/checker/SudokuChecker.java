@@ -8,7 +8,7 @@ import com.github.etienneZink.model.sudoku.framework.candidates.interfaces.Check
  * Class to check if a ClassicSudoku is solved or not.
  * @see ClassicSudoku
  */
-public class SudokuChecker implements Checker{
+public final class SudokuChecker implements Checker{
 
     private ClassicSudoku sudoku;
 

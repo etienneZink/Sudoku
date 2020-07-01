@@ -6,7 +6,7 @@ package com.github.etienneZink.model.sudoku.framework.candidates.fields;
  * <code>ClassicSudoku</code>.
  * @see ClassicSudoku
  */
-public class SudokuInitialField extends SudokuField {
+public  final class SudokuInitialField extends SudokuField {
 
     private static final long serialVersionUID = -5736656543972666685L;
 

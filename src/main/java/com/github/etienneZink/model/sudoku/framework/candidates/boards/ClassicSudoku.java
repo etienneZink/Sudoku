@@ -16,6 +16,10 @@ public final class ClassicSudoku extends BasicBoard {
 
     // constructors
 
+    public ClassicSudoku(){
+        super();
+    }
+
     public ClassicSudoku(SudokuField[][] fields) {
         super(fields);
     }
@@ -100,6 +104,12 @@ public final class ClassicSudoku extends BasicBoard {
     @Override
     protected Field[][] newArray(int rows, int columns) {
         return new SudokuField[rows][columns];
+    }
+
+    @Override
+    protected void generateRandomFields(BasicBoard board) {
+        // TODO
+
     }
 
 }

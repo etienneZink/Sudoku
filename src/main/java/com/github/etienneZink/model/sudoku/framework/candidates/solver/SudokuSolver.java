@@ -11,7 +11,7 @@ import com.github.etienneZink.model.sudoku.framework.candidates.interfaces.Solve
  * 
  * @see ClassicSudoku
  */
-public class SudokuSolver implements Solver {
+public final class SudokuSolver implements Solver {
 
     ClassicSudoku sudokuBoard;
 

@@ -21,6 +21,15 @@ public abstract class BasicBoard implements Serializable {
     private Field[][] fields;
     private Field[][] solvedFields;
 
+    public BasicBoard() {
+        BOARD_SIZE = 9;
+        BOARD_SIZE_ROOT = 3;
+        
+        initializeFields();
+        
+        initializeSolvedFields();
+    }
+
     public BasicBoard(Field[][] fields) {
         double BOARD_SIZE_ROOT = Math.sqrt(fields.length);
 
@@ -33,7 +42,7 @@ public abstract class BasicBoard implements Serializable {
             this.BOARD_SIZE_ROOT = 3;
             this.fields = newArray(BOARD_SIZE, BOARD_SIZE);
         }
-        initialize();
+        initializeSolvedFields();
     }
 
     // non-static methods
@@ -59,14 +68,24 @@ public abstract class BasicBoard implements Serializable {
      * @return <code>true</code> if <code>-1 < index < BOARD_SIZE</code>, else
      *         <code>false</code>.
      */
-    protected boolean indexInBoard(int index) {
+    private boolean indexInBoard(int index) {
         return (-1 < index && index < BOARD_SIZE) ? true : false;
+    }
+
+    private void initializeFields(){
+        fields = newArray(BOARD_SIZE, BOARD_SIZE);
+        for(int row = 0; row < BOARD_SIZE; ++row){
+            for(int column = 0; column < BOARD_SIZE; ++column){
+                fields[row][column] = newEmptyField();
+            }
+        }
+        generateRandomFields(this);
     }
 
     /**
      * Initialize the <code>solvedSudoku</code>.
      */
-    protected void initialize() {
+    private void initializeSolvedFields() {
         solve();
         solvedFields = getFieldsOf(fields);
         clear();
@@ -258,14 +277,22 @@ public abstract class BasicBoard implements Serializable {
 
     /**
      * 
-     * @return New subtype object of the class <code>Field</code> which is used in the <code>BasicBoard</code> subtype.
+     * @return New subtype object of the class <code>Field</code> which is used in
+     *         the <code>BasicBoard</code> subtype.
      */
     protected abstract Field newEmptyField();
 
     /**
      * @param rows
      * @param columns
-     * @return New subtype array of the class <code>Field</code> which is used in the <code>BasicBoard</code> subtype.
+     * @return New subtype array of the class <code>Field</code> which is used in
+     *         the <code>BasicBoard</code> subtype.
      */
     protected abstract Field[][] newArray(int rows, int columns);
+
+    /**
+     * Generates a solvable <code>Field[][]</code> as <code>fields</code> with random values.
+     * @param board
+     */
+    protected abstract void generateRandomFields(BasicBoard board);
 }
