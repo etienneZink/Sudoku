@@ -3,6 +3,7 @@ package com.github.etienneZink.model.sudoku.framework.boardTests;
 import com.github.etienneZink.model.sudoku.framework.candidates.boards.ClassicSudoku;
 import com.github.etienneZink.model.sudoku.framework.candidates.fields.SudokuField;
 import com.github.etienneZink.model.sudoku.framework.candidates.fields.SudokuInitialField;
+import com.github.etienneZink.model.sudoku.framework.candidates.solver.SudokuSolverBacktracking;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -113,7 +114,7 @@ public class SudokuSolveTest {
                 boolean same = true;
                 for(int row = 0; row < sudoku.BOARD_SIZE; ++row){
                         for(int column = 0; column < sudoku.BOARD_SIZE; ++column){
-                                if(!isSame(row, column)){
+                                if(!(sudoku.getSolvedFieldAt(row, column).getValue() == solvedSudoku[row][column].getValue())){
                                         same = false;
                                 }
                         }
@@ -121,7 +122,17 @@ public class SudokuSolveTest {
                 Assert.assertTrue(same);
         }
 
-        public boolean isSame(int row, int column){
-                return sudoku.getSolvedFieldAt(row, column).getValue() == solvedSudoku[row][column].getValue();
+        @Test
+        public void backtrackingTest(){
+                new SudokuSolverBacktracking(sudoku).solve();
+                boolean same = true;
+                for(int row = 0; row < sudoku.BOARD_SIZE; ++row){
+                        for(int column = 0; column < sudoku.BOARD_SIZE; ++column){
+                                if(!(sudoku.getFieldAt(row, column).getValue() == solvedSudoku[row][column].getValue())){
+                                        same = false;
+                                }
+                        }
+                }                
+                Assert.assertTrue(same);
         }
 }

@@ -13,12 +13,12 @@ import com.github.etienneZink.model.sudoku.framework.candidates.interfaces.Solve
  */
 public final class SudokuSolver implements Solver {
 
-    ClassicSudoku sudokuBoard;
+    ClassicSudoku sudoku;
 
     // constructors
 
-    public SudokuSolver(ClassicSudoku sudokuBoard) {
-        this.sudokuBoard = sudokuBoard;
+    public SudokuSolver(ClassicSudoku sudoku) {
+        this.sudoku = sudoku;
     }
 
     // non-static methods
@@ -29,8 +29,8 @@ public final class SudokuSolver implements Solver {
      */
     @Override
     public boolean solve() {
-            while (!sudokuBoard.getSolved()) {
-                if (!solveSudoku() && !sudokuBoard.isSolved()) {
+            while (!sudoku.getSolved()) {
+                if (!solveSudoku() && !sudoku.isSolved()) {
                     return false;
                 }
             }
@@ -50,19 +50,19 @@ public final class SudokuSolver implements Solver {
         SudokuField field;
         boolean somethingChanged = false;
         HashSet<Integer> toRemove;
-        for (int row = 0; row < sudokuBoard.BOARD_SIZE; ++row) {
-            for (int column = 0; column < sudokuBoard.BOARD_SIZE; ++column) {
-                field = (SudokuField) sudokuBoard.getFieldAt(row, column);
+        for (int row = 0; row < sudoku.BOARD_SIZE; ++row) {
+            for (int column = 0; column < sudoku.BOARD_SIZE; ++column) {
+                field = (SudokuField) sudoku.getFieldAt(row, column);
                 if (!field.isSet()) {
                     toRemove = new HashSet<Integer>();
                     for (int candidate : field.getCandidates()) {
-                        if (sudokuBoard.checkValue(row, column, candidate)) {
+                        if (sudoku.checkValue(row, column, candidate)) {
                             toRemove.add(candidate);
                         }
                     }
                     field.getCandidates().removeAll(toRemove);
                     field.isToSet();
-                    sudokuBoard.setFieldAt(row, column, field);
+                    sudoku.setFieldAt(row, column, field);
                     somethingChanged = true;
                 }
             }
