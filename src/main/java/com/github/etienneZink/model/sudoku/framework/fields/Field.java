@@ -1,4 +1,4 @@
-package com.github.etienneZink.model.sudoku.framework.candidates.fields;
+package com.github.etienneZink.model.sudoku.framework.fields;
 
 import java.io.Serializable;
 

@@ -3,7 +3,7 @@ package com.github.etienneZink.model.sudoku.framework.fieldTest;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import com.github.etienneZink.model.sudoku.framework.candidates.fields.SudokuField;
+import com.github.etienneZink.model.sudoku.framework.fields.SudokuField;
 
 import org.junit.Before;
 import org.junit.Test;

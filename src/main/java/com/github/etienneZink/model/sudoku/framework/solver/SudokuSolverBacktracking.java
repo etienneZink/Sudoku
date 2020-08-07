@@ -1,8 +1,8 @@
-package com.github.etienneZink.model.sudoku.framework.candidates.solver;
+package com.github.etienneZink.model.sudoku.framework.solver;
 
-import com.github.etienneZink.model.sudoku.framework.candidates.boards.ClassicSudoku;
-import com.github.etienneZink.model.sudoku.framework.candidates.fields.SudokuField;
-import com.github.etienneZink.model.sudoku.framework.candidates.interfaces.Solver;
+import com.github.etienneZink.model.sudoku.framework.boards.ClassicSudoku;
+import com.github.etienneZink.model.sudoku.framework.fields.SudokuField;
+import com.github.etienneZink.model.sudoku.framework.interfaces.Solver;
 
 //TODO Dokumentation und verständlicherer Code!!!
 

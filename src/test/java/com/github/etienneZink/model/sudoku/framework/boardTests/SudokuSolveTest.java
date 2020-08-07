@@ -1,9 +1,9 @@
 package com.github.etienneZink.model.sudoku.framework.boardTests;
 
-import com.github.etienneZink.model.sudoku.framework.candidates.boards.ClassicSudoku;
-import com.github.etienneZink.model.sudoku.framework.candidates.fields.SudokuField;
-import com.github.etienneZink.model.sudoku.framework.candidates.fields.SudokuInitialField;
-import com.github.etienneZink.model.sudoku.framework.candidates.solver.SudokuSolverBacktracking;
+import com.github.etienneZink.model.sudoku.framework.boards.ClassicSudoku;
+import com.github.etienneZink.model.sudoku.framework.fields.SudokuField;
+import com.github.etienneZink.model.sudoku.framework.fields.SudokuInitialField;
+import com.github.etienneZink.model.sudoku.framework.solver.SudokuSolverBacktracking;
 
 import org.junit.Assert;
 import org.junit.Before;

@@ -1,8 +1,8 @@
-package com.github.etienneZink.model.sudoku.framework.candidates.fields;
+package com.github.etienneZink.model.sudoku.framework.fields;
 
 import java.util.HashSet;
 import java.util.Iterator;
-import com.github.etienneZink.model.sudoku.framework.candidates.boards.ClassicSudoku;
+import com.github.etienneZink.model.sudoku.framework.boards.ClassicSudoku;
 
 /**
  * Class that represents the basic <code>Field</code> in a <code>ClassicSudoku</code> with a

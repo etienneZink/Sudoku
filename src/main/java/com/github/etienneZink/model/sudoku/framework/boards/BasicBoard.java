@@ -1,8 +1,9 @@
-package com.github.etienneZink.model.sudoku.framework.candidates.boards;
+package com.github.etienneZink.model.sudoku.framework.boards;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
-import com.github.etienneZink.model.sudoku.framework.candidates.fields.Field;
+import com.github.etienneZink.model.sudoku.framework.fields.Field;
 
 /**
  * Abstract implementation of a basic game-board.
@@ -24,9 +25,7 @@ public abstract class BasicBoard implements Serializable {
     public BasicBoard() {
         BOARD_SIZE = 9;
         BOARD_SIZE_ROOT = 3;
-        
         initializeFields();
-        
         initializeSolvedFields();
     }
 
@@ -79,7 +78,7 @@ public abstract class BasicBoard implements Serializable {
                 fields[row][column] = newEmptyField();
             }
         }
-        generateRandomFields(this);
+        generateRandomFields();
     }
 
     /**
@@ -292,7 +291,12 @@ public abstract class BasicBoard implements Serializable {
 
     /**
      * Generates a solvable <code>Field[][]</code> as <code>fields</code> with random values.
-     * @param board
      */
-    protected abstract void generateRandomFields(BasicBoard board);
+    protected abstract void generateRandomFields();
+
+    /**
+     * Compares <code>fields</code> with <code>solvedFields</code>.
+     * @return <code>ArrayList<Integer[]></code> with the coordinates of the wrong <code>Field</code> in <code>fields</code>.
+     */
+    protected abstract ArrayList<Integer[]> compare();
 }

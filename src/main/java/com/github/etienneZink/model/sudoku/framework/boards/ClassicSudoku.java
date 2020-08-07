@@ -1,10 +1,12 @@
-package com.github.etienneZink.model.sudoku.framework.candidates.boards;
+package com.github.etienneZink.model.sudoku.framework.boards;
 
 
-import com.github.etienneZink.model.sudoku.framework.candidates.checker.SudokuChecker;
-import com.github.etienneZink.model.sudoku.framework.candidates.fields.Field;
-import com.github.etienneZink.model.sudoku.framework.candidates.fields.SudokuField;
-import com.github.etienneZink.model.sudoku.framework.candidates.solver.SudokuSolver;
+import java.util.ArrayList;
+
+import com.github.etienneZink.model.sudoku.framework.checker.SudokuChecker;
+import com.github.etienneZink.model.sudoku.framework.fields.Field;
+import com.github.etienneZink.model.sudoku.framework.fields.SudokuField;
+import com.github.etienneZink.model.sudoku.framework.solver.SudokuSolver;
 
 /**
  * Class that represents a classic sudoku game.
@@ -16,7 +18,7 @@ public final class ClassicSudoku extends BasicBoard {
 
     // constructors
 
-    public ClassicSudoku(){
+    public ClassicSudoku() {
         super();
     }
 
@@ -107,9 +109,15 @@ public final class ClassicSudoku extends BasicBoard {
     }
 
     @Override
-    protected void generateRandomFields(BasicBoard board) {
-        // TODO
+    protected void generateRandomFields() {
+        // TODO Auto-generated method stub
 
+    }
+
+    @Override
+    protected ArrayList<Integer[]> compare() {
+        // TODO Auto-generated method stub
+       return null;
     }
 
 }
