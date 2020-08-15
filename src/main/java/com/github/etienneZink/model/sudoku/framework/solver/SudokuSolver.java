@@ -7,7 +7,7 @@ import com.github.etienneZink.model.sudoku.framework.fields.SudokuField;
 import com.github.etienneZink.model.sudoku.framework.interfaces.Solver;
 
 /**
- * Class which implements solver to solve a ClassicSudokuBoard.
+ * Class which implements solver to solve a <code>ClassicSudokuBoard</code> through candidates.
  * 
  * @see ClassicSudoku
  */
@@ -61,9 +61,10 @@ public final class SudokuSolver implements Solver {
                         }
                     }
                     field.getCandidates().removeAll(toRemove);
-                    field.isToSet();
-                    sudoku.setFieldAt(row, column, field);
-                    somethingChanged = true;
+                    if(field.isToSet()){
+                        sudoku.setFieldAt(row, column, field);
+                        somethingChanged = true;
+                    }
                 }
             }
         }

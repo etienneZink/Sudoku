@@ -60,6 +60,22 @@ public abstract class BasicBoard implements Serializable {
     }
 
     /**
+     * Compares <code>fields</code> with <code>solvedFields</code>.
+     * @return <code>ArrayList<Integer[]></code> with the indexes of the wrong <code>Field</code> in <code>fields</code>.
+     */
+    public ArrayList<Integer[]> compare(){
+        ArrayList<Integer[]> wrongIndexes = new ArrayList<Integer[]>();
+        for (int row = 0; row < BOARD_SIZE; ++row) {
+            for (int column = 0; column < BOARD_SIZE; ++column) {
+                if (fields[row][column] != solvedFields[row][column]) {
+                    wrongIndexes.add(new Integer[]{row, column});
+                }
+            }
+        }
+        return wrongIndexes;
+    }
+
+    /**
      * Checks if the given <code>index</code> is appropriate for an
      * <code>array</code> with <code>length == BOARD_SIZE</code>.
      * 
@@ -293,10 +309,4 @@ public abstract class BasicBoard implements Serializable {
      * Generates a solvable <code>Field[][]</code> as <code>fields</code> with random values.
      */
     protected abstract void generateRandomFields();
-
-    /**
-     * Compares <code>fields</code> with <code>solvedFields</code>.
-     * @return <code>ArrayList<Integer[]></code> with the coordinates of the wrong <code>Field</code> in <code>fields</code>.
-     */
-    protected abstract ArrayList<Integer[]> compare();
 }

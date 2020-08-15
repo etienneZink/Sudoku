@@ -11,9 +11,10 @@ import com.github.etienneZink.model.sudoku.framework.solver.SudokuSolverBacktrac
 
 public class SolveDuration {
 
+        // statt erster 4 muss eine 3 stehen
         public static SudokuField[][] sudokuToSolve =
 
-                        { { new SudokuInitialField(0), new SudokuInitialField(0), new SudokuInitialField(3),
+                        { { new SudokuInitialField(0), new SudokuInitialField(0), new SudokuInitialField(4),
                                         new SudokuInitialField(0), new SudokuInitialField(2), new SudokuInitialField(0),
                                         new SudokuInitialField(6), new SudokuInitialField(0),
                                         new SudokuInitialField(0) },
@@ -72,22 +73,22 @@ public class SolveDuration {
                 // wieso ist er ohne sudoku.print() schneller? Zeit wird danach gemessen! RAM/CPU noch zu sehr ausgelastet danach?
                 sudoku = new ClassicSudoku(sudokuToSolve);
                 normalSolver = new SudokuSolver(sudoku);
-                //sudoku.print();
+                sudoku.print();
                 startTime = Instant.now();
                 normalSolver.solve();
                 endTime = Instant.now();
                 duration = Duration.between(startTime, endTime);
                 System.out.println("Duration candidateSolver: " + duration.toNanos() + "ns");
-                //sudoku.print();
-
+                sudoku.print();
+                
                 sudoku = new ClassicSudoku(sudokuToSolve);
                 backtrackingSolver = new SudokuSolverBacktracking(sudoku);
-                //sudoku.print();
+                sudoku.print();
                 startTime = Instant.now();
                 backtrackingSolver.solve();
                 endTime = Instant.now();
                 duration = Duration.between(startTime, endTime);
                 System.out.println("Duration backtrackingSolver: " + duration.toNanos() + "ns");
-                //sudoku.print();
+                sudoku.print();
         }
 }

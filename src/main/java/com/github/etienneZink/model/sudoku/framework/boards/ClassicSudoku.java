@@ -1,8 +1,5 @@
 package com.github.etienneZink.model.sudoku.framework.boards;
 
-
-import java.util.ArrayList;
-
 import com.github.etienneZink.model.sudoku.framework.checker.SudokuChecker;
 import com.github.etienneZink.model.sudoku.framework.fields.Field;
 import com.github.etienneZink.model.sudoku.framework.fields.SudokuField;
@@ -113,11 +110,4 @@ public final class ClassicSudoku extends BasicBoard {
         // TODO Auto-generated method stub
 
     }
-
-    @Override
-    protected ArrayList<Integer[]> compare() {
-        // TODO Auto-generated method stub
-       return null;
-    }
-
 }
