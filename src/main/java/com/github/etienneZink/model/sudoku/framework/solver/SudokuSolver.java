@@ -7,7 +7,7 @@ import com.github.etienneZink.model.sudoku.framework.fields.SudokuField;
 import com.github.etienneZink.model.sudoku.framework.interfaces.Solver;
 
 /**
- * Class which implements solver to solve a <code>ClassicSudokuBoard</code> through candidates.
+ * Class which implements solver to solve a <code>ClassicSudokuBoard</code> through candidates and which is deterministic.
  * 
  * @see ClassicSudoku
  */

@@ -1,4 +1,4 @@
-package com.github.etienneZink.model.sudoku.framework.boardTests;
+package com.github.etienneZink.model.sudoku.framework.solverTest;
 
 import com.github.etienneZink.model.sudoku.framework.boards.ClassicSudoku;
 import com.github.etienneZink.model.sudoku.framework.fields.SudokuField;

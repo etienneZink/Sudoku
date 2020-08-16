@@ -10,6 +10,10 @@ public  final class SudokuInitialField extends SudokuField {
 
     private static final long serialVersionUID = -5736656543972666685L;
 
+    public SudokuInitialField() {
+        super();
+    }
+
     public SudokuInitialField(int value) {
         super(value);
         if (isSet()) {

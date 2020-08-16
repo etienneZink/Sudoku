@@ -3,7 +3,9 @@ package com.github.etienneZink.model.sudoku.framework.boards;
 import com.github.etienneZink.model.sudoku.framework.checker.SudokuChecker;
 import com.github.etienneZink.model.sudoku.framework.fields.Field;
 import com.github.etienneZink.model.sudoku.framework.fields.SudokuField;
+import com.github.etienneZink.model.sudoku.framework.fields.SudokuInitialField;
 import com.github.etienneZink.model.sudoku.framework.solver.SudokuSolver;
+import com.github.etienneZink.model.sudoku.framework.solver.SudokuSolverBacktracking;
 
 /**
  * Class that represents a classic sudoku game.
@@ -79,8 +81,8 @@ public final class ClassicSudoku extends BasicBoard {
      * <code>sets isSolvable</code>.
      */
     @Override
-    protected void solve() {
-        setSolvable(new SudokuSolver(this).solve());
+    public boolean solve() {
+        return new SudokuSolver(this).solve();
     }
 
     /**
@@ -101,13 +103,17 @@ public final class ClassicSudoku extends BasicBoard {
     }
 
     @Override
+    protected Field newInitialField(Field field) {
+        return new SudokuInitialField(field.getValue());
+    }
+
+    @Override
     protected Field[][] newArray(int rows, int columns) {
         return new SudokuField[rows][columns];
     }
 
     @Override
     protected void generateRandomFields() {
-        // TODO Auto-generated method stub
-
+        new SudokuSolverBacktracking(this).solve();
     }
 }

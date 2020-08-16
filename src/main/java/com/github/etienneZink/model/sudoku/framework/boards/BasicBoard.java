@@ -2,6 +2,7 @@ package com.github.etienneZink.model.sudoku.framework.boards;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import com.github.etienneZink.model.sudoku.framework.fields.Field;
 
@@ -17,11 +18,14 @@ public abstract class BasicBoard implements Serializable {
     public final int BOARD_SIZE_ROOT;
 
     private boolean solved = false;
-    private boolean isSolvable;
+    private boolean isSolvable = false;
 
     private Field[][] fields;
     private Field[][] solvedFields;
 
+    /**
+     * Creates an object of a <code>BasicBoard</code> subtype with random <code>fields</code>.
+     */
     public BasicBoard() {
         BOARD_SIZE = 9;
         BOARD_SIZE_ROOT = 3;
@@ -39,7 +43,7 @@ public abstract class BasicBoard implements Serializable {
         } else {
             this.BOARD_SIZE = 9;
             this.BOARD_SIZE_ROOT = 3;
-            this.fields = newArray(BOARD_SIZE, BOARD_SIZE);
+            initializeFields();
         }
         initializeSolvedFields();
     }
@@ -88,21 +92,42 @@ public abstract class BasicBoard implements Serializable {
     }
 
     private void initializeFields(){
+        ArrayList<Integer> rows = new ArrayList<Integer>();
+        ArrayList<Integer> columns = new ArrayList<Integer>();
         fields = newArray(BOARD_SIZE, BOARD_SIZE);
         for(int row = 0; row < BOARD_SIZE; ++row){
             for(int column = 0; column < BOARD_SIZE; ++column){
                 fields[row][column] = newEmptyField();
             }
+            rows.add(row);
+            columns.add(row);
         }
+        // generate fields
         generateRandomFields();
+        // copy the values into initial fields
+        solvedFields = copyFieldsOf(fields);
+        fields = copyFieldsOf(solvedFields);
+        Collections.shuffle(rows);
+        for (Integer row : rows) {
+            Collections.shuffle(columns);
+            for (Integer column : columns) {
+                // remove the field. If the sudoku is not solvable, take the field back
+                fields[row][column] = newEmptyField();
+                if(!solve()){
+                    fields[row][column] = solvedFields[row][column];
+                }
+                clear();
+            }
+            
+        }
     }
 
     /**
      * Initialize the <code>solvedSudoku</code>.
      */
     private void initializeSolvedFields() {
-        solve();
-        solvedFields = getFieldsOf(fields);
+        isSolvable = solve();
+        solvedFields = copyFieldsOf(fields);
         clear();
     }
 
@@ -127,11 +152,11 @@ public abstract class BasicBoard implements Serializable {
      * @return New instance of <code>Field[][]</code> but with same
      *         <code>values</code> as <code>originalFields</code>.
      */
-    private Field[][] getFieldsOf(Field[][] originalFields) {
+    private Field[][] copyFieldsOf(Field[][] originalFields) {
         Field[][] tempSudoku = newArray(BOARD_SIZE, BOARD_SIZE);
         for (int row = 0; row < BOARD_SIZE; ++row) {
             for (int column = 0; column < BOARD_SIZE; ++column) {
-                tempSudoku[row][column] = originalFields[row][column];
+                tempSudoku[row][column] = newInitialField(originalFields[row][column]);
             }
         }
         return tempSudoku;
@@ -288,7 +313,7 @@ public abstract class BasicBoard implements Serializable {
     /**
      * Solved the <code>BasicBoard</code> subtype.
      */
-    protected abstract void solve();
+    public abstract boolean solve();
 
     /**
      * 
@@ -296,6 +321,13 @@ public abstract class BasicBoard implements Serializable {
      *         the <code>BasicBoard</code> subtype.
      */
     protected abstract Field newEmptyField();
+
+    /**
+     * 
+     * @return New subtype object of the class <code>Field</code> which is initial and used in
+     *         the <code>BasicBoard</code> subtype.
+     */
+    protected abstract Field newInitialField(Field field);
 
     /**
      * @param rows

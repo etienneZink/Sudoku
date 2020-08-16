@@ -1,4 +1,4 @@
-package com.github.etienneZink.model.sudoku.framework.boardTests;
+package com.github.etienneZink.model.sudoku.framework.solverTest;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -89,5 +89,7 @@ public class SolveDuration {
                 duration = Duration.between(startTime, endTime);
                 System.out.println("Duration backtrackingSolver: " + duration.toNanos() + "ns");
                 sudoku.print();
+
+                sudoku.printSolved();
         }
 }
