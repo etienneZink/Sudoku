@@ -78,22 +78,22 @@ public class SolveDuration {
                 randomSudokuToSolve = randomSudoku.getFields();
 
                 normalSolver = new SudokuSolver(randomSudoku);
-                randomSudoku.print();
+                //randomSudoku.print();
                 startTime = Instant.now();
                 normalSolver.solve();
                 endTime = Instant.now();
                 duration = Duration.between(startTime, endTime);
-                System.out.println("Duration candidateSolver: " + duration.toNanos() + "ns");
-                randomSudoku.print();
+                System.out.println("Duration candidateSolver: " + duration.toNanos()/1000 + "µs");
+                //randomSudoku.print();
                 
                 randomSudoku = new ClassicSudoku((SudokuField[][]) randomSudokuToSolve);
                 backtrackingSolver = new SudokuSolverBacktracking(randomSudoku);
-                randomSudoku.print();
+                //randomSudoku.print();
                 startTime = Instant.now();
                 backtrackingSolver.solve();
                 endTime = Instant.now();
                 duration = Duration.between(startTime, endTime);
-                System.out.println("Duration backtrackingSolver: " + duration.toNanos() + "ns");
-                randomSudoku.print();
+                System.out.println("Duration backtrackingSolver: " + duration.toNanos()/1000 + "µs");
+                //randomSudoku.print();
         }
 }
