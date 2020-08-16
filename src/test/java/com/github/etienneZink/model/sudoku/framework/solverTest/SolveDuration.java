@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.time.Instant;
 
 import com.github.etienneZink.model.sudoku.framework.boards.ClassicSudoku;
+import com.github.etienneZink.model.sudoku.framework.fields.Field;
 import com.github.etienneZink.model.sudoku.framework.fields.SudokuField;
 import com.github.etienneZink.model.sudoku.framework.fields.SudokuInitialField;
 import com.github.etienneZink.model.sudoku.framework.solver.SudokuSolver;
@@ -59,6 +60,8 @@ public class SolveDuration {
                                                         new SudokuInitialField(0) } };
 
         static ClassicSudoku sudoku;
+        static ClassicSudoku randomSudoku;
+        static Field[][] randomSudokuToSolve;
         static Instant startTime;
         static Instant endTime;
         static Duration duration;
@@ -71,25 +74,26 @@ public class SolveDuration {
                 // für genauere Ergebnisse sollte sudoku.print() auskommentiert werden.
                 // wieso ist er ohne sudoku.print() schneller? Zeit wird danach gemessen! RAM/CPU noch zu sehr ausgelastet danach?
                 sudoku = new ClassicSudoku(sudokuToSolve);
-                normalSolver = new SudokuSolver(sudoku);
-                sudoku.print();
+                randomSudoku = new ClassicSudoku();
+                randomSudokuToSolve = randomSudoku.getFields();
+
+                normalSolver = new SudokuSolver(randomSudoku);
+                randomSudoku.print();
                 startTime = Instant.now();
                 normalSolver.solve();
                 endTime = Instant.now();
                 duration = Duration.between(startTime, endTime);
                 System.out.println("Duration candidateSolver: " + duration.toNanos() + "ns");
-                sudoku.print();
+                randomSudoku.print();
                 
-                sudoku = new ClassicSudoku(sudokuToSolve);
-                backtrackingSolver = new SudokuSolverBacktracking(sudoku);
-                sudoku.print();
+                randomSudoku = new ClassicSudoku((SudokuField[][]) randomSudokuToSolve);
+                backtrackingSolver = new SudokuSolverBacktracking(randomSudoku);
+                randomSudoku.print();
                 startTime = Instant.now();
                 backtrackingSolver.solve();
                 endTime = Instant.now();
                 duration = Duration.between(startTime, endTime);
                 System.out.println("Duration backtrackingSolver: " + duration.toNanos() + "ns");
-                sudoku.print();
-
-                sudoku.printSolved();
+                randomSudoku.print();
         }
 }
