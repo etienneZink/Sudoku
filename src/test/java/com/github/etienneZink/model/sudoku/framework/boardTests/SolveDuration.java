@@ -11,10 +11,9 @@ import com.github.etienneZink.model.sudoku.framework.solver.SudokuSolverBacktrac
 
 public class SolveDuration {
 
-        // statt erster 4 muss eine 3 stehen
         public static SudokuField[][] sudokuToSolve =
 
-                        { { new SudokuInitialField(0), new SudokuInitialField(0), new SudokuInitialField(4),
+                        { { new SudokuInitialField(0), new SudokuInitialField(0), new SudokuInitialField(3),
                                         new SudokuInitialField(0), new SudokuInitialField(2), new SudokuInitialField(0),
                                         new SudokuInitialField(6), new SudokuInitialField(0),
                                         new SudokuInitialField(0) },
