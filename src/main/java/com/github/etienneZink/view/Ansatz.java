@@ -36,6 +36,7 @@ public class Ansatz extends JFrame{
 	for (int row = 0; row < rows; row++) {
         for (int col = 0; col < cols; col++) {
             this.test1 = new JTextField();
+            // hier musst du beim Erstellen einfach einen neuen Listener an dem Feld anmelden
             test1.addKeyListener(new AlfredsListener());
             if (row == 0 || row == 3 || row == 6 || row == 9) {
                 if (col == 0 || col == 3 || col == 6 || col == 9) {

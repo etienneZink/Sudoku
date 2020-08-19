@@ -4,6 +4,9 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JTextField;
 
+// Eine extra Klasse als Listener ist in dem Fall besser, da du dann einfach nur ein Objekt dieser Klasse erstellen musst.
+// Dann haben alle Instanzen die gleiche Methode.
+
 public class AlfredsListener extends KeyAdapter{
     public void keyPressed(KeyEvent ke) {
         JTextField component = (JTextField) ke.getSource();
