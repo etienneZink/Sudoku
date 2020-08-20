@@ -29,50 +29,12 @@ public final class ClassicSudoku extends BasicBoard {
 
     @Override
     public void print() {
-        int value;
-        for (int row = 0; row < BOARD_SIZE; ++row) {
-            if (row % BOARD_SIZE_ROOT == 0) {
-                System.out.println("-------------------------------------------------");
-            }
-            for (int column = 0; column < BOARD_SIZE; ++column) {
-                if (column % BOARD_SIZE_ROOT == 0) {
-                    System.out.print("|");
-                }
-                System.out.print("  ");
-                if ((value = getFieldAt(row, column).getValue()) == -1) {
-                    System.out.print(" " + "  ");
-                } else {
-                    System.out.print(value + "  ");
-                }
-            }
-            System.out.print("|");
-            System.out.println();
-        }
-        System.out.println("-------------------------------------------------");
+        printInConsole(getFields());
     }
 
     @Override
     public void printSolved() {
-        int value;
-        for (int row = 0; row < BOARD_SIZE; ++row) {
-            if (row % BOARD_SIZE_ROOT == 0) {
-                System.out.println("-------------------------------------------------");
-            }
-            for (int column = 0; column < BOARD_SIZE; ++column) {
-                if (column % BOARD_SIZE_ROOT == 0) {
-                    System.out.print("|");
-                }
-                System.out.print("  ");
-                if ((value = getSolvedFieldAt(row, column).getValue()) == -1) {
-                    System.out.print(" " + "  ");
-                } else {
-                    System.out.print(value + "  ");
-                }
-            }
-            System.out.print("|");
-            System.out.println();
-        }
-        System.out.println("-------------------------------------------------");
+        printInConsole(getSolvedFields());
     }
 
     /**
@@ -115,5 +77,28 @@ public final class ClassicSudoku extends BasicBoard {
     @Override
     protected void generateRandomFields() {
         new SudokuSolverBacktracking(this).solve();
+    }
+
+    protected void printInConsole(Field[][] fields){
+        int value;
+        for (int row = 0; row < BOARD_SIZE; ++row) {
+            if (row % BOARD_SIZE_ROOT == 0) {
+                System.out.println("-------------------------------------------------");
+            }
+            for (int column = 0; column < BOARD_SIZE; ++column) {
+                if (column % BOARD_SIZE_ROOT == 0) {
+                    System.out.print("|");
+                }
+                System.out.print("  ");
+                if ((value = fields[row][column].getValue()) == -1) {
+                    System.out.print(" " + "  ");
+                } else {
+                    System.out.print(value + "  ");
+                }
+            }
+            System.out.print("|");
+            System.out.println();
+        }
+        System.out.println("-------------------------------------------------");
     }
 }
