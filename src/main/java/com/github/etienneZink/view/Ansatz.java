@@ -35,9 +35,11 @@ public class Ansatz extends JFrame{
 
 	for (int row = 0; row < rows; row++) {
         for (int col = 0; col < cols; col++) {
-            this.test1 = new JTextField();
+            // wird eigene Klasse JSudokuTextFiled verwendet, um row und column der Componente ab zu speichern
+            this.test1 = new JSudokuTextField(row, col);
             // hier musst du beim Erstellen einfach einen neuen Listener an dem Feld anmelden
             test1.addKeyListener(new AlfredsListener());
+            // müsste noch dynamisch an die Größe des Models angepasst werden
             if (row == 0 || row == 3 || row == 6 || row == 9) {
                 if (col == 0 || col == 3 || col == 6 || col == 9) {
                     // Top left corner, draw all sides
@@ -74,29 +76,6 @@ public class Ansatz extends JFrame{
         }
             pane.add(test1);
             setVisible(true);
-            test1.addKeyListener(new KeyAdapter() {
-                public void keyPressed(KeyEvent ke) {
-                    String value = test1.getText();
-                    int l = value.length();
-                    if (ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') {
-                       test1.setEditable(true);
-                       if (l < 1) {
-                           test1.setEditable(true);
-                       }
-                       else {
-                           test1.setEditable(false);
-                       }
-                       
-                    } else {
-                       if (ke.getExtendedKeyCode() == KeyEvent.VK_BACK_SPACE || ke.getExtendedKeyCode() == KeyEvent.VK_DELETE) {
-                           test1.setEditable(true);
-                       }
-                       else {
-                           test1.setEditable(false);
-                       }
-                    }
-                 }
-             });
         }
     } 
 	
