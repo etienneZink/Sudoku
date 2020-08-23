@@ -5,7 +5,7 @@ import com.github.etienneZink.model.sudoku.framework.boards.ClassicSudoku;
 public class RandomFields {
     public static void main(String[] args) {
         //TODO
-        ClassicSudoku sudoku = new ClassicSudoku();
+        ClassicSudoku sudoku = new ClassicSudoku(9);
         sudoku.print();
         sudoku.printSolved();
         System.out.println("Is solvable: " + sudoku.isSolvable());

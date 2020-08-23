@@ -17,8 +17,8 @@ public final class ClassicSudoku extends BasicBoard {
 
     // constructors
 
-    public ClassicSudoku() {
-        super();
+    public ClassicSudoku(int BOARD_SIZE) {
+        super(BOARD_SIZE);
     }
 
     public ClassicSudoku(SudokuField[][] fields) {

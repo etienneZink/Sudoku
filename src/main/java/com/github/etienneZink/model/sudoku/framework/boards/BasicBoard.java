@@ -26,9 +26,16 @@ public abstract class BasicBoard implements Serializable {
     /**
      * Creates an object of a <code>BasicBoard</code> subtype with random <code>fields</code>.
      */
-    public BasicBoard() {
-        BOARD_SIZE = 9;
-        BOARD_SIZE_ROOT = 3;
+    public BasicBoard(int BOARD_SIZE) {
+        double BOARD_SIZE_ROOT = Math.sqrt(BOARD_SIZE);
+        if (BOARD_SIZE_ROOT == Math.floor(BOARD_SIZE_ROOT)) {
+            this.BOARD_SIZE = BOARD_SIZE;
+            this.BOARD_SIZE_ROOT = (int) BOARD_SIZE_ROOT;
+        } else {
+            this.BOARD_SIZE = 9;
+            this.BOARD_SIZE_ROOT = 3;
+        }
+        Field.setBOARD_SIZE(BOARD_SIZE);
         initializeFields();
         initializeSolvedFields();
     }
