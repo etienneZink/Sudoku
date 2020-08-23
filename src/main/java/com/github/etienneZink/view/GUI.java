@@ -1,10 +1,15 @@
 package com.github.etienneZink.view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -24,10 +29,41 @@ public class GUI extends JFrame {
     final int BOARD_SIZE_ROOT;
     final int BOARD_SIZE;
     final int borderWidth = 1;
-    private JPanel contentPane;
+    private JFrame frame;
+    private JPanel contentPane, buttonPane;
+    private JButton clear, solve, check, newSudoku;
     private JSudokuTextField[][] tfArray;
 
     public GUI(Field[][] fields) {
+        frame = new JFrame();
+        
+        buttonPane = new JPanel();
+
+        clear = new JButton("Clear");
+        solve = new JButton("Solve");
+        check = new JButton("Check");
+        newSudoku = new JButton("new Sudoku");
+
+        buttonPane.add(clear);
+        buttonPane.add(solve);
+        buttonPane.add(check);
+        buttonPane.add(newSudoku);
+
+        JMenuBar menu = new JMenuBar();
+        JMenu spiel = new JMenu("Spiel");
+        JMenu solve = new JMenu("Solve");
+        JMenuItem item = new JMenuItem("4x4");
+        JMenuItem item2 = new JMenuItem("9x9");
+        JMenuItem item3 = new JMenuItem("16x16");
+
+
+        spiel.add(item);
+        spiel.add(item2);
+        spiel.add(item3);
+        menu.add(spiel);
+        menu.add(solve);
+        setJMenuBar(menu);
+
         this.BOARD_SIZE = fields.length;
         this.BOARD_SIZE_ROOT = (int) Math.sqrt(BOARD_SIZE);
         tfArray = new JSudokuTextField[BOARD_SIZE][BOARD_SIZE];
@@ -78,9 +114,11 @@ public class GUI extends JFrame {
                 contentPane.add(tempJSTF);
             }
         }
-        setContentPane(contentPane);
         initialize(fields);
-        setVisible(true);
+        frame.add(contentPane, BorderLayout.CENTER);
+        frame.add(buttonPane, BorderLayout.SOUTH);
+        frame.add(menu, BorderLayout.NORTH);
+        frame.setVisible(true);
     }
 
     public void changeValue(int row, int column, int value){
