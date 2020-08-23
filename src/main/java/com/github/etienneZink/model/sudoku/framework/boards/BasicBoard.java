@@ -313,7 +313,7 @@ public abstract class BasicBoard implements Serializable {
     /**
      * Solved the <code>BasicBoard</code> subtype.
      */
-    public abstract boolean solve();
+    protected abstract boolean solve();
 
     /**
      * 
