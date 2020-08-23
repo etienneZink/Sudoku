@@ -17,8 +17,8 @@ public final class ClassicSudoku extends BasicBoard {
 
     // constructors
 
-    public ClassicSudoku() {
-        super();
+    public ClassicSudoku(int BOARD_SIZE) {
+        super(BOARD_SIZE);
     }
 
     public ClassicSudoku(SudokuField[][] fields) {
@@ -43,7 +43,7 @@ public final class ClassicSudoku extends BasicBoard {
      * <code>sets isSolvable</code>.
      */
     @Override
-    public boolean solve() {
+    protected boolean solve() {
         return new SudokuSolver(this).solve();
     }
 
@@ -83,7 +83,10 @@ public final class ClassicSudoku extends BasicBoard {
         int value;
         for (int row = 0; row < BOARD_SIZE; ++row) {
             if (row % BOARD_SIZE_ROOT == 0) {
-                System.out.println("-------------------------------------------------");
+                for(int colums = 0; colums < BOARD_SIZE*6 + BOARD_SIZE_ROOT + 1; ++colums){
+                    System.out.print("-");
+                }
+                System.out.println();
             }
             for (int column = 0; column < BOARD_SIZE; ++column) {
                 if (column % BOARD_SIZE_ROOT == 0) {
@@ -91,14 +94,21 @@ public final class ClassicSudoku extends BasicBoard {
                 }
                 System.out.print("  ");
                 if ((value = fields[row][column].getValue()) == -1) {
-                    System.out.print(" " + "  ");
+                    System.out.print("  " + "  ");
                 } else {
-                    System.out.print(value + "  ");
+                    if (value < 10) {
+                        System.out.print(value + "   ");
+                    } else {
+                        System.out.print(value + "  ");
+                    }
                 }
             }
             System.out.print("|");
             System.out.println();
         }
-        System.out.println("-------------------------------------------------");
+        for(int colums = 0; colums < BOARD_SIZE*6 + BOARD_SIZE_ROOT + 1; ++colums){
+            System.out.print("-");
+        }
+        System.out.println();
     }
 }

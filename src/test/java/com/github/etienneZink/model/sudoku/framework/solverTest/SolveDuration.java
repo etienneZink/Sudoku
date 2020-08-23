@@ -74,7 +74,7 @@ public class SolveDuration {
                 // für genauere Ergebnisse sollte sudoku.print() auskommentiert werden.
                 // wieso ist er ohne sudoku.print() schneller? Zeit wird danach gemessen! RAM/CPU noch zu sehr ausgelastet danach?
                 sudoku = new ClassicSudoku(sudokuToSolve);
-                randomSudoku = new ClassicSudoku();
+                randomSudoku = new ClassicSudoku(11);
                 randomSudokuToSolve = randomSudoku.getFields();
 
                 normalSolver = new SudokuSolver(randomSudoku);

@@ -32,7 +32,6 @@ public final class SudokuSolverBacktracking implements Solver {
             possibleValues.add(value);
         }
         Collections.shuffle(possibleValues);
-
         // if row and column are out of bounds, <code>getFieldAt</code> returns null -> sudoku is at the end 
         if(sudoku.getFieldAt(row, column) == null && sudoku.isSolved()){ 
             return;

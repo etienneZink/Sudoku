@@ -15,6 +15,7 @@ public class SudokuField extends Field {
 
     private static final long serialVersionUID = 6812321149646212285L;
 
+    
     private HashSet<Integer> candidates;
 
     public SudokuField() {
@@ -31,14 +32,14 @@ public class SudokuField extends Field {
     }
 
     private void initialize() {
-        candidates = new HashSet<Integer>(9);
-        for (int i = 0; i < 9; ++i) {
+        candidates = new HashSet<Integer>(BOARD_SIZE);
+        for (int i = 0; i < BOARD_SIZE; ++i) {
             candidates.add(i + 1);
         }
     }
 
     private boolean isLegalValue(int value) {
-        return (0 < value && value < 10) ? true : false;
+        return (0 < value && value < BOARD_SIZE + 1) ? true : false;
     }
 
     public void removeCandidate(int value) {
