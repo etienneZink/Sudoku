@@ -87,6 +87,21 @@ public abstract class BasicBoard implements Serializable {
     }
 
     /**
+     * Clears all <code>Field</code> objects in <code>fields</code>, which aren't
+     * <code>initial</code>.
+     */
+    public void clear() {
+        for (int row = 0; row < BOARD_SIZE; ++row) {
+            for (int column = 0; column < BOARD_SIZE; ++column) {
+                if (!fields[row][column].isInitial()) {
+                    fields[row][column] = newEmptyField();
+                }
+            }
+        }
+        solved = false;
+    }
+
+    /**
      * Checks if the given <code>index</code> is appropriate for an
      * <code>array</code> with <code>length == BOARD_SIZE</code>.
      * 
@@ -136,21 +151,6 @@ public abstract class BasicBoard implements Serializable {
         isSolvable = solve();
         solvedFields = copyFieldsOf(fields);
         clear();
-    }
-
-    /**
-     * Clears all <code>Field</code> objects in <code>fields</code>, which aren't
-     * <code>initial</code>.
-     */
-    private void clear() {
-        for (int row = 0; row < BOARD_SIZE; ++row) {
-            for (int column = 0; column < BOARD_SIZE; ++column) {
-                if (!fields[row][column].isInitial()) {
-                    fields[row][column] = newEmptyField();
-                }
-            }
-        }
-        solved = false;
     }
 
     /**
