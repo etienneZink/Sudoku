@@ -130,10 +130,6 @@ public class GUI extends JFrame {
                     tempJSTF.setEditable(false);
                     tempJSTF.setEnabled(false);
                 }
-                // hier musst du beim Erstellen einfach einen neuen Listener an dem Feld
-                // anmelden
-                tempJSTF.addKeyListener(new AlfredsListener());
-                // müsste noch dynamisch an die Größe des Models angepasst werden
                 if (row % BOARD_SIZE_ROOT == 0) {
                     if (column % BOARD_SIZE_ROOT == 0) {
                         // Top left corner, draw all sides
