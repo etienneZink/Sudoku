@@ -43,7 +43,7 @@ public final class ClassicSudoku extends BasicBoard {
      * <code>sets isSolvable</code>.
      */
     @Override
-    protected boolean solve() {
+    public boolean solve() {
         return new SudokuSolver(this).solve();
     }
 

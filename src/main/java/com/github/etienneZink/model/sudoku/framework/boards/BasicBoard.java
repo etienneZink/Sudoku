@@ -78,12 +78,27 @@ public abstract class BasicBoard implements Serializable {
         ArrayList<Integer[]> wrongIndexes = new ArrayList<Integer[]>();
         for (int row = 0; row < BOARD_SIZE; ++row) {
             for (int column = 0; column < BOARD_SIZE; ++column) {
-                if (fields[row][column] != solvedFields[row][column]) {
+                if (fields[row][column].getValue() != solvedFields[row][column].getValue()) {
                     wrongIndexes.add(new Integer[]{row, column});
                 }
             }
         }
         return wrongIndexes;
+    }
+
+    /**
+     * Clears all <code>Field</code> objects in <code>fields</code>, which aren't
+     * <code>initial</code>.
+     */
+    public void clear() {
+        for (int row = 0; row < BOARD_SIZE; ++row) {
+            for (int column = 0; column < BOARD_SIZE; ++column) {
+                if (!fields[row][column].isInitial()) {
+                    fields[row][column] = newEmptyField();
+                }
+            }
+        }
+        solved = false;
     }
 
     /**
@@ -136,21 +151,6 @@ public abstract class BasicBoard implements Serializable {
         isSolvable = solve();
         solvedFields = copyFieldsOf(fields);
         clear();
-    }
-
-    /**
-     * Clears all <code>Field</code> objects in <code>fields</code>, which aren't
-     * <code>initial</code>.
-     */
-    private void clear() {
-        for (int row = 0; row < BOARD_SIZE; ++row) {
-            for (int column = 0; column < BOARD_SIZE; ++column) {
-                if (!fields[row][column].isInitial()) {
-                    fields[row][column] = newEmptyField();
-                }
-            }
-        }
-        solved = false;
     }
 
     /**
@@ -320,7 +320,7 @@ public abstract class BasicBoard implements Serializable {
     /**
      * Solved the <code>BasicBoard</code> subtype.
      */
-    protected abstract boolean solve();
+    public abstract boolean solve();
 
     /**
      * 
