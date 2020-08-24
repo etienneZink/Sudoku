@@ -1,6 +1,5 @@
 package com.github.etienneZink.controller.listener;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -18,20 +17,11 @@ public class ValidateInputListener extends KeyAdapter {
       this.controller = controller;
    }
 
-   public void keyReleased(KeyEvent ke) {
-      JSudokuTextField component = (JSudokuTextField) ke.getSource();
-      component.getActionListeners()[0].actionPerformed(new ActionEvent(component, 1, "perform"));
-   }
-
    public void keyPressed(KeyEvent e) {
-      validate(e);
-   }
-
-   private JSudokuTextField validate(KeyEvent ke) {
-      JSudokuTextField component = (JSudokuTextField) ke.getSource();
+      JSudokuTextField component = (JSudokuTextField) e.getSource();
       String value = component.getText();
       int l = value.length();
-      if (ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') {
+      if (e.getKeyChar() >= '0' && e.getKeyChar() <= '9') {
          component.setEditable(true);
          if (controller.getBOARD_SIZE() < 10) {
             if (l < 1) {
@@ -47,12 +37,11 @@ public class ValidateInputListener extends KeyAdapter {
             }
          }
       } else {
-         if (ke.getExtendedKeyCode() == KeyEvent.VK_BACK_SPACE || ke.getExtendedKeyCode() == KeyEvent.VK_DELETE) {
+         if (e.getExtendedKeyCode() == KeyEvent.VK_BACK_SPACE || e.getExtendedKeyCode() == KeyEvent.VK_DELETE) {
             component.setEditable(true);
          } else {
             component.setEditable(false);
          }
       }
-      return component;
-   }
+   }      
 }

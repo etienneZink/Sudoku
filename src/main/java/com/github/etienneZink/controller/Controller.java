@@ -41,6 +41,11 @@ public class Controller {
         model = new ClassicSudoku(BOARD_SIZE);
         view.initializeContentPane(model.getFields());
         initializeTFListener();
+        if(BOARD_SIZE > 10){
+            view.getFrame().setSize(1000, 1000);
+        } else {
+            view.getFrame().setSize(600, 600);
+        }
     }
 
     public void solve() {
@@ -48,48 +53,48 @@ public class Controller {
         view.changeValues(model.getSolvedFields());
     }
 
-    public void submitValue(int row, int column, int value){
+    public void submitValue(int row, int column, int value) {
         model.setFieldAt(row, column, new SudokuField(value));
     }
 
-    public void check(){
+    public void check() {
         ArrayList<Integer[]> indexes;
         Integer[] index;
         Iterator<Integer[]> iterator;
         JSudokuTextField[][] jstfArray = view.getJSTF();
         if (model.isSolved()) {
-            for(int row = 0; row < model.BOARD_SIZE; ++row){
-                for(int column = 0; column < model.BOARD_SIZE; ++column){
+            for (int row = 0; row < model.BOARD_SIZE; ++row) {
+                for (int column = 0; column < model.BOARD_SIZE; ++column) {
                     jstfArray[row][column].setBackground(Color.green);
                 }
             }
         } else {
             indexes = model.compare();
             iterator = indexes.iterator();
-            while(iterator.hasNext()){
+            while (iterator.hasNext()) {
                 index = iterator.next();
                 jstfArray[index[0]][index[1]].setBackground(Color.red);
             }
         }
     }
 
-    private void initializeTFListener(){
+    private void initializeTFListener() {
         JSudokuTextField[][] jstfArray = view.getJSTF();
-        for(int row = 0; row < BOARD_SIZE; ++row){
-            for(int column = 0; column < BOARD_SIZE; ++column){
+        for (int row = 0; row < BOARD_SIZE; ++row) {
+            for (int column = 0; column < BOARD_SIZE; ++column) {
                 jstfArray[row][column].addKeyListener(new ValidateInputListener(this));
-                jstfArray[row][column].addActionListener(new ValueChangeListener(this));
+                jstfArray[row][column].addKeyListener(new ValueChangeListener(this));
             }
         }
     }
 
     // getter and setter
 
-    public void setBOARD_SIZE(int BOARD_SIZE){
+    public void setBOARD_SIZE(int BOARD_SIZE) {
         this.BOARD_SIZE = BOARD_SIZE;
     }
 
-    public int getBOARD_SIZE(){
+    public int getBOARD_SIZE() {
         return BOARD_SIZE;
     }
 }

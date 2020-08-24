@@ -3,12 +3,11 @@ package com.github.etienneZink.controller.listener;
 import com.github.etienneZink.controller.Controller;
 import com.github.etienneZink.view.JSudokuTextField;
 
-import org.apache.commons.lang.StringUtils;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
-public class ValueChangeListener implements ActionListener{
+public class ValueChangeListener extends KeyAdapter{
 
     private Controller controller;
 
@@ -16,14 +15,11 @@ public class ValueChangeListener implements ActionListener{
         this.controller = controller;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent ek) {
-        JSudokuTextField jstf = (JSudokuTextField) ek.getSource();
-        String text = jstf.getText();
-        int row = jstf.getIndexRow();
-        int column = jstf.getIndexColumn();
+    public void keyReleased(KeyEvent ke) {
+        JSudokuTextField component = (JSudokuTextField) ke.getSource();
+        String text = component.getText();
         if(!text.equals("")){
-            controller.submitValue(row,column, Integer.parseInt(text));
-        }     
-    }
+            controller.submitValue(component.getIndexRow(),component.getIndexColumn(), Integer.parseInt(text));
+        }
+     }
 }

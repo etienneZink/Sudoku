@@ -69,9 +69,9 @@ public class GUI extends JFrame {
         menu.add(spiel);
         menu.add(solveMenu);
 
-        setTitle("Sudoku");
+        frame.setTitle("Sudoku");
         frame.setSize(600, 600);
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(this);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         initializeContentPane(fields);
         frame.setVisible(true);
@@ -192,5 +192,9 @@ public class GUI extends JFrame {
 
     public JMenuItem getMenuSechzehnMalSechzehn() {
         return sechzehnmalsechzehn;
+    }
+
+    public JFrame getFrame(){
+        return frame;
     }
 }
