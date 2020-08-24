@@ -3,6 +3,8 @@ package com.github.etienneZink.controller.listener;
 import com.github.etienneZink.controller.Controller;
 import com.github.etienneZink.view.JSudokuTextField;
 
+import org.apache.commons.lang.StringUtils;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -20,7 +22,7 @@ public class ValueChangeListener implements ActionListener{
         String text = jstf.getText();
         int row = jstf.getIndexRow();
         int column = jstf.getIndexColumn();
-        if(text != ""){
+        if(!text.equals("")){
             controller.submitValue(row,column, Integer.parseInt(text));
         }     
     }
