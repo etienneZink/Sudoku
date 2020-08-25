@@ -16,14 +16,10 @@ import java.awt.BorderLayout;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 
-import com.github.etienneZink.model.sudoku.framework.boards.ClassicSudoku;
 import com.github.etienneZink.model.sudoku.framework.fields.Field;
 
 import java.awt.Font;
 import java.awt.Toolkit;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
 
 public class GUI extends JFrame {
 
@@ -46,19 +42,9 @@ public class GUI extends JFrame {
     private JMenuItem sechzehnmalsechzehn;
     private int screenWidth;
     private int screenHeight;
-    private ClassicSudoku sudoku;
 
-    public GUI(File file) {
+    public GUI(Field[][] fields) {
         frame = new JFrame();
-        if(file.exists()){
-            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
-                sudoku = (ClassicSudoku) ois.readObject();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            sudoku = new ClassicSudoku(9); 
-        }
 
         buttonPane = new JPanel();
 
@@ -92,7 +78,7 @@ public class GUI extends JFrame {
         frame.setLocation(screenWidth/2-300, screenHeight/2-300);
         setLocationRelativeTo(this);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        initializeContentPane(sudoku.getFields());
+        initializeContentPane(fields);
         frame.setVisible(true);
     }
 
@@ -178,7 +164,13 @@ public class GUI extends JFrame {
         frame.add(contentPane, BorderLayout.CENTER);
         frame.add(buttonPane, BorderLayout.SOUTH);
         frame.add(menu, BorderLayout.NORTH);
-        frame.setVisible(true);
+        if(BOARD_SIZE > 10){
+            frame.setSize(1000, 1000);
+            frame.setLocation(screenWidth/2-500, screenHeight/2-500);
+        } else {
+            frame.setSize(600, 600);
+            frame.setLocation(screenWidth/2-300, screenHeight/2-300);
+        }        frame.setVisible(true);
 
     }
 

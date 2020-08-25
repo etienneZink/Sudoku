@@ -15,6 +15,8 @@ import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 
 public class Controller {
 
@@ -23,12 +25,21 @@ public class Controller {
     File.separator +  "controller" + File.separator +"saveFiles" + File.separator + "saveFile.txt");
     private GUI view;
     private BasicBoard model;
-    private int BOARD_SIZE;
+    private int BOARD_SIZE = 9;
 
-    public Controller(int BOARD_SIZE) {
-        this.BOARD_SIZE = BOARD_SIZE;
-        model = new ClassicSudoku(BOARD_SIZE);
-        view = new GUI(file);
+    public Controller() {
+
+        if(file.exists()){
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+                model = (ClassicSudoku) ois.readObject();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            model = new ClassicSudoku(BOARD_SIZE); 
+        }
+        this.BOARD_SIZE = model.BOARD_SIZE;
+        view = new GUI(model.getFields());
         view.getClearBTN().addActionListener(new ClearListener(this));
         view.getNewSudokuBTN().addActionListener(new NewSudokuListener(this));
         view.getSolveBTN().addActionListener(new SolveListener(this));
@@ -47,19 +58,9 @@ public class Controller {
     }
 
     public void newSudoku() {
-        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-        int screenWidth = gd.getDisplayMode().getWidth();
-        int screenHeight = gd.getDisplayMode().getHeight();
         model = new ClassicSudoku(BOARD_SIZE);
         view.initializeContentPane(model.getFields());
         initializeTFListener();
-        if(BOARD_SIZE > 10){
-            view.getFrame().setSize(1000, 1000);
-            view.getFrame().setLocation(screenWidth/2-500, screenHeight/2-500);
-        } else {
-            view.getFrame().setSize(600, 600);
-            view.getFrame().setLocation(screenWidth/2-300, screenHeight/2-300);
-        }
     }
 
     public void solve() {
