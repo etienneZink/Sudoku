@@ -13,11 +13,17 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 
+import com.github.etienneZink.model.sudoku.framework.boards.ClassicSudoku;
 import com.github.etienneZink.model.sudoku.framework.fields.Field;
 
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 
 public class GUI extends JFrame {
 
@@ -34,21 +40,32 @@ public class GUI extends JFrame {
     private JSudokuTextField[][] jstfArray;
     private JButton clear, solve, check, newSudoku;
     private JMenuBar menu;
-    JMenu spiel;
-    JMenu solveMenu;
-    JMenuItem viermalvier;
-    JMenuItem neunmalneun;
-    JMenuItem sechzehnmalsechzehn;
+    private JMenu spiel;
+    private JMenuItem viermalvier;
+    private JMenuItem neunmalneun;
+    private JMenuItem sechzehnmalsechzehn;
+    private int screenWidth;
+    private int screenHeight;
+    private ClassicSudoku sudoku;
 
-    public GUI(Field[][] fields) {
+    public GUI(File file) {
         frame = new JFrame();
+        if(file.exists()){
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+                sudoku = (ClassicSudoku) ois.readObject();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            sudoku = new ClassicSudoku(9); 
+        }
 
         buttonPane = new JPanel();
 
         clear = new JButton("Clear");
         solve = new JButton("Solve");
         check = new JButton("Check");
-        newSudoku = new JButton("new Sudoku");
+        newSudoku = new JButton("New Sudoku");
 
         buttonPane.add(clear);
         buttonPane.add(solve);
@@ -56,8 +73,7 @@ public class GUI extends JFrame {
         buttonPane.add(newSudoku);
 
         menu = new JMenuBar();
-        spiel = new JMenu("Spiel");
-        solveMenu = new JMenu("Solve");
+        spiel = new JMenu("Size");
         viermalvier = new JMenuItem("4x4");
         neunmalneun = new JMenuItem("9x9");
         sechzehnmalsechzehn = new JMenuItem("16x16");
@@ -67,13 +83,16 @@ public class GUI extends JFrame {
         spiel.add(neunmalneun);
         spiel.add(sechzehnmalsechzehn);
         menu.add(spiel);
-        menu.add(solveMenu);
 
+        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        screenWidth = gd.getDisplayMode().getWidth();
+        screenHeight = gd.getDisplayMode().getHeight();
         frame.setTitle("Sudoku");
         frame.setSize(600, 600);
+        frame.setLocation(screenWidth/2-300, screenHeight/2-300);
         setLocationRelativeTo(this);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        initializeContentPane(fields);
+        initializeContentPane(sudoku.getFields());
         frame.setVisible(true);
     }
 
@@ -127,8 +146,9 @@ public class GUI extends JFrame {
                 if ((tempValue = fields[row][column].getValue()) != -1) {
                     tempJSTF = jstfArray[row][column];
                     tempJSTF.setText(String.valueOf(tempValue));
-                    tempJSTF.setEditable(false);
-                    tempJSTF.setEnabled(false);
+                    if(fields[row][column].isInitial()){
+                        tempJSTF.setEditable(false);
+                    }
                 }
                 if (row % BOARD_SIZE_ROOT == 0) {
                     if (column % BOARD_SIZE_ROOT == 0) {
