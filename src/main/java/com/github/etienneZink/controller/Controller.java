@@ -10,8 +10,6 @@ import com.github.etienneZink.model.sudoku.framework.boards.ClassicSudoku;
 import com.github.etienneZink.view.GUI;
 import com.github.etienneZink.view.JSudokuTextField;
 import com.github.etienneZink.model.sudoku.framework.fields.SudokuField;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
@@ -20,9 +18,7 @@ import java.io.ObjectInputStream;
 
 public class Controller {
 
-    public final File file = new File("." + File.separator + "src" + File.separator + "main" + File.separator 
-    + "java" + File.separator + "com" +File.separator + "github" + File.separator + "etienneZink" +
-    File.separator +  "controller" + File.separator +"saveFiles" + File.separator + "saveFile.txt");
+    public final File file = new File("." + File.separator + "saveFile.txt");
     private GUI view;
     private BasicBoard model;
     private int BOARD_SIZE = 9;
