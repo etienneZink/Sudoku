@@ -9,6 +9,9 @@ import com.github.etienneZink.model.sudoku.framework.boards.BasicBoard;
 import com.github.etienneZink.model.sudoku.framework.boards.ClassicSudoku;
 import com.github.etienneZink.view.GUI;
 import com.github.etienneZink.view.JSudokuTextField;
+
+import org.apache.commons.lang.SystemUtils;
+
 import com.github.etienneZink.model.sudoku.framework.fields.SudokuField;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -18,12 +21,16 @@ import java.io.ObjectInputStream;
 
 public class Controller {
 
-    public final File file = new File("." + File.separator + "saveFile.txt");
+    public final File file;
+    public final File path;
     private GUI view;
     private BasicBoard model;
     private int BOARD_SIZE = 9;
 
     public Controller() {
+        path = new File(SystemUtils.getUserHome().toString() + File.separator + "Sudoku" + File.separator + "saveFile");
+        path.mkdirs();
+        file = new File(path.toString() + File.separator + "saveFile.txt");
 
         if(file.exists()){
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
