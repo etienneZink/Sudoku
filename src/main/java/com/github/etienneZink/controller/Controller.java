@@ -67,8 +67,20 @@ public class Controller {
     }
 
     public void solve() {
+        Integer[] index;
+        ArrayList<Integer[]> indexes;
+        Iterator<Integer[]> iterator;
+        JSudokuTextField[][] jstfArray;
+        indexes = model.compare();
+        clear();
+        jstfArray = view.getJSTF();
         model.solve();
-        view.changeValues(model.getSolvedFields());
+        view.changeValues(model.getFields());
+        iterator = indexes.iterator();
+        while (iterator.hasNext()) {
+            index = iterator.next();
+            jstfArray[index[0]][index[1]].setBackground(Color.green);
+        }
     }
 
     public void submitValue(int row, int column, int value) {
@@ -76,7 +88,6 @@ public class Controller {
     }
 
     public void save(){
-        //TODO
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
             file.createNewFile();
             oos.writeObject(model);
