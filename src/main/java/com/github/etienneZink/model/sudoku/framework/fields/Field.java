@@ -17,7 +17,7 @@ public class Field implements Serializable {
     private boolean isSet = false;
     private boolean initialField = false;
 
-    // constructros
+    // constructors
 
     protected Field() {
         

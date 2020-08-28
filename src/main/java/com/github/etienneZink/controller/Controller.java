@@ -9,17 +9,39 @@ import com.github.etienneZink.model.sudoku.framework.boards.BasicBoard;
 import com.github.etienneZink.model.sudoku.framework.boards.ClassicSudoku;
 import com.github.etienneZink.view.GUI;
 import com.github.etienneZink.view.JSudokuTextField;
+
+import org.apache.commons.lang.SystemUtils;
+
 import com.github.etienneZink.model.sudoku.framework.fields.SudokuField;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 
 public class Controller {
 
+    public final File file;
+    public final File path;
     private GUI view;
     private BasicBoard model;
-    private int BOARD_SIZE;
+    private int BOARD_SIZE = 9;
 
-    public Controller(int BOARD_SIZE) {
-        this.BOARD_SIZE = BOARD_SIZE;
-        model = new ClassicSudoku(BOARD_SIZE);
+    public Controller() {
+        path = new File(SystemUtils.getUserHome().toString() + File.separator + "Sudoku" + File.separator + "saveFile");
+        path.mkdirs();
+        file = new File(path.toString() + File.separator + "saveFile.txt");
+
+        if(file.exists()){
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+                model = (ClassicSudoku) ois.readObject();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            model = new ClassicSudoku(BOARD_SIZE); 
+        }
+        this.BOARD_SIZE = model.BOARD_SIZE;
         view = new GUI(model.getFields());
         view.getClearBTN().addActionListener(new ClearListener(this));
         view.getNewSudokuBTN().addActionListener(new NewSudokuListener(this));
@@ -28,6 +50,7 @@ public class Controller {
         view.getMenuVierMalVier().addActionListener(new NewSudokuSizeListener(this, 4));
         view.getMenuNeunMalNeun().addActionListener(new NewSudokuSizeListener(this, 9));
         view.getMenuSechzehnMalSechzehn().addActionListener(new NewSudokuSizeListener(this, 16));
+        view.getFrame().addWindowListener(new SaveWhenCloseListener(this));
         initializeTFListener();
     }
 
@@ -41,20 +64,37 @@ public class Controller {
         model = new ClassicSudoku(BOARD_SIZE);
         view.initializeContentPane(model.getFields());
         initializeTFListener();
-        if(BOARD_SIZE > 10){
-            view.getFrame().setSize(1000, 1000);
-        } else {
-            view.getFrame().setSize(600, 600);
-        }
     }
 
     public void solve() {
+        Integer[] index;
+        ArrayList<Integer[]> indexes;
+        Iterator<Integer[]> iterator;
+        JSudokuTextField[][] jstfArray;
+        indexes = model.compare();
+        clear();
+        jstfArray = view.getJSTF();
         model.solve();
-        view.changeValues(model.getSolvedFields());
+        view.changeValues(model.getFields());
+        iterator = indexes.iterator();
+        while (iterator.hasNext()) {
+            index = iterator.next();
+            jstfArray[index[0]][index[1]].setBackground(Color.green);
+        }
     }
 
     public void submitValue(int row, int column, int value) {
         model.setFieldAt(row, column, new SudokuField(value));
+    }
+
+    public void save(){
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
+            file.createNewFile();
+            oos.writeObject(model);
+            oos.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void check() {
