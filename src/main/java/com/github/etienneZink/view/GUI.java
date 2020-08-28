@@ -166,11 +166,10 @@ public class GUI extends JFrame {
         frame.add(menu, BorderLayout.NORTH);
         if(BOARD_SIZE > 10){
             frame.setSize(1000, 1000);
-            frame.setLocation(screenWidth/2-500, screenHeight/2-500);
         } else {
             frame.setSize(600, 600);
-            frame.setLocation(screenWidth/2-300, screenHeight/2-300);
-        }        frame.setVisible(true);
+        }       
+        frame.setVisible(true);
 
     }
 
