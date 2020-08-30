@@ -1,9 +1,14 @@
 package com.github.etienneZink.view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Image;
+
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -29,6 +34,7 @@ public class GUI extends JFrame {
     private static final long serialVersionUID = -1647492041239001724L;
 
     final int borderWidth = 1;
+        
     private int BOARD_SIZE_ROOT;
     private int BOARD_SIZE;
     private JFrame frame;
@@ -42,6 +48,7 @@ public class GUI extends JFrame {
     private JMenuItem sechzehnmalsechzehn;
     private int screenWidth;
     private int screenHeight;
+    ImageIcon image = new ImageIcon(getClass().getClassLoader().getResource(".//res//Sudoku.png"));
 
     public GUI(Field[][] fields) {
         frame = new JFrame();
@@ -49,8 +56,15 @@ public class GUI extends JFrame {
         buttonPane = new JPanel();
 
         clear = new JButton("Clear");
+        clear.setBackground(new Color(59, 89, 182));
+        clear.setForeground(Color.white);
+        clear.setFocusPainted(false);
+        clear.setFont(new Font("Tahoma", Font.BOLD, 12));
+
         solve = new JButton("Solve");
+    
         check = new JButton("Check");
+        check.setPreferredSize(new Dimension(80, 80));
         newSudoku = new JButton("New Sudoku");
 
         buttonPane.add(clear);
@@ -168,10 +182,16 @@ public class GUI extends JFrame {
             frame.setSize(1000, 1000);
         } else {
             frame.setSize(600, 600);
-        }       
-        frame.setVisible(true);
+        }
+        
+        
 
+
+        frame.setIconImage(image.getImage());
+        frame.setVisible(true);
     }
+
+    
 
     public JButton getClearBTN() {
         return clear;
