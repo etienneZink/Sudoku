@@ -4,9 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.Image;
 
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,14 +15,16 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import java.awt.BorderLayout;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 
 import com.github.etienneZink.model.sudoku.framework.fields.Field;
 
+import org.apache.commons.lang.SystemUtils;
+
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.io.File;
 
 public class GUI extends JFrame {
 
@@ -48,7 +48,7 @@ public class GUI extends JFrame {
     private JMenuItem sechzehnmalsechzehn;
     private int screenWidth;
     private int screenHeight;
-    ImageIcon image = new ImageIcon(getClass().getClassLoader().getResource(".//res//Sudoku.png"));
+    ImageIcon image = new ImageIcon(SystemUtils.getUserDir() + File.separator + "resources" + File.separator + "images" + File.separator + "Sudoku.png");
 
     public GUI(Field[][] fields) {
         frame = new JFrame();
@@ -56,15 +56,8 @@ public class GUI extends JFrame {
         buttonPane = new JPanel();
 
         clear = new JButton("Clear");
-        clear.setBackground(new Color(59, 89, 182));
-        clear.setForeground(Color.white);
-        clear.setFocusPainted(false);
-        clear.setFont(new Font("Tahoma", Font.BOLD, 12));
-
         solve = new JButton("Solve");
-    
         check = new JButton("Check");
-        check.setPreferredSize(new Dimension(80, 80));
         newSudoku = new JButton("New Sudoku");
 
         buttonPane.add(clear);
@@ -93,6 +86,8 @@ public class GUI extends JFrame {
         setLocationRelativeTo(this);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         initializeContentPane(fields);
+        JFrame.setDefaultLookAndFeelDecorated(true);
+        frame.setIconImage(image.getImage());
         frame.setVisible(true);
     }
 
@@ -183,11 +178,6 @@ public class GUI extends JFrame {
         } else {
             frame.setSize(600, 600);
         }
-        
-        
-
-
-        frame.setIconImage(image.getImage());
         frame.setVisible(true);
     }
 
