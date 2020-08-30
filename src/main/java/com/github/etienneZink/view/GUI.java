@@ -67,25 +67,29 @@ public class GUI extends JFrame {
         checkIcon.setImage(checkIcon.getImage().getScaledInstance(35, 25, Image.SCALE_DEFAULT));
         ImageIcon newSudIcon = new ImageIcon(getClass().getClassLoader().getResource(imagePath + "new.png"));
         newSudIcon.setImage(newSudIcon.getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
-
+	
+	    //Einstellungen für "Clear" Button
         clear = new JButton(clearIcon);
         clear.setText("Clear");
         clear.setFont(new Font("Tahoma", Font.BOLD, 15));
         clear.setBackground(new Color(181, 181, 181));
         clear.setForeground(Color.black);
 
+	    //Einstellungen für "Solve" Button
         solve = new JButton(solveIcon);
         solve.setText("Solve");
         solve.setFont(new Font("Tahoma", Font.BOLD, 15));
         solve.setBackground(new Color(181, 181, 181));
         solve.setForeground(Color.black);
 
+	    //Einstellungen für "Check" Button
         check = new JButton(checkIcon);
         check.setText("Check");
         check.setFont(new Font("Tahoma", Font.BOLD, 15));
         check.setBackground(new Color(181, 181, 181));
         check.setForeground(Color.black);
         
+	    //Einstellungen für "New" Button
         newSudoku = new JButton(newSudIcon);
         newSudoku.setText("New");
         newSudoku.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -97,6 +101,7 @@ public class GUI extends JFrame {
         buttonPane.add(check);
         buttonPane.add(newSudoku);
 
+	    //Menüband und Items initialisieren
         menu = new JMenuBar();
         spiel = new JMenu("Size");
         viermalvier = new JMenuItem("4x4");
@@ -109,6 +114,7 @@ public class GUI extends JFrame {
         spiel.add(sechzehnmalsechzehn);
         menu.add(spiel);
 
+	    //Parameter für das Frame
         final GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
         screenWidth = gd.getDisplayMode().getWidth();
         screenHeight = gd.getDisplayMode().getHeight();
