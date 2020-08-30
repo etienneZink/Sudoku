@@ -20,7 +20,11 @@ import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 
 /**
+ * Class that represents the interface between model and view. It launches a
+ * <code>ClassicSudoku</code> as model and a <code>GUI</code> as the view.
  * 
+ * @see ClassicSudoku
+ * @see GUI
  */
 public class Controller {
 
@@ -36,19 +40,19 @@ public class Controller {
         path = new File(SystemUtils.getUserHome().toString() + File.separator + "Sudoku" + File.separator + "saveFile");
         path.mkdirs();
         file = new File(path.toString() + File.separator + "saveFile.txt");
-
-        if(file.exists()){
+        // load savefile
+        if (file.exists()) {
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
                 model = (ClassicSudoku) ois.readObject();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } else {
-            model = new ClassicSudoku(BOARD_SIZE); 
+            model = new ClassicSudoku(BOARD_SIZE);
         }
         this.BOARD_SIZE = model.BOARD_SIZE;
         view = new GUI(model.getFields());
-        // initialize listener 
+        // initialize listeners
         view.getClearBTN().addActionListener(new ClearListener(this));
         view.getNewSudokuBTN().addActionListener(new NewSudokuListener(this));
         view.getSolveBTN().addActionListener(new SolveListener(this));
@@ -63,7 +67,9 @@ public class Controller {
     // non-static methods
 
     /**
-     * 
+     * Clears all the non initial <code>Field</code> objets of the
+     * <code>model</code> and initializes the <code>contentPane</code> of the
+     * <code>view</code> and the <code>listeners</code> of it.
      */
     public void clear() {
         model.clear();
@@ -72,7 +78,9 @@ public class Controller {
     }
 
     /**
-     * This method creates a new <code>ClassicSudoku</code> as model and initializes the view and all listeners.
+     * This method creates a new <code>ClassicSudoku</code> as the
+     * <code>model</code> and initializes the <code>contentPane</code> of the
+     * <code>view</code> and the <code>listeners</code> of it.
      */
     public void newSudoku() {
         model = new ClassicSudoku(BOARD_SIZE);
@@ -81,7 +89,10 @@ public class Controller {
     }
 
     /**
-     * 
+     * <code>Clear()</code> the <code>model</code> and <code>solve()</code> it. Then
+     * initializes the <code>contentPane</code> of the <code>view</code> and the
+     * <code>listeners</code> of it. Sets the <code>background</code> of all
+     * <code>JSudokuTextField</code> objects to green, if they are newly set.
      */
     public void solve() {
         Integer[] index;
@@ -101,16 +112,16 @@ public class Controller {
     }
 
     /**
-     * 
+     * Submits the value to the <code>model</code>.
      */
     public void submitValue(int row, int column, int value) {
         model.setFieldAt(row, column, new SudokuField(value));
     }
 
     /**
-     * 
+     * Saves the current <code>model</code> at <code>{@value #path}<code>
      */
-    public void save(){
+    public void save() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
             file.createNewFile();
             oos.writeObject(model);
@@ -121,7 +132,11 @@ public class Controller {
     }
 
     /**
-     * 
+     * <code>Check()</code> if the <code>model isSolved()</code>. If
+     * <code>true</code>, changes the <code>background</code> of all
+     * <code>JSudokuTextField</code> objects to <code>green</code>, else changes the
+     * <code>background</code> of all <code>JSudokuTextField</code> objects which
+     * are wrong to <code>red</code>.
      */
     public void check() {
         ArrayList<Integer[]> indexes;
@@ -145,7 +160,9 @@ public class Controller {
     }
 
     /**
-     * 
+     * Initializes the <code>ValidateInputListener</code> and the
+     * <code>ValueChangeListener</code> to all the <code>JSudokuTextFiled</code>
+     * objects of the <code>view</code>.
      */
     private void initializeTFListener() {
         JSudokuTextField[][] jstfArray = view.getJSTF();

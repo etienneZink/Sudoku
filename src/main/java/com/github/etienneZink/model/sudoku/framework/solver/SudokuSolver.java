@@ -7,7 +7,8 @@ import com.github.etienneZink.model.sudoku.framework.fields.SudokuField;
 import com.github.etienneZink.model.sudoku.framework.interfaces.Solver;
 
 /**
- * Class which implements solver to solve a <code>ClassicSudokuBoard</code> through candidates and which is deterministic.
+ * Class which implements solver to solve a <code>ClassicSudokuBoard</code>
+ * through candidates and which is deterministic.
  * 
  * @see ClassicSudoku
  */
@@ -25,16 +26,18 @@ public final class SudokuSolver implements Solver {
 
     /**
      * Solve the given <code>ClassicSudoku</code>.
-     * @return <code>True</code> if the <code>ClassicSudoku</code> was solved, else <code>false</code>.
+     * 
+     * @return <code>True</code> if the <code>ClassicSudoku</code> was solved, else
+     *         <code>false</code>.
      */
     @Override
     public boolean solve() {
-            while (!sudoku.getSolved()) {
-                if (!solveSudoku() && !sudoku.isSolved()) {
-                    return false;
-                }
+        while (!sudoku.getSolved()) {
+            if (!solveSudoku() && !sudoku.isSolved()) {
+                return false;
             }
-            return true;
+        }
+        return true;
     }
 
     /**
@@ -61,7 +64,7 @@ public final class SudokuSolver implements Solver {
                         }
                     }
                     field.getCandidates().removeAll(toRemove);
-                    if(field.isToSet()){
+                    if (field.isToSet()) {
                         sudoku.setFieldAt(row, column, field);
                         somethingChanged = true;
                     }

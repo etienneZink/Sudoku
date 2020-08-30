@@ -24,7 +24,8 @@ public abstract class BasicBoard implements Serializable {
     private Field[][] solvedFields;
 
     /**
-     * Creates an object of a <code>BasicBoard</code> subtype with random <code>fields</code>.
+     * Creates an object of a <code>BasicBoard</code> subtype with random
+     * <code>fields</code>.
      */
     public BasicBoard(int BOARD_SIZEtoSet) {
         double BOARD_SIZE_ROOT = Math.sqrt(BOARD_SIZEtoSet);
@@ -72,14 +73,16 @@ public abstract class BasicBoard implements Serializable {
 
     /**
      * Compares <code>fields</code> with <code>solvedFields</code>.
-     * @return <code>ArrayList<Integer[]></code> with the indexes of the wrong <code>Field</code> in <code>fields</code>.
+     * 
+     * @return <code>ArrayList<Integer[]></code> with the indexes of the wrong
+     *         <code>Field</code> in <code>fields</code>.
      */
-    public ArrayList<Integer[]> compare(){
+    public ArrayList<Integer[]> compare() {
         ArrayList<Integer[]> wrongIndexes = new ArrayList<Integer[]>();
         for (int row = 0; row < BOARD_SIZE; ++row) {
             for (int column = 0; column < BOARD_SIZE; ++column) {
                 if (fields[row][column].getValue() != solvedFields[row][column].getValue()) {
-                    wrongIndexes.add(new Integer[]{row, column});
+                    wrongIndexes.add(new Integer[] { row, column });
                 }
             }
         }
@@ -113,12 +116,12 @@ public abstract class BasicBoard implements Serializable {
         return (-1 < index && index < BOARD_SIZE) ? true : false;
     }
 
-    private void initializeFields(){
+    private void initializeFields() {
         ArrayList<Integer> rows = new ArrayList<Integer>();
         ArrayList<Integer> columns = new ArrayList<Integer>();
         fields = newArray(BOARD_SIZE, BOARD_SIZE);
-        for(int row = 0; row < BOARD_SIZE; ++row){
-            for(int column = 0; column < BOARD_SIZE; ++column){
+        for (int row = 0; row < BOARD_SIZE; ++row) {
+            for (int column = 0; column < BOARD_SIZE; ++column) {
                 fields[row][column] = newEmptyField();
             }
             rows.add(row);
@@ -135,12 +138,12 @@ public abstract class BasicBoard implements Serializable {
             for (Integer column : columns) {
                 // remove the field. If the sudoku is not solvable, take the field back
                 fields[row][column] = newEmptyField();
-                if(!solve()){
+                if (!solve()) {
                     fields[row][column] = solvedFields[row][column];
                 }
                 clear();
             }
-            
+
         }
     }
 
@@ -331,8 +334,8 @@ public abstract class BasicBoard implements Serializable {
 
     /**
      * 
-     * @return New subtype object of the class <code>Field</code> which is initial and used in
-     *         the <code>BasicBoard</code> subtype.
+     * @return New subtype object of the class <code>Field</code> which is initial
+     *         and used in the <code>BasicBoard</code> subtype.
      */
     protected abstract Field newInitialField(Field field);
 
@@ -345,7 +348,8 @@ public abstract class BasicBoard implements Serializable {
     protected abstract Field[][] newArray(int rows, int columns);
 
     /**
-     * Generates a solvable <code>Field[][]</code> as <code>fields</code> with random values.
+     * Generates a solvable <code>Field[][]</code> as <code>fields</code> with
+     * random values.
      */
     protected abstract void generateRandomFields();
 }

@@ -79,11 +79,11 @@ public final class ClassicSudoku extends BasicBoard {
         new SudokuSolverBacktracking(this).solve();
     }
 
-    protected void printInConsole(Field[][] fields){
+    protected void printInConsole(Field[][] fields) {
         int value;
         for (int row = 0; row < BOARD_SIZE; ++row) {
             if (row % BOARD_SIZE_ROOT == 0) {
-                for(int colums = 0; colums < BOARD_SIZE*6 + BOARD_SIZE_ROOT + 1; ++colums){
+                for (int colums = 0; colums < BOARD_SIZE * 6 + BOARD_SIZE_ROOT + 1; ++colums) {
                     System.out.print("-");
                 }
                 System.out.println();
@@ -106,7 +106,7 @@ public final class ClassicSudoku extends BasicBoard {
             System.out.print("|");
             System.out.println();
         }
-        for(int colums = 0; colums < BOARD_SIZE*6 + BOARD_SIZE_ROOT + 1; ++colums){
+        for (int colums = 0; colums < BOARD_SIZE * 6 + BOARD_SIZE_ROOT + 1; ++colums) {
             System.out.print("-");
         }
         System.out.println();

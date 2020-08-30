@@ -3,8 +3,9 @@ package com.github.etienneZink.model.sudoku.framework.fields;
 import java.io.Serializable;
 
 /**
- * Class that represents a basic field in a game. <code>Static int BOARD_SIZE</code> must be set when 
- * creating a <code>BasicBoard</code> subtype object with <code>Field</code> object inside.
+ * Class that represents a basic field in a game.
+ * <code>Static int BOARD_SIZE</code> must be set when creating a
+ * <code>BasicBoard</code> subtype object with <code>Field</code> object inside.
  */
 
 public abstract class Field implements Serializable {
@@ -20,7 +21,7 @@ public abstract class Field implements Serializable {
     // constructors
 
     protected Field() {
-        
+
     }
 
     protected Field(int value) {
@@ -30,7 +31,7 @@ public abstract class Field implements Serializable {
 
     // static method
 
-    public static void setBOARD_SIZE(int value){
+    public static void setBOARD_SIZE(int value) {
         BOARD_SIZE = value;
     }
 

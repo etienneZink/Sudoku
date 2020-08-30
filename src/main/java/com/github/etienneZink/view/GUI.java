@@ -27,7 +27,9 @@ import java.awt.Toolkit;
 import java.io.File;
 
 /**
- * Class that visualizes the <code>ClassicSudoku</code> and includes some controls like buttons and a menu bar.
+ * Class that visualizes the <code>ClassicSudoku</code> and includes some
+ * controls like buttons and a menu bar.
+ * 
  * @see JSudokuTextField
  */
 public class GUI extends JFrame {
@@ -35,13 +37,13 @@ public class GUI extends JFrame {
     private static final long serialVersionUID = -1647492041239001724L;
 
     final int borderWidth = 1;
-        
+
     private int BOARD_SIZE_ROOT;
     private int BOARD_SIZE;
     private final JFrame frame;
     private JPanel contentPane;
 
-	private final JPanel buttonPane;
+    private final JPanel buttonPane;
     private JSudokuTextField[][] jstfArray;
     private final JButton clear, solve, check, newSudoku;
     private final JMenuBar menu;
@@ -67,29 +69,29 @@ public class GUI extends JFrame {
         checkIcon.setImage(checkIcon.getImage().getScaledInstance(35, 25, Image.SCALE_DEFAULT));
         ImageIcon newSudIcon = new ImageIcon(getClass().getClassLoader().getResource(imagePath + "new.png"));
         newSudIcon.setImage(newSudIcon.getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
-	
-	    //Einstellungen für "Clear" Button
+
+        // settins for "Clear" button
         clear = new JButton(clearIcon);
         clear.setText("Clear");
         clear.setFont(new Font("Tahoma", Font.BOLD, 15));
         clear.setBackground(new Color(181, 181, 181));
         clear.setForeground(Color.black);
 
-	    //Einstellungen für "Solve" Button
+        // settins for "Solve" button
         solve = new JButton(solveIcon);
         solve.setText("Solve");
         solve.setFont(new Font("Tahoma", Font.BOLD, 15));
         solve.setBackground(new Color(181, 181, 181));
         solve.setForeground(Color.black);
 
-	    //Einstellungen für "Check" Button
+        // settins for "Check" button
         check = new JButton(checkIcon);
         check.setText("Check");
         check.setFont(new Font("Tahoma", Font.BOLD, 15));
         check.setBackground(new Color(181, 181, 181));
         check.setForeground(Color.black);
-        
-	    //Einstellungen für "New" Button
+
+        // settins for "New" button
         newSudoku = new JButton(newSudIcon);
         newSudoku.setText("New");
         newSudoku.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -101,7 +103,7 @@ public class GUI extends JFrame {
         buttonPane.add(check);
         buttonPane.add(newSudoku);
 
-	    //Menüband und Items initialisieren
+        // initialize menu bar and items
         menu = new JMenuBar();
         spiel = new JMenu("Size");
         viermalvier = new JMenuItem("4x4");
@@ -114,13 +116,13 @@ public class GUI extends JFrame {
         spiel.add(sechzehnmalsechzehn);
         menu.add(spiel);
 
-	    //Parameter für das Frame
+        // parameters for the frame
         final GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
         screenWidth = gd.getDisplayMode().getWidth();
         screenHeight = gd.getDisplayMode().getHeight();
         frame.setTitle("Sudoku");
         frame.setSize(600, 600);
-        frame.setLocation(screenWidth/2-300, screenHeight/2-300);
+        frame.setLocation(screenWidth / 2 - 300, screenHeight / 2 - 300);
         setLocationRelativeTo(this);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         initializeContentPane(fields);
@@ -156,10 +158,10 @@ public class GUI extends JFrame {
         // keine Überprüfung notwendig, da im model richtig gesetzt
         BOARD_SIZE = fields.length;
         BOARD_SIZE_ROOT = (int) Math.sqrt(BOARD_SIZE);
-        if(contentPane != null){
+        if (contentPane != null) {
             frame.remove(contentPane);
         }
-	//initialize Panel
+        // initialize panel
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.setLayout(new GridLayout(BOARD_SIZE, BOARD_SIZE));
@@ -170,15 +172,13 @@ public class GUI extends JFrame {
 
         for (int row = 0; row < BOARD_SIZE; ++row) {
             for (int column = 0; column < BOARD_SIZE; ++column) {
-                // wird eigene Klasse JSudokuTextFiled verwendet, um row und column der
-                // Componente ab zu speichern
                 tempJSTF = new JSudokuTextField(row, column);
                 // adds the JSTF to the list, to address it later
                 jstfArray[row][column] = tempJSTF;
                 if ((tempValue = fields[row][column].getValue()) != -1) {
                     tempJSTF = jstfArray[row][column];
                     tempJSTF.setText(String.valueOf(tempValue));
-                    if(fields[row][column].isInitial()){
+                    if (fields[row][column].isInitial()) {
                         tempJSTF.setEditable(false);
                     }
                 }
@@ -214,18 +214,19 @@ public class GUI extends JFrame {
 
         buttonPane.setBackground(new Color(255, 255, 255));
         contentPane.setBackground(new Color(117, 117, 117));
-	//Fallunterscheidung von der Größe
-        if(BOARD_SIZE > 10){
+        // case distinction of the size
+        if (BOARD_SIZE > 10) {
             frame.setSize(1000, 1000);
         } else {
             frame.setSize(600, 600);
         }
-	//Icon setzen
+        // set icon
         final ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource(imagePath + "frameIcon.png"));
         frame.setIconImage(icon.getImage());
         frame.setVisible(true);
     }
-	//Funktionen der einzelnen Items
+
+    // getter
     public JButton getClearBTN() {
         return clear;
     }
@@ -258,7 +259,7 @@ public class GUI extends JFrame {
         return sechzehnmalsechzehn;
     }
 
-    public JFrame getFrame(){
+    public JFrame getFrame() {
         return frame;
     }
 }
