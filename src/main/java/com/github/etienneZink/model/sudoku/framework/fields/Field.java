@@ -7,7 +7,7 @@ import java.io.Serializable;
  * creating a <code>BasicBoard</code> subtype object with <code>Field</code> object inside.
  */
 
-public class Field implements Serializable {
+public abstract class Field implements Serializable {
 
     private static final long serialVersionUID = -3783448412446847604L;
 

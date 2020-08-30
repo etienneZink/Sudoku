@@ -22,17 +22,16 @@ import java.awt.GraphicsEnvironment;
 
 import com.github.etienneZink.model.sudoku.framework.fields.Field;
 
-import org.apache.commons.lang.SystemUtils;
-
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.io.File;
 
+/**
+ * Class that visualizes the <code>ClassicSudoku</code> and includes some controls like buttons and a menu bar.
+ * @see JSudokuTextField
+ */
 public class GUI extends JFrame {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = -1647492041239001724L;
 
     final int borderWidth = 1;

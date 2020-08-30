@@ -27,6 +27,8 @@ public class Controller {
     private BasicBoard model;
     private int BOARD_SIZE = 9;
 
+    // constructor
+
     public Controller() {
         path = new File(SystemUtils.getUserHome().toString() + File.separator + "Sudoku" + File.separator + "saveFile");
         path.mkdirs();
@@ -54,18 +56,29 @@ public class Controller {
         initializeTFListener();
     }
 
+    // non-static methods
+
+    /**
+     * 
+     */
     public void clear() {
         model.clear();
         view.initializeContentPane(model.getFields());
         initializeTFListener();
     }
 
+    /**
+     * This method creates a new <code>ClassicSudoku</code> as model and initializes the view and all listeners.
+     */
     public void newSudoku() {
         model = new ClassicSudoku(BOARD_SIZE);
         view.initializeContentPane(model.getFields());
         initializeTFListener();
     }
 
+    /**
+     * 
+     */
     public void solve() {
         Integer[] index;
         ArrayList<Integer[]> indexes;
@@ -83,10 +96,16 @@ public class Controller {
         }
     }
 
+    /**
+     * 
+     */
     public void submitValue(int row, int column, int value) {
         model.setFieldAt(row, column, new SudokuField(value));
     }
 
+    /**
+     * 
+     */
     public void save(){
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
             file.createNewFile();
@@ -97,6 +116,9 @@ public class Controller {
         }
     }
 
+    /**
+     * 
+     */
     public void check() {
         ArrayList<Integer[]> indexes;
         Integer[] index;
@@ -118,6 +140,9 @@ public class Controller {
         }
     }
 
+    /**
+     * 
+     */
     private void initializeTFListener() {
         JSudokuTextField[][] jstfArray = view.getJSTF();
         for (int row = 0; row < BOARD_SIZE; ++row) {
