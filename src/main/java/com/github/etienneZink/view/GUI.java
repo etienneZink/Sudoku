@@ -57,13 +57,13 @@ public class GUI extends JFrame {
         buttonPane = new JPanel();
         buttonPane.setLayout(new GridLayout(1, 4));
 
-        ImageIcon clearIcon = new ImageIcon("res/clear.png");
+        ImageIcon clearIcon = new ImageIcon("resources/images/clear.png");
         clearIcon.setImage(clearIcon.getImage().getScaledInstance(35, 25, Image.SCALE_DEFAULT));
-        ImageIcon solveIcon = new ImageIcon("res/solves.png");
+        ImageIcon solveIcon = new ImageIcon("resources/images/solves.png");
         solveIcon.setImage(solveIcon.getImage().getScaledInstance(35, 25, Image.SCALE_DEFAULT));
-        ImageIcon checkIcon = new ImageIcon("res/ok.png");
+        ImageIcon checkIcon = new ImageIcon("resources/images/ok.png");
         checkIcon.setImage(checkIcon.getImage().getScaledInstance(35, 25, Image.SCALE_DEFAULT));
-        ImageIcon newSudIcon = new ImageIcon("res/new.png");
+        ImageIcon newSudIcon = new ImageIcon("resources" + File.separator + "images" + File.separator + "new.png");
         newSudIcon.setImage(newSudIcon.getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
 
         clear = new JButton(clearIcon);
@@ -211,7 +211,7 @@ public class GUI extends JFrame {
         } else {
             frame.setSize(600, 600);
         }
-        final ImageIcon icon = new ImageIcon("res" + File.separator + "pi.png");
+        final ImageIcon icon = new ImageIcon("resources" + File.separator + "images" + File.separator + "pi.png");
         frame.setIconImage(icon.getImage());
         frame.setVisible(true);
     }
