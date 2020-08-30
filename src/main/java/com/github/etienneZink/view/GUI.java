@@ -7,7 +7,6 @@ import java.awt.GridLayout;
 import java.awt.Image;
 
 import javax.swing.BorderFactory;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -54,8 +53,9 @@ public class GUI extends JFrame {
 
     public GUI(final Field[][] fields) {
         frame = new JFrame();
+
         buttonPane = new JPanel();
-        buttonPane.setLayout(new GridLayout(1, 2));
+        buttonPane.setLayout(new GridLayout(1, 4));
 
         ImageIcon clearIcon = new ImageIcon("res/clear.png");
         clearIcon.setImage(clearIcon.getImage().getScaledInstance(35, 25, Image.SCALE_DEFAULT));
@@ -205,14 +205,12 @@ public class GUI extends JFrame {
 
         buttonPane.setBackground(new Color(255, 255, 255));
         contentPane.setBackground(new Color(117, 117, 117));
-        //menu.setBackground(new Color(255, 255, 255));
 
         if(BOARD_SIZE > 10){
             frame.setSize(1000, 1000);
         } else {
             frame.setSize(600, 600);
         }
-
         final ImageIcon icon = new ImageIcon("res" + File.separator + "pi.png");
         frame.setIconImage(icon.getImage());
         frame.setVisible(true);
