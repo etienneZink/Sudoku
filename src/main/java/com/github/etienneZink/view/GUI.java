@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Image;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -15,6 +16,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 
@@ -37,28 +39,59 @@ public class GUI extends JFrame {
         
     private int BOARD_SIZE_ROOT;
     private int BOARD_SIZE;
-    private JFrame frame;
-    private JPanel contentPane, buttonPane;
-    private JSudokuTextField[][] jstfArray;
-    private JButton clear, solve, check, newSudoku;
-    private JMenuBar menu;
-    private JMenu spiel;
-    private JMenuItem viermalvier;
-    private JMenuItem neunmalneun;
-    private JMenuItem sechzehnmalsechzehn;
-    private int screenWidth;
-    private int screenHeight;
-    ImageIcon image = new ImageIcon(SystemUtils.getUserDir() + File.separator + "resources" + File.separator + "images" + File.separator + "Sudoku.png");
+    private final JFrame frame;
+    private JPanel contentPane;
 
-    public GUI(Field[][] fields) {
+	private final JPanel buttonPane;
+    private JSudokuTextField[][] jstfArray;
+    private final JButton clear, solve, check, newSudoku;
+    private final JMenuBar menu;
+    private final JMenu spiel;
+    private final JMenuItem viermalvier;
+    private final JMenuItem neunmalneun;
+    private final JMenuItem sechzehnmalsechzehn;
+    private final int screenWidth;
+    private final int screenHeight;
+    private String imagePath = SystemUtils.getUserDir().toString() + File.separator + "main" + File.separator + "resources" + File.separator + "images" + File.separator;
+
+    public GUI(final Field[][] fields) {
         frame = new JFrame();
 
         buttonPane = new JPanel();
+        buttonPane.setLayout(new GridLayout(1, 4));
 
-        clear = new JButton("Clear");
-        solve = new JButton("Solve");
-        check = new JButton("Check");
-        newSudoku = new JButton("New Sudoku");
+        ImageIcon clearIcon = new ImageIcon(imagePath + "clear.png");
+        clearIcon.setImage(clearIcon.getImage().getScaledInstance(35, 25, Image.SCALE_DEFAULT));
+        ImageIcon solveIcon = new ImageIcon(imagePath + "solves.png");
+        solveIcon.setImage(solveIcon.getImage().getScaledInstance(35, 25, Image.SCALE_DEFAULT));
+        ImageIcon checkIcon = new ImageIcon(imagePath + "check.png");
+        checkIcon.setImage(checkIcon.getImage().getScaledInstance(35, 25, Image.SCALE_DEFAULT));
+        ImageIcon newSudIcon = new ImageIcon(imagePath + "new.png");
+        newSudIcon.setImage(newSudIcon.getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
+
+        clear = new JButton(clearIcon);
+        clear.setText("Clear");
+        clear.setFont(new Font("Tahoma", Font.BOLD, 15));
+        clear.setBackground(new Color(181, 181, 181));
+        clear.setForeground(Color.black);
+
+        solve = new JButton(solveIcon);
+        solve.setText("Solve");
+        solve.setFont(new Font("Tahoma", Font.BOLD, 15));
+        solve.setBackground(new Color(181, 181, 181));
+        solve.setForeground(Color.black);
+
+        check = new JButton(checkIcon);
+        check.setText("Check");
+        check.setFont(new Font("Tahoma", Font.BOLD, 15));
+        check.setBackground(new Color(181, 181, 181));
+        check.setForeground(Color.black);
+        
+        newSudoku = new JButton(newSudIcon);
+        newSudoku.setText("New Sudoku");
+        newSudoku.setFont(new Font("Tahoma", Font.BOLD, 15));
+        newSudoku.setBackground(new Color(181, 181, 181));
+        newSudoku.setForeground(Color.black);
 
         buttonPane.add(clear);
         buttonPane.add(solve);
@@ -77,7 +110,7 @@ public class GUI extends JFrame {
         spiel.add(sechzehnmalsechzehn);
         menu.add(spiel);
 
-        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        final GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
         screenWidth = gd.getDisplayMode().getWidth();
         screenHeight = gd.getDisplayMode().getHeight();
         frame.setTitle("Sudoku");
@@ -86,8 +119,6 @@ public class GUI extends JFrame {
         setLocationRelativeTo(this);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         initializeContentPane(fields);
-        JFrame.setDefaultLookAndFeelDecorated(true);
-        frame.setIconImage(image.getImage());
         frame.setVisible(true);
     }
 
@@ -97,7 +128,7 @@ public class GUI extends JFrame {
      * 
      * @param fields
      */
-    public void changeValues(Field[][] fields) {
+    public void changeValues(final Field[][] fields) {
         int tempValue;
         for (int row = 0; row < BOARD_SIZE; ++row) {
             for (int column = 0; column < BOARD_SIZE; ++column) {
@@ -114,7 +145,7 @@ public class GUI extends JFrame {
      * 
      * @param fields
      */
-    public void initializeContentPane(Field[][] fields) {
+    public void initializeContentPane(final Field[][] fields) {
         int tempValue;
 
         // keine Überprüfung notwendig, da im model richtig gesetzt
@@ -129,7 +160,7 @@ public class GUI extends JFrame {
         jstfArray = new JSudokuTextField[BOARD_SIZE][BOARD_SIZE];
 
         JSudokuTextField tempJSTF;
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
         for (int row = 0; row < BOARD_SIZE; ++row) {
             for (int column = 0; column < BOARD_SIZE; ++column) {
@@ -173,15 +204,20 @@ public class GUI extends JFrame {
         frame.add(contentPane, BorderLayout.CENTER);
         frame.add(buttonPane, BorderLayout.SOUTH);
         frame.add(menu, BorderLayout.NORTH);
+        frame.setBackground(Color.black);
+
+        buttonPane.setBackground(new Color(255, 255, 255));
+        contentPane.setBackground(new Color(117, 117, 117));
+
         if(BOARD_SIZE > 10){
             frame.setSize(1000, 1000);
         } else {
             frame.setSize(600, 600);
         }
+        final ImageIcon icon = new ImageIcon(imagePath + "frameIcon.png");
+        frame.setIconImage(icon.getImage());
         frame.setVisible(true);
     }
-
-    
 
     public JButton getClearBTN() {
         return clear;
