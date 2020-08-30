@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import com.github.etienneZink.controller.Controller;
 
 /**
- * 
+ * Listener to react if the size-button gets pressed
  */
 public class NewSudokuSizeListener implements ActionListener {
 

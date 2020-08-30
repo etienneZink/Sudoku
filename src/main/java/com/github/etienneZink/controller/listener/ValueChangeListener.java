@@ -8,7 +8,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 /**
- * 
+ * Listener to react if the changed input is not between 1 - 4/9/16
  */
 public class ValueChangeListener extends KeyAdapter{
 

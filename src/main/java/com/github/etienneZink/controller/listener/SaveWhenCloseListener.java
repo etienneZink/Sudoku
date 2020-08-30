@@ -7,7 +7,7 @@ import com.github.etienneZink.controller.Controller;
 import java.awt.event.WindowAdapter;
 
 /**
- * 
+ * Listener to react if the close-button gets pressed
  */
 public class SaveWhenCloseListener extends WindowAdapter {
 

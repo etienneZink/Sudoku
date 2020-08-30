@@ -7,7 +7,7 @@ import com.github.etienneZink.controller.Controller;
 import com.github.etienneZink.view.JSudokuTextField;
 
 /**
- * 
+ * Listener to react if the input is not between 1 - 4/9/16
  */
 public class ValidateInputListener extends KeyAdapter {
 

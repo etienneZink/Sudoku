@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import com.github.etienneZink.controller.Controller;
 
 /**
- * 
+ * Listener to react if the check-button gets pressed
  */
 public class CheckListener implements ActionListener {
 
