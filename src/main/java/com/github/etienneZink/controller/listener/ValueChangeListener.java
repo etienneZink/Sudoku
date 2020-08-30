@@ -7,6 +7,9 @@ import com.github.etienneZink.view.JSudokuTextField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+/**
+ * 
+ */
 public class ValueChangeListener extends KeyAdapter{
 
     private Controller controller;

@@ -87,7 +87,7 @@ public class GUI extends JFrame {
         check.setForeground(Color.black);
         
         newSudoku = new JButton(newSudIcon);
-        newSudoku.setText("New Sudoku");
+        newSudoku.setText("New");
         newSudoku.setFont(new Font("Tahoma", Font.BOLD, 15));
         newSudoku.setBackground(new Color(181, 181, 181));
         newSudoku.setForeground(Color.black);

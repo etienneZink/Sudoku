@@ -6,9 +6,9 @@ import java.awt.event.KeyEvent;
 import com.github.etienneZink.controller.Controller;
 import com.github.etienneZink.view.JSudokuTextField;
 
-// Eine extra Klasse als Listener ist in dem Fall besser, da du dann einfach nur ein Objekt dieser Klasse erstellen musst.
-// Dann haben alle Instanzen die gleiche Methode.
-
+/**
+ * 
+ */
 public class ValidateInputListener extends KeyAdapter {
 
    private Controller controller;

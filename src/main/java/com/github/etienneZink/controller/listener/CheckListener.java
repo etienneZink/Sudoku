@@ -5,6 +5,9 @@ import java.awt.event.ActionListener;
 
 import com.github.etienneZink.controller.Controller;
 
+/**
+ * 
+ */
 public class CheckListener implements ActionListener {
 
     private Controller controller;
@@ -17,6 +20,4 @@ public class CheckListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         controller.check();
     }
-    
-
 }

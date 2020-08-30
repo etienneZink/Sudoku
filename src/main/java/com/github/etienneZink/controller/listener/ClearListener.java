@@ -5,6 +5,9 @@ import java.awt.event.ActionListener;
 
 import com.github.etienneZink.controller.Controller;
 
+/**
+ * 
+ */
 public class ClearListener implements ActionListener {
 
     private Controller controller;

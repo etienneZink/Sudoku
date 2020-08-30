@@ -8,9 +8,6 @@ import javax.swing.JTextField;
  */
 public class JSudokuTextField extends JTextField{
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 5901713222727174359L;
 
     private int indexRow;

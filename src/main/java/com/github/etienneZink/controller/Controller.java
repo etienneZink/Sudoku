@@ -19,6 +19,9 @@ import java.io.ObjectOutputStream;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 
+/**
+ * 
+ */
 public class Controller {
 
     public final File file;
@@ -45,6 +48,7 @@ public class Controller {
         }
         this.BOARD_SIZE = model.BOARD_SIZE;
         view = new GUI(model.getFields());
+        // initialize listener 
         view.getClearBTN().addActionListener(new ClearListener(this));
         view.getNewSudokuBTN().addActionListener(new NewSudokuListener(this));
         view.getSolveBTN().addActionListener(new SolveListener(this));

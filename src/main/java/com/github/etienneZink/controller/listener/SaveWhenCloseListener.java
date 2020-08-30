@@ -6,6 +6,9 @@ import com.github.etienneZink.controller.Controller;
 
 import java.awt.event.WindowAdapter;
 
+/**
+ * 
+ */
 public class SaveWhenCloseListener extends WindowAdapter {
 
     Controller controller;
