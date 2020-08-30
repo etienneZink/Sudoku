@@ -211,7 +211,7 @@ public class GUI extends JFrame {
         } else {
             frame.setSize(600, 600);
         }
-        final ImageIcon icon = new ImageIcon("resources" + File.separator + "images" + File.separator + "pi.png");
+        final ImageIcon icon = new ImageIcon("src" + File.separator + "main" + File.separator + "resources" + File.separator + "images" + File.separator + "pi.png");
         frame.setIconImage(icon.getImage());
         frame.setVisible(true);
     }
