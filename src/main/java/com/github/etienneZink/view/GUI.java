@@ -153,6 +153,7 @@ public class GUI extends JFrame {
         if(contentPane != null){
             frame.remove(contentPane);
         }
+	//initialize Panel
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.setLayout(new GridLayout(BOARD_SIZE, BOARD_SIZE));
@@ -207,17 +208,18 @@ public class GUI extends JFrame {
 
         buttonPane.setBackground(new Color(255, 255, 255));
         contentPane.setBackground(new Color(117, 117, 117));
-
+	//Fallunterscheidung von der Größe
         if(BOARD_SIZE > 10){
             frame.setSize(1000, 1000);
         } else {
             frame.setSize(600, 600);
         }
+	//Icon setzen
         final ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource(imagePath + "frameIcon.png"));
         frame.setIconImage(icon.getImage());
         frame.setVisible(true);
     }
-
+	//Funktionen der einzelnen Items
     public JButton getClearBTN() {
         return clear;
     }
