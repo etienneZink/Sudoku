@@ -52,10 +52,12 @@ public class GUI extends JFrame {
     private final JMenuItem sechzehnmalsechzehn;
     private final int screenWidth;
     private final int screenHeight;
-    private String imagePath = SystemUtils.getUserDir().toString() + File.separator + "main" + File.separator + "resources" + File.separator + "images" + File.separator;
+    private String imagePath = SystemUtils.getUserDir().toString() + File.separator + "src" + File.separator + "main" 
+    + File.separator + "resources" + File.separator + "images" + File.separator;
 
     public GUI(final Field[][] fields) {
         frame = new JFrame();
+        System.out.println(imagePath);
 
         buttonPane = new JPanel();
         buttonPane.setLayout(new GridLayout(1, 4));
