@@ -61,7 +61,7 @@ public class GUI extends JFrame {
         clearIcon.setImage(clearIcon.getImage().getScaledInstance(35, 25, Image.SCALE_DEFAULT));
         ImageIcon solveIcon = new ImageIcon("resources/images/solves.png");
         solveIcon.setImage(solveIcon.getImage().getScaledInstance(35, 25, Image.SCALE_DEFAULT));
-        ImageIcon checkIcon = new ImageIcon("resources/images/ok.png");
+        ImageIcon checkIcon = new ImageIcon("resources/images/check.png");
         checkIcon.setImage(checkIcon.getImage().getScaledInstance(35, 25, Image.SCALE_DEFAULT));
         ImageIcon newSudIcon = new ImageIcon("resources" + File.separator + "images" + File.separator + "new.png");
         newSudIcon.setImage(newSudIcon.getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
@@ -74,19 +74,19 @@ public class GUI extends JFrame {
 
         solve = new JButton(solveIcon);
         solve.setText("Solve");
-        solve.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        solve.setFont(new Font("Tahoma", Font.BOLD, 15));
         solve.setBackground(new Color(181, 181, 181));
         solve.setForeground(Color.black);
 
         check = new JButton(checkIcon);
         check.setText("Check");
-        check.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        check.setFont(new Font("Tahoma", Font.BOLD, 15));
         check.setBackground(new Color(181, 181, 181));
         check.setForeground(Color.black);
         
         newSudoku = new JButton(newSudIcon);
         newSudoku.setText("New Sudoku");
-        newSudoku.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        newSudoku.setFont(new Font("Tahoma", Font.BOLD, 15));
         newSudoku.setBackground(new Color(181, 181, 181));
         newSudoku.setForeground(Color.black);
 
@@ -211,7 +211,7 @@ public class GUI extends JFrame {
         } else {
             frame.setSize(600, 600);
         }
-        final ImageIcon icon = new ImageIcon("Sudoku/src/main/resources/images/pi.png");
+        final ImageIcon icon = new ImageIcon("Sudoku/src/main/resources/images/frameIcon.png");
         frame.setIconImage(icon.getImage());
         frame.setVisible(true);
     }
