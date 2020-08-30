@@ -52,23 +52,21 @@ public class GUI extends JFrame {
     private final JMenuItem sechzehnmalsechzehn;
     private final int screenWidth;
     private final int screenHeight;
-    private String imagePath = SystemUtils.getUserDir().toString() + File.separator + "src" + File.separator + "main" 
-    + File.separator + "resources" + File.separator + "images" + File.separator;
+    private String imagePath = "images" + File.separator;
 
     public GUI(final Field[][] fields) {
         frame = new JFrame();
-        System.out.println(imagePath);
 
         buttonPane = new JPanel();
         buttonPane.setLayout(new GridLayout(1, 4));
 
-        ImageIcon clearIcon = new ImageIcon(imagePath + "clear.png");
+        ImageIcon clearIcon = new ImageIcon(getClass().getClassLoader().getResource(imagePath + "clear.png"));
         clearIcon.setImage(clearIcon.getImage().getScaledInstance(35, 25, Image.SCALE_DEFAULT));
-        ImageIcon solveIcon = new ImageIcon(imagePath + "solves.png");
+        ImageIcon solveIcon = new ImageIcon(getClass().getClassLoader().getResource(imagePath + "solves.png"));
         solveIcon.setImage(solveIcon.getImage().getScaledInstance(35, 25, Image.SCALE_DEFAULT));
-        ImageIcon checkIcon = new ImageIcon(imagePath + "check.png");
+        ImageIcon checkIcon = new ImageIcon(getClass().getClassLoader().getResource(imagePath + "check.png"));
         checkIcon.setImage(checkIcon.getImage().getScaledInstance(35, 25, Image.SCALE_DEFAULT));
-        ImageIcon newSudIcon = new ImageIcon(imagePath + "new.png");
+        ImageIcon newSudIcon = new ImageIcon(getClass().getClassLoader().getResource(imagePath + "new.png"));
         newSudIcon.setImage(newSudIcon.getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
 
         clear = new JButton(clearIcon);
@@ -216,7 +214,7 @@ public class GUI extends JFrame {
         } else {
             frame.setSize(600, 600);
         }
-        final ImageIcon icon = new ImageIcon(imagePath + "frameIcon.png");
+        final ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource(imagePath + "frameIcon.png"));
         frame.setIconImage(icon.getImage());
         frame.setVisible(true);
     }
