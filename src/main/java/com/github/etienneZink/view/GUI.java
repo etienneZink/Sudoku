@@ -57,7 +57,6 @@ public class GUI extends JFrame {
 
     public GUI(final Field[][] fields) {
         frame = new JFrame();
-        System.out.println(imagePath);
 
         buttonPane = new JPanel();
         buttonPane.setLayout(new GridLayout(1, 4));
