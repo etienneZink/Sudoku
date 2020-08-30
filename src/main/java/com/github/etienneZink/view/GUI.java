@@ -22,6 +22,8 @@ import java.awt.GraphicsEnvironment;
 
 import com.github.etienneZink.model.sudoku.framework.fields.Field;
 
+import org.apache.commons.lang.SystemUtils;
+
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.io.File;
@@ -50,20 +52,23 @@ public class GUI extends JFrame {
     private final JMenuItem sechzehnmalsechzehn;
     private final int screenWidth;
     private final int screenHeight;
+    private String imagePath = SystemUtils.getUserDir().toString() + File.separator + "src" + File.separator + "main" 
+    + File.separator + "resources" + File.separator + "images" + File.separator;
 
     public GUI(final Field[][] fields) {
         frame = new JFrame();
+        System.out.println(imagePath);
 
         buttonPane = new JPanel();
         buttonPane.setLayout(new GridLayout(1, 4));
 
-        ImageIcon clearIcon = new ImageIcon("resources/images/clear.png");
+        ImageIcon clearIcon = new ImageIcon(imagePath + "clear.png");
         clearIcon.setImage(clearIcon.getImage().getScaledInstance(35, 25, Image.SCALE_DEFAULT));
-        ImageIcon solveIcon = new ImageIcon("resources/images/solves.png");
+        ImageIcon solveIcon = new ImageIcon(imagePath + "solves.png");
         solveIcon.setImage(solveIcon.getImage().getScaledInstance(35, 25, Image.SCALE_DEFAULT));
-        ImageIcon checkIcon = new ImageIcon("resources/images/check.png");
+        ImageIcon checkIcon = new ImageIcon(imagePath + "check.png");
         checkIcon.setImage(checkIcon.getImage().getScaledInstance(35, 25, Image.SCALE_DEFAULT));
-        ImageIcon newSudIcon = new ImageIcon("resources" + File.separator + "images" + File.separator + "new.png");
+        ImageIcon newSudIcon = new ImageIcon(imagePath + "new.png");
         newSudIcon.setImage(newSudIcon.getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
 
         clear = new JButton(clearIcon);
@@ -211,7 +216,7 @@ public class GUI extends JFrame {
         } else {
             frame.setSize(600, 600);
         }
-        final ImageIcon icon = new ImageIcon("Sudoku" + File.separator + "main" + File.separator + "resources" + File.separator + "images" + File.separator + "frameIcon.png");
+        final ImageIcon icon = new ImageIcon(imagePath + "frameIcon.png");
         frame.setIconImage(icon.getImage());
         frame.setVisible(true);
     }
