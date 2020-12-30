@@ -20,6 +20,4 @@ public class ClearListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         controller.clear();
     }
-    
-
 }

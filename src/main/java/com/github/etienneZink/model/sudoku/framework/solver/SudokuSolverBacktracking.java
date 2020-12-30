@@ -25,7 +25,7 @@ public final class SudokuSolverBacktracking implements Solver {
         solve(0, 0);
         return sudoku.isSolved();
     }
-
+    
     private void solve(int row, int column) {
         // randomize the access of the values (impotant for generating random fields)
         ArrayList<Integer> possibleValues = new ArrayList<Integer>();

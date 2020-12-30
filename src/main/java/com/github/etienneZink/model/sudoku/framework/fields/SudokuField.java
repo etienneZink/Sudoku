@@ -39,7 +39,7 @@ public class SudokuField extends Field {
     }
 
     private boolean isLegalValue(int value) {
-        return (0 < value && value < BOARD_SIZE + 1) ? true : false;
+        return 0 < value && value < BOARD_SIZE + 1;
     }
 
     public void removeCandidate(int value) {

@@ -123,8 +123,8 @@ public class GUI extends JFrame {
         frame.setTitle("Sudoku");
         frame.setSize(600, 600);
         frame.setLocation(screenWidth / 2 - 300, screenHeight / 2 - 300);
-        setLocationRelativeTo(this);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(this);
+        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         initializeContentPane(fields);
         frame.setVisible(true);
     }

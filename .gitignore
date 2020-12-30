@@ -19,3 +19,8 @@ buildNumber.properties
 .factorypath
 .project
 .vscode/
+
+#
+# IntelliJ
+#
+.idea

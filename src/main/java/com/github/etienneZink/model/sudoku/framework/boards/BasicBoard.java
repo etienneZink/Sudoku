@@ -113,7 +113,7 @@ public abstract class BasicBoard implements Serializable {
      *         <code>false</code>.
      */
     private boolean indexInBoard(int index) {
-        return (-1 < index && index < BOARD_SIZE) ? true : false;
+        return -1 < index && index < BOARD_SIZE;
     }
 
     private void initializeFields() {

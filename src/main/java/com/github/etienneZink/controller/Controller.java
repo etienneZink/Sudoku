@@ -45,10 +45,11 @@ public class Controller {
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
                 model = (ClassicSudoku) ois.readObject();
             } catch (Exception e) {
-                e.printStackTrace();
+                //e.printStackTrace();
+                model = new ClassicSudoku(BOARD_SIZE); // TODO Fehlt in Abgabe
             }
         } else {
-            model = new ClassicSudoku(BOARD_SIZE);
+
         }
         this.BOARD_SIZE = model.BOARD_SIZE;
         view = new GUI(model.getFields());
@@ -67,7 +68,7 @@ public class Controller {
     // non-static methods
 
     /**
-     * Clears all the non initial <code>Field</code> objets of the
+     * Clears all the non initial <code>Field</code> objects of the
      * <code>model</code> and initializes the <code>contentPane</code> of the
      * <code>view</code> and the <code>listeners</code> of it.
      */
