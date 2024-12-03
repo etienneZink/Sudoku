@@ -45,11 +45,10 @@ public class Controller {
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
                 model = (ClassicSudoku) ois.readObject();
             } catch (Exception e) {
-                //e.printStackTrace();
-                model = new ClassicSudoku(BOARD_SIZE); // TODO Fehlt in Abgabe
+                model = new ClassicSudoku(BOARD_SIZE);
             }
         } else {
-
+            model = new ClassicSudoku(BOARD_SIZE);
         }
         this.BOARD_SIZE = model.BOARD_SIZE;
         view = new GUI(model.getFields());

@@ -8,8 +8,7 @@
   <version>1.0</version>
 
   <name>Sudoku</name>
-  <!-- FIXME change it to the project's website -->
-  <url>https://github.com/zink-e/Sudoku</url>
+  <url>https://github.com/etienneZink/Sudoku</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
